@@ -1,0 +1,139 @@
+/* Reset some default styles */
+/* Set the font family for the entire website to "Lato" */
+body {
+    font-family: "Lato", sans-serif; /* Use "Lato," and if not available, use a generic sans-serif font */
+}
+body, ul {margin: 0; padding: 0; list-style: none;}
+
+/* CSS for centering the logo in the middle of the header */
+header {
+    text-align: center; /* Center-align the content horizontally */
+    padding: 60px 0 20px; /* Add padding to the top and bottom for spacing */
+}
+
+.logo a {
+    font-size: 48px; /* Adjust the font size as needed for a big letter */
+    font-weight: bold; /* Make the text bold */
+    color: #00a859; /* Dark green text color */
+    text-decoration: none; /* Remove underlines from the link */
+    font-family: 'Lato', sans-serif; /* Use the Lato font */
+}
+
+/* CSS for the login section */
+.login {
+    padding: 20px 0; /* Decrease the top and bottom padding to push it upwards */
+    text-align: center; /* Center-align the content horizontally */
+}
+
+.login-container {
+    padding: 20px; /* Add padding to the login content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a shadow to create a shading effect */
+    border-radius: 10px; /* Add rounded corners to the container */
+    display: inline-block; /* Keep the container inline and centered */
+    text-align: left; /* Align the content within the container to the left */
+    width: 25%; ; /* Increase the width of the container */
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* CSS for login heading */
+.login-heading {
+    font-weight: bold;
+    text-align: center;
+}
+
+/* CSS for user info */
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* Add spacing between the login heading and user info */
+}
+
+.user-info img {
+    width: 20px; /* Adjust the width of the user icon as needed */
+    height: 20px; /* Adjust the height of the user icon as needed */
+    margin-right: 10px; /* Add spacing between the user icon and text */
+}
+
+.label {
+    margin-right: 10px; /* Add spacing between the label and the input field */
+}
+
+.input-container {
+    display: inline-block;
+    vertical-align: middle; /* Vertically align the input with the icon and text */
+    border-bottom: 1px solid #ccc; /* Add a bottom border to create a straight line effect */
+    margin-top: 0px; /* Add spacing between the user info and the input field */
+    padding-bottom: 5px; /* Add padding to the bottom of the input container */
+}
+
+
+#username {
+    border: none; /* Remove the input border */
+    background: none; /* Remove the input background */
+    padding: 0; /* Remove input padding */
+    font-size: inherit; /* Use the same font size as the label */
+    width: auto; /* Allow the input to expand based on content */
+    outline: none; /* Remove the input focus outline */
+}
+
+/* CSS for the password info */
+
+.password-info {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* Add spacing between the username input and password info */
+}
+
+.password-info img {
+    width: 20px; /* Adjust the width of the password icon as needed */
+    height: 20px; /* Adjust the height of the password icon as needed */
+    margin-right: 10px; /* Add spacing between the password icon and text */
+}
+
+/* Password input container */
+.input-container input[type="password"] {
+    border: none; /* Remove the input border */
+    background: none; /* Remove the input background */
+    padding: 0; /* Remove input padding */
+    font-size: inherit; /* Use the same font size as the label */
+    width: auto; /* Allow the input to expand based on content */
+    outline: none; /* Remove the input focus outline */
+}
+
+/* Style for the button */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px; /* Add spacing between the password input and the button */
+}
+
+.login-button {
+    background-color: green; /* Set the button's background color to green */
+    color: white; /* Set the text color to white */
+    padding: 15px 30px; /* Add padding to the button for better styling */
+    text-decoration: none; /* Remove underline from the button */
+    border-radius: 5px; /* Add rounded corners to the button */
+    font-weight: bold; /* Make the button text bold */
+    transition: background-color 0.3s; /* Add a smooth transition for the background color */
+    border: none; /* Remove the button border */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    font-size: 16px; /* Set the font size for the button text */
+}
+
+.login-button:hover {
+    background-color: darkgreen; /* Change the background color on hover */
+}
+
+/* Adjust the margin for user-info and input-container to shift it to the right */
+.user-info,
+.password-info,
+.input-container {
+    margin-left: 20px; /* Adjust the left margin to shift it to the right */
+    margin-right: 20px; /* Adjust the right margin to shift it to the right */
+}
+
+/* Increase the width of the input container */
+.input-container {
+    width: 90%; /* Increase the width to 100% for full width */
+}

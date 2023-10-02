@@ -1,0 +1,307 @@
+/* Reset some default styles */
+/* Set the font family for the entire website to "Lato" */
+body {
+    font-family: "Lato", sans-serif; /* Use "Lato," and if not available, use a generic sans-serif font */
+}
+body, ul {margin: 0; padding: 0; list-style: none;}
+
+/* Style for the image container */
+.hero {
+    position: relative; /* Needed for absolute positioning */
+}
+
+/* Style for the black overlay above the image */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 54.5%; /* Cover the entire image */
+    background-color: rgba(0, 0, 0, 0.65); /* Black overlay with transparency */
+    z-index: 2; /* Place the overlay above the image */
+}
+
+/* Style for the header and navigation bar */
+header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: transparent; 
+    color: #fff;
+    padding: 20px 40px;
+    z-index: 3; 
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a {
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+}
+
+.menu ul {
+    display: flex;
+    gap: 40px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.menu ul li a:hover {
+    color: #00a859;
+}
+
+/* Style for the image */
+img {
+    width: 100%;
+    height: 94vh; 
+    object-fit: cover;
+    opacity: 0.8;
+}
+
+/* Style for the text overlay container */
+.text-overlay {
+    position: absolute;
+    top: 35%; /* Vertically center the container within the .hero section */
+    left: 50%; /* Horizontally center the container within the .hero section */
+    transform: translate(-50%, -100%);
+    text-align: center;
+    z-index: 4; /* Place the container above the black overlay */
+    color: #fff; /* Text color (adjust as needed) */
+}
+
+/* Style for the "GreenEase" text */
+.green-ease-text {
+    font-size: 59px; 
+    font-weight: bold;
+    margin-bottom: 12px; /* Add margin to create space between elements */
+}
+
+/* Style for the "Innovative Waste Collection" text */
+.innovative-text {
+    font-size: 30px; 
+    font-weight: 50; 
+}
+
+/* Style for the "Why Choose Clean and Green Garbage Solution?" text */
+.hero-title {
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center-align the text */
+    position: relative; /* Create a relative positioning context */
+}
+
+/* Style for the "Why Choose Clean and Green Garbage Solution?" text */
+.hero-title {
+    font-weight: 1000; /* Make the text bold */
+    text-align: center; /* Center-align the text */
+    position: relative; /* Create a relative positioning context */
+    margin-top: 20px; /* Increase the margin above the text */
+    margin-bottom: 20px; /* Increase the margin below the text */
+    margin-left: 20px; /* Adjust the margin to shift the text to the right */
+}
+
+/* Style for the line below the text */
+.line {
+    border: none; /* Remove the default border style of the <hr> element */
+    border-top: 2px solid #ccc; /* Set the line color to gray and thickness */
+    margin: 10px auto; /* Center-align the line horizontally and add some space */
+    width: 100%; /* Set the width to 100% to make it full-width */
+}
+
+Style for the subheading wrapper
+.subheading-wrapper {
+    display: flex;
+    justify-content: center; /* Center the subheadings horizontally */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    gap: 20px; /* Add some gap between subheading boxes */
+}
+
+/* Style for each subheading container */
+.subheading-box {
+    flex-basis: calc(50% - 10px); /* Adjust the width as needed, accounting for margins */
+    margin: 0 5px; /* Add some margin between subheading containers */
+    text-align: center; /* Center-align the subheading and paragraph */
+    background-color: #f0f0f0; /* Gray background color for the box */
+    padding: 20px; /* Add some padding inside the box */
+    border-radius: 10px; /* Add rounded corners to the box */
+}
+
+/* Style for the subheading */
+.subheading h3 {
+    font-weight: 700; /* Make the subheading semi-bold */
+    margin-bottom: 10px; /* Add some space below the subheading */
+}
+
+/* Style for the paragraph */
+.subheading p {
+    margin-top: 10px; /* Add some space above the paragraph */
+    text-align: center; /* Center-align the paragraph */
+}
+
+/* Style for the circular image */
+.circular-images {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-container {
+    text-align: center; /* Center-align the text with the image */
+    margin-right: 20px; /* Adjust the spacing between image containers */
+    margin-bottom: 10px; /* Add margin below the image containers */
+    margin-top: 20px;
+}
+
+.circular-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid grey; /* Add a black border */
+}
+
+.image-text {
+    font-weight: regular; 
+    margin-top: 10px; /* Add space between the image and text */
+}
+
+/* Style for the impact text */
+.impact-container {
+    text-align: center; /* Center-align the content */
+    margin-top: 20px; /* Add some top margin for spacing */
+}
+
+.impact-heading {
+    font-weight: bold; /* Make the heading bold */
+    font-size: 25px;
+    margin-bottom: 3px; /* Decrease the margin between heading and text */
+}
+
+.impact-text {
+    font-size: 17px;
+}
+
+/* Style for the button */
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cta-button.button {
+    background-color: green; /* Set the button's background color to green */
+    color: white; /* Set the text color to white */
+    padding: 15px 30px; /* Add padding to the button for better styling */
+    text-decoration: none; /* Remove underline from the link */
+    border-radius: 5px; /* Add rounded corners to the button */
+    font-weight: bold; /* Make the button text bold */
+    transition: background-color 0.3s; /* Add a smooth transition for the background color */
+}
+
+.cta-button.button:hover {
+    background-color: darkgreen; /* Change the background color on hover */
+}
+
+
+
+/* Style for the feature boxes section */
+.feature-boxes {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px; /* Adjust padding as needed */
+}
+
+/* Style for each individual feature box */
+.feature-box {
+    flex: 1; /* Distribute available space equally among boxes */
+    background-color: #f5f5f5; /* Background color for the boxes */
+    padding: 20px; /* Adjust padding as needed */
+    text-align: center;
+    border: 1px solid #ddd; /* Add a border for separation */
+    border-radius: 5px; /* Add rounded corners */
+    margin: 10px; /* Add margin to create space between boxes */
+}
+
+.feature-box img {
+    max-width: 80%;
+    height: 80%;
+    margin-bottom: 10px; /* Add space between image and text */
+}
+
+.feature-box h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.feature-box p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+
+/* Style for the footer */
+.footer {
+    background-color: #3c3c3c; /* Black background color for the footer */
+    color: #fff; /* Text color for the footer */
+    padding: 5px 0; /* Add padding to the top and bottom of the footer */
+    margin-top: 20px;
+}
+
+/* Style for the terms and conditions link */
+.terms {
+    margin-left: 20px; /* Add some left margin to the terms and conditions link */
+}
+
+.terms a {
+    color: #fff; /* Text color for the link */
+    text-decoration: none; /* Remove underlines from the link */
+    font-weight: bold; /* Make the link text bold */
+}
+
+.terms a:hover {
+    color: #00a859;
+}
+
+/* Style for the social icons */
+.social-icons {
+    margin-right: 20px; /* Add some right margin to the social icons */
+    margin-top: -10px; /* Add negative top margin to shift the icons upwards */
+}
+
+/* Style for individual social media icons */
+.social-icons a {
+    margin-left: 10px; /* Add some space between icons */
+    float: right;
+}
+
+.social-icons img {
+    width: 25px; /* Increase the width to make the icons larger */
+    height: 25px; /* Increase the height to match the width for a uniform size */
+    filter: invert(100%); /* Change the color to white using the invert filter */
+    object-fit: contain; /* Maintain the aspect ratio and contain within the specified dimensions */
+}
+
+/* Style for the copyright text */
+.copyright {
+    text-align: center; /* Center-align the copyright text */
+    padding: 0; /* Remove any padding */
+    margin-left: 80px; /* Add left margin to move it to the right */
+}
