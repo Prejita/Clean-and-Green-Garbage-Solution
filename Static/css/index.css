@@ -360,6 +360,7 @@ Style for the subheading wrapper
 .view-all-blogs {
     text-align: center;
     margin-top: 30px; 
+    margin-bottom: 50px;
 }
 
 .view-all-button {
@@ -378,37 +379,85 @@ Style for the subheading wrapper
     background-color: darkgreen;
 }
 
-/* Style for the contact container */
+
+/* Style for the contact section */
+.contact-section {
+    background-color: #fff;
+    padding: 50px 0;
+    position: relative; /* Add relative positioning to the contact section */
+}
+
 .contact-container {
     display: flex;
-    justify-content: space-between; /* Place content and image side by side */
-    align-items: center; /* Center content and image vertically */
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     max-width: 1200px;
     margin: 0 auto;
-    flex-direction: row-reverse; /* Reverse the order of elements (image and content) */
 }
 
-/* Style for the contact content */
-.contact-content {
-    text-align: center; /* Align content to the left */
-    background-color: #3c3c3c; /* Background color for the content box */
-    padding: 20px; /* Add padding to the content box */
-    border-radius: 5px; /* Add rounded corners to the content box */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-    color: #fff;
-    margin: 20px; /* Reduce the margin to decrease the gap */
-    margin-bottom: 0; /* Remove the margin below the contact content */
+.contact-image-container {
+    flex: 1;
+    text-align: center;
+    margin-left: -180px;
+    margin-right: 20px;
+    position: absolute; /* Add absolute positioning to the image container */
+    left: 0; /* Position it on the left side */
+    top: 40.15%; /* Vertically center the image */
+    transform: translateY(-50%); /* Adjust to center vertically */
+    z-index: 1; /* Place the image above the contact content */
 }
 
-/* Style for the contact image */
-.contact-image img {
-    max-width: 80%; /* Make sure the image doesn't exceed its container */
+.contact-image {
+    max-width: 41.75%;
     height: auto;
-    border-radius: 5px; /* Add a slight border radius for a rounded look */
-    margin-left: 0px; /* Add margin to separate the image from the content */
-    margin-right: 20px; /* Reduce the right margin to decrease the gap */
+    border-radius: 10px;
+    opacity: 100%;
 }
 
+.contact-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    margin-left: 600px;
+    margin-right: 20px;
+    position: relative;
+    z-index: 2;
+    max-width: 300px; /* Adjust the maximum width to control the size */
+    width: 40%; /* Ensure it takes up the available width */
+}
+
+/* Style for the paragraph above the button */
+.contact-content p {
+    margin-bottom: 25px; 
+}
+
+/* Style for the contact button */
+.contact-button {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #fff; /* White background color */
+    color: #00a859; /* Green text color */
+    border: 2px solid #00a859; /* Green border */
+    padding: 10px 10px; /* Smaller padding */
+    border-radius: 50px; /* Rounded button shape */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px; /* Slightly smaller font size */
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    display: block; /* Make it a block-level element */
+    text-align: center; /* Center-align the text */
+    width: 40%; /* Set a width to center the button */
+    margin: 0 auto; /* Center horizontally */
+}
+
+/* Change button appearance on hover */
+.contact-button:hover {
+    background-color: #00a859; /* Green background color on hover */
+    color: #fff; /* White text color on hover */
+}
 
 
 /* Style for the footer */
