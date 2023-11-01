@@ -15,10 +15,10 @@
             <div class="menu">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/login.html">Login</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
                 </ul>
             </div>
         </nav>
@@ -80,7 +80,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="terms">
-                <a href="terms-and-conditions.html">Terms and Conditions</a>
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
             </div>
 
             <div class="social-icons">

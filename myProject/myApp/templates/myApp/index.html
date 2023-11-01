@@ -16,10 +16,10 @@
             <div class="menu">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="login.html">Login</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
                 </ul>
             </div>
         </nav>
@@ -72,7 +72,7 @@
             </div>
             
             <div class="button-container">
-                <a href="/login.html" class="cta-button button">Join Us Today</a>
+                <a href="{% url 'login' %}"  class="cta-button button">Join Us Today</a>
             </div>            
 
         </div>
@@ -86,7 +86,7 @@
             <div class="about-us-content">
                 <h2>About Us</h2>
                 <p>We are a dedicated team of professionals committed to revolutionizing waste collection and management. With years of experience in the industry, we provide innovative and sustainable solutions to meet the evolving needs of our communities.</p>
-                <a href="about.html" class="about-button">Learn More</a>
+                <a href="{% url 'about' %}"  class="about-button">Learn More</a>
             </div>
             <div class="about-us-image">
                 <img src="/static/img/dustbin.jpg" alt="About Us Image">
@@ -103,7 +103,7 @@
                 <img src="/static/img/wasteseg.jpg" alt="Blog 1">
                 <h3 class="blog-title">Mastering Waste Segregation: A Step-by-Step Guide</h3>
                 <p class="blog-description">Mastering Waste Segregation: A Step-by-Step Guide" offers valuable insights and practical tips for responsible waste management through effective segregation.</p>
-                <a href="#" class="read-more">Read More</a>
+                <a href="{% url 'blog_post1' %}"  class="read-more">Read More</a>
             </div>
     
             <!-- Blog 2 -->
@@ -111,12 +111,12 @@
                 <img src="/static/img/t2t.jpg" alt="Blog 2">
                 <h3 class="blog-title">From Trash to Treasure: Creative Ways to Upcycle</h3>
                 <p class="blog-description">"From Trash to Treasure: Creative Ways to Upcycle" explores innovative ways to repurpose discarded items into valuable and creative treasures.</p>
-                <a href="#" class="read-more">Read More</a>
+                <a href="{% url 'blog_post2' %}"  class="read-more">Read More</a>
             </div>
         </div>
          <!-- View All Blogs Button -->
          <div class="view-all-blogs">
-            <a href="blog.html" class="view-all-button">View All Blogs</a>
+            <a href="{% url 'blog' %}"  class="view-all-button">View All Blogs</a>
         </div>
     </section>
     
@@ -129,7 +129,7 @@
             <div class="contact-content">
                 <h2>Contact Us</h2>
                 <p>We'd love to hear from you! Get in touch with us for any inquiries or feedback.</p>
-                <a href="contact.html" class="contact-button">Contact Now</a>
+                <a href="{% url 'contact' %}" class="contact-button">Contact Now</a>
             </div>
         </div>
     </section>
@@ -140,7 +140,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="terms">
-                <a href="terms-and-conditions.html">Terms and Conditions</a>
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
             </div>
 
             <div class="social-icons">

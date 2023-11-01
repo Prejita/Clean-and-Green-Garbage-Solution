@@ -15,10 +15,10 @@
             <div class="menu">
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                    <li><a href="/login.html">Login</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
                 </ul>
             </div>
         </nav>
@@ -37,7 +37,7 @@
                 <p>"Mastering Waste Segregation: A Step-by-Step Guide" offers valuable insights and practical tips for responsible waste management through effective segregation. 
                     It provides a clear, step-by-step approach to sorting different waste materials, promoting a cleaner and more sustainable environment.
                 </p>
-                <a href="/blog-post-1.html">Read More</a>
+                <a href="{% url 'blog_post1' %}">Read More</a>
             </div>
         </article>
         <hr style="width: 96%;">
@@ -51,7 +51,7 @@
                 <p>"From Trash to Treasure: Creative Ways to Upcycle" explores innovative ways to repurpose discarded items into valuable and creative treasures. 
                     Discover inspiring ideas and methods for upcycling, turning what was once considered trash into unique and useful creations.
                 </p>
-                <a href="/blog-post-2.html">Read More</a>
+                <a href="{% url 'blog_post2' %}">Read More</a>
             </div>
         </article>
         <hr style="width: 96%;">
@@ -65,7 +65,7 @@
                 <p>"The Environmental Impact of Proper E-Waste Disposal" delves into the crucial subject of responsible electronic waste management. 
                     Learn about the environmental consequences of improper disposal and the positive impact of recycling and disposing of e-waste correctly. 
                 </p>
-                <a href="/blog-post-3.html">Read More</a>
+                <a href="{% url 'blog_post3' %}">Read More</a>
             </div>
         </article>
         <hr style="width: 96%;">
@@ -80,7 +80,7 @@
                      Discover five practical tips that can make a significant difference in reducing your ecological footprint and contributing to a greener, more sustainable future.
 
                 </p>
-                <a href="/blog-post-4.html">Read More</a>
+                <a href="{% url 'blog_post4' %}">Read More</a>
             </div>
         </article>
 
@@ -89,7 +89,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="terms">
-                <a href="terms-and-conditions.html">Terms and Conditions</a>
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
             </div>
 
             <div class="social-icons">

@@ -21,7 +21,8 @@ body {
 .user-profile {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
+    justify-content: center; 
     margin-bottom: 20px;
 }
 
@@ -32,10 +33,11 @@ body {
 }
 
 .admin-label {
-    font-size: 20px;
+    font-size: 17px;
     color: #fff;
     margin-top: 10px;
     margin-bottom: 20px;
+    font-weight: bold;
 }
 
 .menu {
@@ -116,5 +118,9 @@ body {
     font-size: 26px;
     margin-left: 20px;
     margin-top: 30px;
+}
+
+.content {
+    flex: 1; /* Allow the content to take up all available horizontal space */
 }
 
