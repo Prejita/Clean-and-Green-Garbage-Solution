@@ -35,12 +35,14 @@
                         <span class="bold-text">Notifications</span>
                     </div>
                 </div>
-                <div class="menu-item">
-                    <div class="menu-box">
-                        <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
-                        <span class="bold-text">Logout</span>
-                    </div>
-                </div>
+                <div class="menu-item" id="logout">
+                    <a href="{% url 'index' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
+                            <span class="bold-text">Logout</span>
+                        </div>
+                    </a>                    
+                </div>                           
             </div>
             <div class="copyright">
                 <p>&copy; 2023 GreenEase, All Rights Reserved</p>
