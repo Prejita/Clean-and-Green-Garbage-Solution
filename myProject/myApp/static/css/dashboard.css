@@ -1,5 +1,4 @@
 /* CSS for dashboard */
-
 body {
     font-family: "Lato", sans-serif;
     margin: 0;
@@ -15,14 +14,14 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow-x: hidden; /* Preventing content from overflowing */
+    overflow-x: hidden;
 }
 
 .user-profile {
     display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
 }
 
@@ -47,27 +46,23 @@ body {
 }
 
 .menu .menu-item {
-    margin-bottom: 10px;
     cursor: pointer;
     color: #fff;
     width: 100%;
-    padding: 0;
-    margin-bottom: 0;
 }
 
 .menu .menu-item:nth-child(1) .menu-box {
-    background: #00a859; /* Setting the background color of the first menu item (dashboard) */
+    background: #00a859;
 }
 
 .menu .menu-box {
     display: flex;
     align-items: center;
-    padding: 15px ;
-    border-radius: 0; 
+    padding: 15px;
+    border-radius: 0;
     background: none;
     transition: background 0.3s;
     width: 100%;
-    margin: 0;
 }
 
 .menu .menu-box .icon {
@@ -95,32 +90,36 @@ body {
     margin-bottom: 5px;
 }
 
-.title-box {
-    color: #00a859;
-    text-align: center;
-    width: calc(100% - 250px); /* Subtract the width of the sidebar */
-    height: 70px;
+.content {
+    flex: 1;
     display: flex;
-    justify-content: flex-start; /* Align text to the left */
-    position: relative; 
+    flex-direction: column;
 }
 
-.title-box::after {
-    content: "";
-    background: #ccc; 
-    height: 2px;
-    width: 100%; /* Cover the full width of the title box */
-    position: absolute; /* Position at the bottom of the title box */
-    bottom: 0; /* Place at the bottom of the title box */
+.title-box {
+    background: #fff;
+    color: #00a859;
+    text-align: left;
+    height: 50px;
+    margin-left: 30px;
 }
 
 .title-box h1 {
     font-size: 26px;
-    margin-left: 20px;
-    margin-top: 30px;
 }
 
-.content {
-    flex: 1; /* Allow the content to take up all available horizontal space */
+.line {
+    border: none; /* Remove the default border style of the <hr> element */
+    border-top: 2px solid #ccc; /* Set the line color to gray and thickness */
+    width: 100%; /* Set the width to 100% to make it full-width */
+    margin-bottom: 3px;
 }
 
+.map {
+    flex: 1;
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+}
