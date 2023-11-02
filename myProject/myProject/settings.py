@@ -120,6 +120,8 @@ STATIC_URL = 'static/'
 import os
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'myApp/static')]
 
+LOGIN_REDIRECT_URL = "/dashboard/"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 

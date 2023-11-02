@@ -43,3 +43,6 @@ def dashboard(request):
 def termsandconditions(request):
     context={}
     return render(request, "myApp/terms-and-conditions.html", context)
+
+
+

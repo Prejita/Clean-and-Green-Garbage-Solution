@@ -1,9 +1,10 @@
 from . import views
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("login/", views.login, name="login"),
+    path("login/", auth_views.LoginView.as_view(template_name="myApp/login.html"), name="login"),
     path("about/", views.about, name="about"),
     path("blog_post1/", views.blog_post1, name="blog_post1"),
     path("blog_post2/", views.blog_post2, name="blog_post2"),
