@@ -30,10 +30,12 @@
                     </div>
                 </div>
                 <div class="menu-item">
-                    <div class="menu-box">
-                        <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
-                        <span class="bold-text">Notifications</span>
-                    </div>
+                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                            <span class="bold-text">Notifications</span>
+                        </div>
+                    </a>    
                 </div>
                 <div class="menu-item" id="logout">
                     <a href="{% url 'index' %}" style="text-decoration: none;">
