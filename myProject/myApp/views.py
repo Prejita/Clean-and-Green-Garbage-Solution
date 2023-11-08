@@ -60,9 +60,11 @@ def notifications(request):
 from django.contrib import messages
 from django.shortcuts import redirect
 ser = serial.Serial('COM6', 9600)
+
+@csrf_exempt  # Add the csrf_exempt decorator here
 def handle_arduino_data(request):
     if request.method == 'POST':
-        data = ser.readline().strip().decode('utf-8')  # Read data from the serial port
+        data = request.POST.get('fill_level')  # Get the 'fill_level' data from the POST request
         # Process the data as needed
         if data:
             if data == 'dustbin_full':
