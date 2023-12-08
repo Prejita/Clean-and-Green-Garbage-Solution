@@ -57,22 +57,22 @@ def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
 
-from django.contrib import messages
-from django.shortcuts import redirect
-ser = serial.Serial('COM6', 9600)
+# from django.contrib import messages
+# from django.shortcuts import redirect
+# ser = serial.Serial('COM6', 9600)
 
-@csrf_exempt  # Add the csrf_exempt decorator here
-def handle_arduino_data(request):
-    if request.method == 'POST':
-        data = request.POST.get('fill_level')  # Get the 'fill_level' data from the POST request
-        # Process the data as needed
-        if data:
-            if data == 'dustbin_full':
-                messages.error(request, 'The dustbin is full. Please take necessary action.')
-                print("Dustbin full notification sent.")
-            else:
-                print("Data received:", data)  # Print the data to the console for testing purposes
-            # Perform further processing or save the data to a database or send it to another system
+# @csrf_exempt  # Add the csrf_exempt decorator here
+# def handle_arduino_data(request):
+#     if request.method == 'POST':
+#         data = request.POST.get('fill_level')  # Get the 'fill_level' data from the POST request
+#         # Process the data as needed
+#         if data:
+#             if data == 'dustbin_full':
+#                 messages.error(request, 'The dustbin is full. Please take necessary action.')
+#                 print("Dustbin full notification sent.")
+#             else:
+#                 print("Data received:", data)  # Print the data to the console for testing purposes
+#             # Perform further processing or save the data to a database or send it to another system
 
-    # Redirect to the notifications page after setting the message
-    return redirect('notifications')
+#     # Redirect to the notifications page after setting the message
+#     return redirect('notifications')
