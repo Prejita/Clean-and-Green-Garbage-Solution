@@ -57,22 +57,26 @@ def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
 
-# from django.contrib import messages
-# from django.shortcuts import redirect
-# ser = serial.Serial('COM6', 9600)
 
-# @csrf_exempt  # Add the csrf_exempt decorator here
-# def handle_arduino_data(request):
-#     if request.method == 'POST':
-#         data = request.POST.get('fill_level')  # Get the 'fill_level' data from the POST request
-#         # Process the data as needed
-#         if data:
-#             if data == 'dustbin_full':
-#                 messages.error(request, 'The dustbin is full. Please take necessary action.')
-#                 print("Dustbin full notification sent.")
-#             else:
-#                 print("Data received:", data)  # Print the data to the console for testing purposes
-#             # Perform further processing or save the data to a database or send it to another system
+# Django view to handle incoming data from ESP32 and save it to the database
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
 
-#     # Redirect to the notifications page after setting the message
-#     return redirect('notifications')
+@csrf_exempt  # Use this decorator to exempt CSRF verification (for testing purposes)
+def save_dustbin_status(request):
+    if request.method == 'POST':  # Ensure the view only responds to POST requests
+        try:
+            received_data = json.loads(request.body)
+            # Process received_data as needed
+            print("Received data:", received_data)
+            # Perform actions based on the received data
+            
+            # Return a success response
+            return JsonResponse({'message': 'Data received successfully'})
+        except json.JSONDecodeError as e:
+            # Handle JSON decoding errors
+            return JsonResponse({'error': 'Invalid JSON format'})
+    else:
+        # For other methods (GET, PUT, DELETE, etc.), return a method not allowed response
+        return JsonResponse({'error': 'Method not allowed'}, status=405)

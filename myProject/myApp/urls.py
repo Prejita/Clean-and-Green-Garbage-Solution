@@ -4,8 +4,6 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("", views.index, name="index"),
-    # path('arduino-data/', views.arduino_data, name='arduino_data'),
-    #path('handle_arduino_data/', views.handle_arduino_data, name='handle_arduino_data'),
     path("login/", auth_views.LoginView.as_view(template_name="myApp/login.html"), name="login"),
     path("about/", views.about, name="about"),
     path("blog_post1/", views.blog_post1, name="blog_post1"),
@@ -17,4 +15,5 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path("termsandconditions/", views.termsandconditions, name="termsandconditions"),
     path("notifications/", views.notifications, name="notifications"),
+    path('api/save_dustbin_status/', views.save_dustbin_status, name='save_dustbin_status'),
     ]
