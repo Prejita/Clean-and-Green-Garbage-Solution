@@ -15,5 +15,5 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path("termsandconditions/", views.termsandconditions, name="termsandconditions"),
     path("notifications/", views.notifications, name="notifications"),
-    path('api/save_dustbin_status/', views.save_dustbin_status, name='save_dustbin_status'),
+    path('esp32/data/', views.esp32_data_handler, name='esp32_data'),
     ]

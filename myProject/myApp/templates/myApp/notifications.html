@@ -4,14 +4,19 @@
     <title>Notifications</title>
 </head>
 <body>
-    <h1>Notifications</h1>
-    
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+    <h1>Status: <span id="status"></span></h1>
+    <h2>Distance: <span id="distance"></span> cm</h2>
+
+    <script>
+        // Fetch data using JavaScript from your Django backend
+        fetch('/esp32/data/')
+            .then(response => response.json())
+            .then(data => {
+                // Update the HTML content with the received data
+                document.getElementById('status').innerText = data.status;
+                document.getElementById('distance').innerText = data.distance;
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>
