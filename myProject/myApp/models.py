@@ -1,10 +1,9 @@
 from django.db import models
 
-
-class Dustbin(models.Model):
-    status = models.CharField(max_length=10)
+class DustbinData(models.Model):
+    fill_percentage = models.FloatField()
+    is_filled = models.BooleanField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"Dustbin Status: {self.status} at {self.timestamp}"
-
+        return f"Dustbin data: {self.fill_percentage}% Filled ({self.timestamp})"

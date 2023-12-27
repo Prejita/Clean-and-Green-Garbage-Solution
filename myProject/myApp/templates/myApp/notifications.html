@@ -1,22 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Notifications</title>
+    <title>ESP32 Notifications</title>
 </head>
 <body>
-    <h1>Status: <span id="status"></span></h1>
-    <h2>Distance: <span id="distance"></span> cm</h2>
-
-    <script>
-        // Fetch data using JavaScript from your Django backend
-        fetch('/esp32/data/')
-            .then(response => response.json())
-            .then(data => {
-                // Update the HTML content with the received data
-                document.getElementById('status').innerText = data.status;
-                document.getElementById('distance').innerText = data.distance;
-            })
-            .catch(error => console.error('Error:', error));
-    </script>
+    <h1>ESP32 Notifications</h1>
+    <p>Fill Percentage: {{ fill_percentage }}</p>
+    <p>Is Filled: {% if is_filled %}Yes{% else %}No{% endif %}</p>
 </body>
 </html>
