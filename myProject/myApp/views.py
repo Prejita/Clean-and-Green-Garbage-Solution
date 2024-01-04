@@ -55,35 +55,6 @@ def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
 
-# @csrf_exempt
-# def dustbin_data_receiver(request):
-#     if request.method == 'POST':
-#         try:
-#             received_data = json.loads(request.body)
-#             fill_percentage = received_data.get('distance')
-#             is_filled = received_data.get('status')
-
-#             # Store the received data in the DustbinData model
-#             DustbinData.objects.create(fill_percentage=fill_percentage, is_filled=is_filled)
-
-#             return JsonResponse({'message': 'Data received and processed successfully'})
-#         except json.JSONDecodeError as e:
-#             return JsonResponse({'error': 'Invalid JSON format'})
-#     else:
-#         return JsonResponse({'error': 'Invalid request method'})
-
-
-# def notifications(request):
-#     # Retrieve the latest DustbinData instance (or modify this logic based on your needs)
-#     latest_data = DustbinData.objects.latest('timestamp')
-
-#     # Pass fill_percentage and is_filled to the template
-#     context = {
-#         'fill_percentage': latest_data.fill_percentage,
-#         'is_filled': latest_data.is_filled
-#     }
-#     return render(request, "myApp/notifications.html", context)
-
 @csrf_exempt
 def dustbin_data_receiver(request):
     if request.method == 'POST':
@@ -103,12 +74,20 @@ def dustbin_data_receiver(request):
 
 
 def notifications(request):
-    # Retrieve the latest DustbinData instance (or modify this logic based on your needs)
+    # Retrieve the latest DustbinData instance 
     latest_data = DustbinData.objects.latest('timestamp')
 
-    # Pass distance and status to the template
+    # Pass distance and status
     context = {
         'distance': latest_data.distance,
         'status': latest_data.status
     }
     return render(request, "myApp/notifications.html", context)
+
+def dashboard(request):
+    latest_data = DustbinData.objects.latest('timestamp')
+    context = {
+        'distance': latest_data.distance,
+        'status': latest_data.status
+    }
+    return render(request, "myApp/dashboard.html", context)
