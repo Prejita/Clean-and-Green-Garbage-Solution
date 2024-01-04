@@ -1,3 +1,5 @@
+<!-- notifications.html
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +7,19 @@
 </head>
 <body>
     <h1>ESP32 Notifications</h1>
-    <p>Fill Percentage: {{ fill_percentage }}</p>
-    <p>Is Filled: {% if is_filled %}Yes{% else %}No{% endif %}</p>
+    <p>Status: {{ status }}</p>
+    <p>Fill Percentage: {{ fill_percentage }}%</p>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ESP32 Notifications</title>
+</head>
+<body>
+    <h1>ESP32 Notifications</h1>
+    <p>Status: {{ status }}</p>
+    <p>Distance: {{ distance }} cm</p>
 </body>
 </html>
