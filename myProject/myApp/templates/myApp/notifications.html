@@ -60,7 +60,8 @@
 
         <!-- Table for notifications -->
         <div class="notifications">
-            <table class="notification-table">
+            <table class="notification-table" id="notificationTable">
+                <!-- Table header -->
                 <thead>
                     <tr>
                         <th>SN</th>
@@ -71,27 +72,36 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Rows with notification data -->
+                    {% for notification in notifications %}
                     <tr>
-                        <td>1</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                        <td>Herald College Kathmandu</td>
-                        <td>2024-01-06 13:00</td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ notification.message }}</td>
+                        <td>{{ notification.location }}</td>
+                        <td>{{ notification.timestamp }}</td>
                         <td><button class="delete-btn">Delete</button></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</td>
-                        <td>Location 2</td>
-                        <td>2024-01-06 14:30</td>
-                        <td><button class="delete-btn">Delete</button></td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
-
     </div>
+    
+    <script>
+        // Get all delete buttons by their class name
+        const deleteButtons = document.querySelectorAll('.delete-btn');
 
+        // Add click event listener to each delete button
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Find the closest row (parentElement of the button) and remove it from the table
+                const row = this.closest('tr');
+                if (row) {
+                    row.remove();
+                }
+            });
+        });
+    </script>
 </body>
 </html> 
 

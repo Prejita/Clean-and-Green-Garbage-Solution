@@ -106,7 +106,7 @@ body {
 .line {
     border: none;
     border-top: 2px solid #ccc;
-    width: 105%;
+    width: 150%;
     margin-bottom: 3px;
 }
 
@@ -115,7 +115,7 @@ body {
 }
 
 .notification-table {
-    width: 100%;
+    width: 145%;
     border-collapse: collapse;
     margin-left: 25px;
 }

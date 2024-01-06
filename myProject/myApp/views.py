@@ -139,3 +139,10 @@ def dashboard(request):
         'location': latest_data.location
     }
     return render(request, "myApp/dashboard.html", context)
+
+from .models import Notification
+
+def notifications(request):
+    notification = Notification.objects.all()
+    return render(request, 'myApp/notifications.html', {'notifications': notification})
+
