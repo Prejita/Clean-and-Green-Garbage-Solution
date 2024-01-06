@@ -73,9 +73,11 @@
         // Retrieve distance and status from the Django context
         var distance = '{{ distance }}';
         var status = '{{ status }}';
+        var time = '{{kathmandu_time}}';
+        var binlocation = '{{location}}';
     
         var marker = L.marker([27.712265, 85.330902]).addTo(map)
-            .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: Herald College Kathmandu')
+            .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: '+ time)
             .openPopup();
 
         // Create and position the custom box in the top right corner
@@ -83,7 +85,7 @@
 
         customBox.onAdd = function () {
             var div = L.DomUtil.create('div', 'custom-box');
-            div.innerHTML = "<h2>Dustbin's Information</h2><hr>" +  '<p>Dustbin: 1 <br>Distance: ' + distance + ' cm <br>Status: ' + status + '<br>Location: Herald College Kathmandu </p>';
+            div.innerHTML = "<h2>Dustbin's Information</h2><hr>" + '<p>Dustbin: 1 <br>Distance: ' + distance + ' cm <br>Status: ' + status + '<br>Location: ' + binlocation + '<br> Time: ' + time + '</p>';
             return div;
         };
         

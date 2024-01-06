@@ -55,31 +55,31 @@ def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
 
-@csrf_exempt
-def dustbin_data_receiver(request):
-    if request.method == 'POST':
-        try:
-            received_data = json.loads(request.body)
-            distance = received_data.get('distance')
-            status = received_data.get('status')
+# @csrf_exempt
+# def dustbin_data_receiver(request):
+#     if request.method == 'POST':
+#         try:
+#             received_data = json.loads(request.body)
+#             distance = received_data.get('distance')
+#             status = received_data.get('status')
 
-            # Store the received data in the DustbinData model
-            DustbinData.objects.create(distance=distance, status=status)
+#             # Store the received data in the DustbinData model
+#             DustbinData.objects.create(distance=distance, status=status)
 
-            return JsonResponse({'message': 'Data received and processed successfully'})
-        except json.JSONDecodeError as e:
-            return JsonResponse({'error': 'Invalid JSON format'})
-    else:
-        return JsonResponse({'error': 'Invalid request method'})
+#             return JsonResponse({'message': 'Data received and processed successfully'})
+#         except json.JSONDecodeError as e:
+#             return JsonResponse({'error': 'Invalid JSON format'})
+#     else:
+#         return JsonResponse({'error': 'Invalid request method'})
 
-def dashboard(request):
-    # Retrieve the latest DustbinData instance 
-    latest_data = DustbinData.objects.latest('timestamp')
-    context = {
-        'distance': latest_data.distance,
-        'status': latest_data.status
-    }
-    return render(request, "myApp/dashboard.html", context)
+# def dashboard(request):
+#     # Retrieve the latest DustbinData instance 
+#     latest_data = DustbinData.objects.latest('timestamp')
+#     context = {
+#         'distance': latest_data.distance,
+#         'status': latest_data.status
+#     }
+#     return render(request, "myApp/dashboard.html", context)
 
 # @csrf_exempt
 # def dustbin_data_receiver(request):
@@ -109,3 +109,33 @@ def dashboard(request):
 #         'kathmandu_time': latest_data.kathmandu_time  # Pass Kathmandu time to context
 #     }
 #     return render(request, "myApp/dashboard.html", context)
+
+@csrf_exempt
+def dustbin_data_receiver(request):
+    if request.method == 'POST':
+        try:
+            received_data = json.loads(request.body)
+            distance = received_data.get('distance')
+            status = received_data.get('status')
+            kathmandu_time = received_data.get('kathmandu_time')  # Extract Kathmandu time
+            location = received_data.get('location')  # Extract location data
+
+            # Store the received data in the DustbinData model
+            DustbinData.objects.create(distance=distance, status=status, kathmandu_time=kathmandu_time, location=location)
+
+            return JsonResponse({'message': 'Data received and processed successfully'})
+        except json.JSONDecodeError as e:
+            return JsonResponse({'error': 'Invalid JSON format'})
+    else:
+        return JsonResponse({'error': 'Invalid request method'})
+    
+def dashboard(request):
+    # Retrieve the latest DustbinData instance
+    latest_data = DustbinData.objects.latest('timestamp')
+    context = {
+        'distance': latest_data.distance,
+        'status': latest_data.status,
+        'kathmandu_time': latest_data.kathmandu_time,  # Pass Kathmandu time to context
+        'location': latest_data.location
+    }
+    return render(request, "myApp/dashboard.html", context)
