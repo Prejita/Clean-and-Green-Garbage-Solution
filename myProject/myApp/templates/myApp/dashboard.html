@@ -76,9 +76,23 @@
         var time = '{{kathmandu_time}}';
         var binlocation = '{{location}}';
     
-        var marker = L.marker([27.712265, 85.330902]).addTo(map)
-            .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: '+ time)
-            .openPopup();
+       // Check if the status is "Full" and change marker popup color to red
+       if (status === 'Full') {
+            // Define a red icon
+            var redIcon = L.icon({
+                iconUrl: '/static/img/marker.png',  // URL to red marker icon
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
+            });
+            var marker = L.marker([27.712265, 85.330902], {icon:redIcon}).addTo(map)
+                .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + time)
+                .openPopup();
+        } else {
+            var marker = L.marker([27.712265, 85.330902]).addTo(map)
+                .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + time)
+                .openPopup();
+        }
 
         // Create and position the custom box in the top right corner
         var customBox = L.control({ position: 'topright' });
