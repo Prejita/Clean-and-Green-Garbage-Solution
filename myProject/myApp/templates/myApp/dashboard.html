@@ -75,11 +75,21 @@
         var status = '{{ status }}';
     
         var marker = L.marker([27.712265, 85.330902]).addTo(map)
-            .bindPopup('Dustbin <br>Distance: ' + distance + ' cm<br>Status: ' + status)
+            .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: Herald College Kathmandu')
             .openPopup();
+
+        // Create and position the custom box in the top right corner
+        var customBox = L.control({ position: 'topright' });
+
+        customBox.onAdd = function () {
+            var div = L.DomUtil.create('div', 'custom-box');
+            div.innerHTML = "<h2>Dustbin's Information</h2><hr>" +  '<p>Dustbin: 1 <br>Distance: ' + distance + ' cm <br>Status: ' + status + '<br>Location: Herald College Kathmandu </p>';
+            return div;
+        };
+        
+        customBox.addTo(map);
     </script>
     
-
 </body>
 </html>
 

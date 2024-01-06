@@ -114,3 +114,16 @@ body {
     width: 100%; /* Set the width to 100% to make it full-width */
     margin-bottom: 3px;
 }
+
+.custom-box {
+    position: absolute;
+    z-index: 1000;
+    background-color: #3c3c3c;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    width: 230px;
+}
+.custom-box p {
+    font-size: 14px; 
+}

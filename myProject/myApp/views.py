@@ -72,22 +72,40 @@ def dustbin_data_receiver(request):
     else:
         return JsonResponse({'error': 'Invalid request method'})
 
-
-def notifications(request):
-    # Retrieve the latest DustbinData instance 
-    latest_data = DustbinData.objects.latest('timestamp')
-
-    # Pass distance and status
-    context = {
-        'distance': latest_data.distance,
-        'status': latest_data.status
-    }
-    return render(request, "myApp/notifications.html", context)
-
 def dashboard(request):
+    # Retrieve the latest DustbinData instance 
     latest_data = DustbinData.objects.latest('timestamp')
     context = {
         'distance': latest_data.distance,
         'status': latest_data.status
     }
     return render(request, "myApp/dashboard.html", context)
+
+# @csrf_exempt
+# def dustbin_data_receiver(request):
+#     if request.method == 'POST':
+#         try:
+#             received_data = json.loads(request.body)
+#             distance = received_data.get('distance')
+#             status = received_data.get('status')
+#             kathmandu_time = received_data.get('kathmandu_time')  # Extract Kathmandu time
+
+#             # Store the received data in the DustbinData model
+#             DustbinData.objects.create(distance=distance, status=status, kathmandu_time=kathmandu_time)
+
+#             return JsonResponse({'message': 'Data received and processed successfully'})
+#         except json.JSONDecodeError as e:
+#             return JsonResponse({'error': 'Invalid JSON format'})
+#     else:
+#         return JsonResponse({'error': 'Invalid request method'})
+
+
+# def dashboard(request):
+#     # Retrieve the latest DustbinData instance
+#     latest_data = DustbinData.objects.latest('timestamp')
+#     context = {
+#         'distance': latest_data.distance,
+#         'status': latest_data.status,
+#         'kathmandu_time': latest_data.kathmandu_time  # Pass Kathmandu time to context
+#     }
+#     return render(request, "myApp/dashboard.html", context)
