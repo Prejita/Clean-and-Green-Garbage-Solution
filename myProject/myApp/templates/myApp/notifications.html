@@ -1,25 +1,97 @@
-<!-- notifications.html
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ESP32 Notifications</title>
-</head>
-<body>
-    <h1>ESP32 Notifications</h1>
-    <p>Status: {{ status }}</p>
-    <p>Fill Percentage: {{ fill_percentage }}%</p>
-</body>
-</html> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/notification.css"/>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>ESP32 Notifications</title>
+    <title>GreenEase - Notification</title>
 </head>
 <body>
-    <h1>ESP32 Notifications</h1>
-    <p>Status: {{ status }}</p>
-    <p>Distance: {{ distance }} cm</p>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="/static/img/profile-pic.png" alt="User Profile Picture">
+                <div class="admin-label">Admin</div>
+            </div>
+            <div class="menu">
+                <div class="menu-item">
+                    <a href="{% url 'dashboard' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/dashboard.png" alt="Dashboard Icon" class="icon">
+                            <span class="bold-text">Dashboard</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                            <span class="bold-text">Notifications</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item" id="logout">
+                    <a href="{% url 'index' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
+                            <span class="bold-text">Logout</span>
+                        </div>
+                    </a>                    
+                </div>                           
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div>
+        </aside>
+    </div>
+
+    <div class="content">
+        <div class="title-box">
+            <h1>GreenEase</h1>
+        </div>
+
+        <hr class = "line">
+
+        <!-- Search input -->
+        <div class="notification-actions">
+            <input type="text" id="search" placeholder="Search notification...">
+        </div>
+
+        <!-- Table for notifications -->
+        <div class="notifications">
+            <table class="notification-table">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Notification</th>
+                        <th>Location</th>
+                        <th>DateTime</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                        <td>Herald College Kathmandu</td>
+                        <td>2024-01-06 13:00</td>
+                        <td><button class="delete-btn">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</td>
+                        <td>Location 2</td>
+                        <td>2024-01-06 14:30</td>
+                        <td><button class="delete-btn">Delete</button></td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
 </body>
-</html>
+</html> 
+
