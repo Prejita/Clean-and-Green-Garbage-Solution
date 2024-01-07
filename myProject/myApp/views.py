@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 from .models import DustbinData  # Import the DustbinData model
+from .models import Notification
 
 def index(request):
     context = {}
@@ -140,9 +141,29 @@ def dashboard(request):
     }
     return render(request, "myApp/dashboard.html", context)
 
-from .models import Notification
-
 def notifications(request):
     notification = Notification.objects.all()
     return render(request, 'myApp/notifications.html', {'notifications': notification})
 
+@csrf_exempt
+def delete_notification(request, notification_id):
+    if request.method == 'DELETE':
+        try:
+            notification = Notification.objects.get(id=notification_id)
+            notification.delete()
+            return JsonResponse({'message': 'Notification deleted successfully'})
+        except Notification.DoesNotExist:
+            return JsonResponse({'error': 'Notification does not exist'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
+def delete_all_notifications(request):
+    if request.method == 'DELETE':
+        try:
+            # Delete all records from the Notification model
+            Notification.objects.all().delete()
+            return JsonResponse({'message': 'All notifications deleted successfully'})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)

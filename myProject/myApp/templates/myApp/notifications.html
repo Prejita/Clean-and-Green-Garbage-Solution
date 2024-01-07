@@ -53,13 +53,16 @@
 
         <hr class = "line">
 
-        <!-- Search input -->
-        <div class="notification-actions">
-            <input type="text" id="search" placeholder="Search notification...">
+        <!-- Search input and Clear All button container -->
+        <div class="search-and-clear-container">
+            <div class="search-actions">
+                <input type="text" id="search" placeholder="Search notification...">
+            </div>
+            <button id="clearAllNotifications">Clear Notifications</button>
         </div>
 
         <!-- Table for notifications -->
-        <div class="notifications">
+        <div class="table-container">
             <table class="notification-table" id="notificationTable">
                 <!-- Table header -->
                 <thead>
@@ -88,20 +91,101 @@
     </div>
     
     <script>
-        // Get all delete buttons by their class name
         const deleteButtons = document.querySelectorAll('.delete-btn');
-
-        // Add click event listener to each delete button
+    
         deleteButtons.forEach(button => {
             button.addEventListener('click', function() {
-                // Find the closest row (parentElement of the button) and remove it from the table
                 const row = this.closest('tr');
                 if (row) {
-                    row.remove();
+                    const notificationId = row.querySelector('td:first-child').innerText; // Assuming the first column contains the ID
+    
+                    // Send an AJAX request to the Django backend to delete the notification
+                    fetch(`/delete_notification/${notificationId}/`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token for security
+                        },
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // If the deletion is successful, remove the row from the table
+                            row.remove();
+                        } else {
+                            console.error('Error deleting notification');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
                 }
+            });
+        });
+    </script>    
+
+    <!-- Place this script at the bottom of your HTML body or within a separate JavaScript file -->
+    <script>
+        // Function to perform search based on input value
+        function searchNotifications() {
+            // Get input value and convert it to lowercase for case-insensitive search
+            const searchValue = document.getElementById('search').value.toLowerCase();
+
+            // Get all rows in the table
+            const rows = document.querySelectorAll('.notification-table tbody tr');
+
+            // Loop through each row to check for matching values and show/hide rows accordingly
+            rows.forEach(row => {
+                const message = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const location = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                const timestamp = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+
+                // Check if any of the row's columns contain the search value
+                if (
+                    message.includes(searchValue) ||
+                    location.includes(searchValue) ||
+                    timestamp.includes(searchValue)
+                ) {
+                    // Show the row if it matches the search
+                    row.style.display = '';
+                } else {
+                    // Hide the row if it doesn't match the search
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Get the search input element
+        const searchInput = document.getElementById('search');
+
+        // Add 'input' event listener to trigger search on input change
+        searchInput.addEventListener('input', searchNotifications);
+    </script>
+
+    <script>
+        const clearAllButton = document.getElementById('clearAllNotifications');
+
+        clearAllButton.addEventListener('click', function() {
+            // Send an AJAX request to the Django backend to delete all notifications
+            fetch('/delete_all_notifications/', {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token for security
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the deletion is successful, remove all rows from the table
+                    const notificationTable = document.getElementById('notificationTable');
+                    notificationTable.querySelectorAll('tbody tr').forEach(row => {
+                        row.remove();
+                    });
+                } else {
+                    console.error('Error deleting notifications');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
             });
         });
     </script>
 </body>
 </html> 
-
