@@ -56,6 +56,10 @@ def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
 
+def addevents(request):
+    context = {}
+    return render(request, "myApp/addevents.html", context)
+
 # @csrf_exempt
 # def dustbin_data_receiver(request):
 #     if request.method == 'POST':
