@@ -5,6 +5,7 @@ from django.http import JsonResponse
 import json
 from .models import DustbinData  # Import the DustbinData model
 from .models import Notification
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     context = {}
@@ -42,6 +43,7 @@ def contact(request):
     context = {}
     return render(request, "myApp/contact.html", context)
 
+@login_required
 def dashboard(request):
     # You can retrieve messages from other views here and display them in your dashboard.
     messages_data = messages.get_messages(request)

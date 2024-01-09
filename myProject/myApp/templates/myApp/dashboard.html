@@ -38,17 +38,17 @@
                     </a>    
                 </div>
                 <div class="menu-item" id="logout">
-                    <a href="{% url 'index' %}" style="text-decoration: none;">
+                    <a href="#" id="logout-link" style="text-decoration: none;">
                         <div class="menu-box">
                             <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
                             <span class="bold-text">Logout</span>
                         </div>
                     </a>                    
-                </div>                           
-            </div>
-            <div class="copyright">
+                </div>
+                
+            <!-- <div class="copyright">
                 <p>&copy; 2023 GreenEase, All Rights Reserved</p>
-            </div>
+            </div> -->
         </aside>
     </div>
     
@@ -61,7 +61,39 @@
 
         <div id="map" style="width: 100%; height: 580px;"></div>
     </div>
-  
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Logout confirmation
+            const logoutLink = document.getElementById('logout-link');
+            logoutLink.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent the default link behavior
+    
+                // Show a confirmation dialog before logging out
+                Swal.fire({
+                    title: 'Are you sure you want to logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Logout',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If confirmed, proceed with logout
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logged out successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Redirect the user to the homepage or login page after logout
+                            window.location.href = '{% url "index" %}'; // Replace with your desired logout URL
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script>
         var map = L.map('map').setView([27.712265, 85.330702], 13);
     

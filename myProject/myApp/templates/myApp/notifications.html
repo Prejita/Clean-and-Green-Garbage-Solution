@@ -32,17 +32,16 @@
                     </a>    
                 </div>
                 <div class="menu-item" id="logout">
-                    <a href="{% url 'index' %}" style="text-decoration: none;">
+                    <a href="#" id="logout-link" style="text-decoration: none;">
                         <div class="menu-box">
                             <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
                             <span class="bold-text">Logout</span>
                         </div>
                     </a>                    
-                </div>                           
-            </div>
-            <div class="copyright">
+                </div>
+            <!-- <div class="copyright">
                 <p>&copy; 2023 GreenEase, All Rights Reserved</p>
-            </div>
+            </div> -->
         </aside>
     </div>
 
@@ -89,7 +88,38 @@
             </table>
         </div>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Logout confirmation
+            const logoutLink = document.getElementById('logout-link');
+            logoutLink.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent the default link behavior
+    
+                // Show a confirmation dialog before logging out
+                Swal.fire({
+                    title: 'Are you sure you want to logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Logout',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If confirmed, proceed with logout
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logged out successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Redirect the user to the homepage or login page after logout
+                            window.location.href = '{% url "index" %}'; 
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
@@ -99,32 +129,46 @@
             deleteButtons.forEach(button => {
                 button.addEventListener("click", function() {
                     const notificationId = this.getAttribute("data-notification-id");
-                    console.log("button pressed")
-                    // Send a POST request to the Django endpoint for deletion
-                    fetch(`/delete_notification/${notificationId}/`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRFToken': '{{ csrf_token }}' // Ensure to include the CSRF token
-                        },
-                        body: JSON.stringify({ notification_id: notificationId })
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            // If deletion is successful, remove the table row from the UI
-                            const tableRow = this.parentElement.parentElement;
-                            tableRow.remove();
-                            alert(`Notification ID ${notificationId} deleted`);
-                        } else {
-                            console.error('Failed to delete notification');
+                    
+                    // Show a confirmation dialog before deletion
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You are about to delete this notification',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'No, keep it'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If confirmed, proceed with deletion
+                            fetch(`/delete_notification/${notificationId}/`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': '{{ csrf_token }}' // Ensure to include the CSRF token
+                                },
+                                body: JSON.stringify({ notification_id: notificationId })
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    // If deletion is successful, remove the table row from the UI
+                                    const tableRow = button.parentElement.parentElement;
+                                    tableRow.remove();
+                                    // Show success notification
+                                    Swal.fire('Deleted!', `Notification deleted`, 'success');
+                                } else {
+                                    console.error('Failed to delete notification');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
                     });
                 });
             });
         });
+   
     </script>
 
     <script>
@@ -164,15 +208,43 @@
         searchInput.addEventListener('input', searchNotifications);
     </script>
 
-    <script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const deleteButtons = document.querySelectorAll(".delete-btn");
         const clearAllButton = document.getElementById('clearAllNotifications');
 
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const notificationId = this.getAttribute("data-notification-id");
+                deleteNotification(notificationId);
+            });
+        });
+
         clearAllButton.addEventListener('click', function() {
-            // Send an AJAX request to the Django backend to delete all notifications
+            // Show a confirmation dialog before clearing all notifications
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This will clear all notifications. Are you sure you want to proceed?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, clear all!',
+                cancelButtonText: 'No, keep them'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send an AJAX request to delete all notifications
+                    clearAllNotifications();
+                }
+            });
+        });
+
+
+
+        // Function to clear all notifications
+        function clearAllNotifications() {
             fetch('/delete_all_notifications/', {
                 method: 'DELETE',
                 headers: {
-                    'X-CSRFToken': '{{ csrf_token }}', // Include CSRF token for security
+                    'X-CSRFToken': '{{ csrf_token }}',
                 },
             })
             .then(response => {
@@ -182,6 +254,8 @@
                     notificationTable.querySelectorAll('tbody tr').forEach(row => {
                         row.remove();
                     });
+                    // Show success notification
+                    Swal.fire('Cleared!', 'All notifications have been cleared', 'success');
                 } else {
                     console.error('Error deleting notifications');
                 }
@@ -189,7 +263,8 @@
             .catch(error => {
                 console.error('Error:', error);
             });
-        });
-    </script>
+        }
+    });
+</script>
 </body>
 </html> 
