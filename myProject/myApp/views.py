@@ -173,21 +173,3 @@ def delete_all_notifications(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
-    
-# @csrf_exempt 
-# def delete_notification(request):
-#     if request.method == 'POST':
-#         notification_id = request.POST.get('notification_id')
-        
-#         try:
-#             # Perform deletion based on the notification ID
-#             notification = Notification.objects.get(id=notification_id)
-#             notification.delete()
-#             return JsonResponse({'message': f'Notification ID {notification_id} deleted successfully'})
-#         except Notification.DoesNotExist:
-#             return JsonResponse({'error': 'Notification does not exist'}, status=404)
-#         except Exception as e:
-#             return JsonResponse({'error': str(e)}, status=500)
-    
-#     return JsonResponse({'error': 'Invalid request'})
-    
