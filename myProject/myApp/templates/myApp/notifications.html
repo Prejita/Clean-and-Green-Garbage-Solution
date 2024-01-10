@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/notification.css"/>
+
+    <title>GreenEase - Notification</title>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="/static/img/profile-pic.png" alt="User Profile Picture">
+                <div class="admin-label">Admin</div>
+            </div>
+            <div class="menu">
+                <div class="menu-item">
+                    <a href="{% url 'dashboard' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/dashboard.png" alt="Dashboard Icon" class="icon">
+                            <span class="bold-text">Dashboard</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                            <span class="bold-text">Notifications</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item" id="logout">
+                    <a href="#" id="logout-link" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
+                            <span class="bold-text">Logout</span>
+                        </div>
+                    </a>                    
+                </div>
+            <!-- <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div> -->
+        </aside>
+    </div>
+
+    <div class="content">
+        <div class="title-box">
+            <h1>GreenEase</h1>
+        </div>
+
+        <hr class = "line">
+
+        <!-- Search input and Clear All button container -->
+        <div class="search-and-clear-container">
+            <div class="search-actions">
+                <input type="text" id="search" placeholder="Search notification...">
+            </div>
+            <button id="clearAllNotifications">Clear Notifications</button>
+        </div>
+
+        <!-- Table for notifications -->
+        <div class="table-container">
+            <table class="notification-table" id="notificationTable">
+                <!-- Table header -->
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Notification</th>
+                        <th>Location</th>
+                        <th>DateTime</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows with notification data -->
+                    {% for notification in notifications %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ notification.message }}</td>
+                        <td>{{ notification.location }}</td>
+                        <td>{{ notification.timestamp }}</td>
+                        <td><button class="delete-btn" data-notification-id="{{ notification.id }}">Delete</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Logout confirmation
+            const logoutLink = document.getElementById('logout-link');
+            logoutLink.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent the default link behavior
+    
+                // Show a confirmation dialog before logging out
+                Swal.fire({
+                    title: 'Are you sure you want to logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Logout',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If confirmed, proceed with logout
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logged out successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Redirect the user to the homepage or login page after logout
+                            window.location.href = '{% url "index" %}'; 
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", function() {
+                    const notificationId = this.getAttribute("data-notification-id");
+                    
+                    // Show a confirmation dialog before deletion
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: 'You are about to delete this notification',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, delete it!',
+                        cancelButtonText: 'No, keep it'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If confirmed, proceed with deletion
+                            fetch(`/delete_notification/${notificationId}/`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRFToken': '{{ csrf_token }}' // Ensure to include the CSRF token
+                                },
+                                body: JSON.stringify({ notification_id: notificationId })
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    // If deletion is successful, remove the table row from the UI
+                                    const tableRow = button.parentElement.parentElement;
+                                    tableRow.remove();
+                                    // Show success notification
+                                    Swal.fire('Deleted!', `Notification deleted`, 'success');
+                                } else {
+                                    console.error('Failed to delete notification');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
+                        }
+                    });
+                });
+            });
+        });
+   
+    </script>
+
+    <script>
+        // Function to perform search based on input value
+        function searchNotifications() {
+            // Get input value and convert it to lowercase for case-insensitive search
+            const searchValue = document.getElementById('search').value.toLowerCase();
+
+            // Get all rows in the table
+            const rows = document.querySelectorAll('.notification-table tbody tr');
+
+            // Loop through each row to check for matching values and show/hide rows accordingly
+            rows.forEach(row => {
+                const message = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const location = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                const timestamp = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+
+                // Check if any of the row's columns contain the search value
+                if (
+                    message.includes(searchValue) ||
+                    location.includes(searchValue) ||
+                    timestamp.includes(searchValue)
+                ) {
+                    // Show the row if it matches the search
+                    row.style.display = '';
+                } else {
+                    // Hide the row if it doesn't match the search
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Get the search input element
+        const searchInput = document.getElementById('search');
+
+        // Add 'input' event listener to trigger search on input change
+        searchInput.addEventListener('input', searchNotifications);
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        const clearAllButton = document.getElementById('clearAllNotifications');
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const notificationId = this.getAttribute("data-notification-id");
+                deleteNotification(notificationId);
+            });
+        });
+
+        clearAllButton.addEventListener('click', function() {
+            // Show a confirmation dialog before clearing all notifications
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This will clear all notifications. Are you sure you want to proceed?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, clear all!',
+                cancelButtonText: 'No, keep them'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send an AJAX request to delete all notifications
+                    clearAllNotifications();
+                }
+            });
+        });
+
+
+
+        // Function to clear all notifications
+        function clearAllNotifications() {
+            fetch('/delete_all_notifications/', {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+            })
+            .then(response => {
+                if (response.ok) {
+                    // If the deletion is successful, remove all rows from the table
+                    const notificationTable = document.getElementById('notificationTable');
+                    notificationTable.querySelectorAll('tbody tr').forEach(row => {
+                        row.remove();
+                    });
+                    // Show success notification
+                    Swal.fire('Cleared!', 'All notifications have been cleared', 'success');
+                } else {
+                    console.error('Error deleting notifications');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    });
+</script>
+</body>
+</html> 

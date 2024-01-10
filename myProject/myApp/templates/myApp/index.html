@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- {% load static %} -->
+    <link rel="stylesheet" href="/static/css/index.css"/> 
+    <title>GreenEase - Home</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">GreenEase</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="text-overlay">
+            <div class="green-ease-text">GreenEase</div>
+            <div class="innovative-text">Innovative Waste Collection</div>
+        </div>
+
+        <img src="/static/img/waste.jpg" alt="Waste Collection">
+
+        <div class="hero-content">
+            <h1 class="hero-title">Why Choose Us?</h1>
+     
+              
+            <div class="circular-images">
+                <div class="image-container">
+                    <img src="/static/img/download.png" alt="Circular Image 1" class="circular-image">
+                    <p class="image-text">Efficient</p>
+                </div>
+                <div class="image-container">
+                    <img src="/static/img/convenience.jpg" alt="Circular Image 2" class="circular-image">
+                    <p class="image-text">Convenient</p> 
+                </div>
+                <div class="image-container">
+                    <img src="/static/img/download.jpg" alt="Circular Image 3" class="circular-image">
+                    <p class="image-text">Environmental <br>Responsibility</p> 
+                </div>
+                <div class="image-container">
+                    <img src="/static/img/saving.png" alt="Circular Image 3" class="circular-image">
+                    <p class="image-text">Cost Savings</p> 
+                </div>
+                <div class="image-container">
+                    <img src="/static/img/community.png" alt="Circular Image 3" class="circular-image">
+                    <p class="image-text">Community Engagement</p> 
+                </div>
+                <div class="image-container">
+                    <img src="/static/img/cust.png" alt="Circular Image 3" class="circular-image">
+                    <p class="image-text">Customization</p> 
+                </div>
+            </div>
+
+            <hr class="line">
+            
+            <div class="impact-container">
+                <h2 class="impact-heading">Your Impact Matters</h2>
+                <p class="impact-text">Every action on our platform contributes to a cleaner world.</p>
+            </div>
+            
+            <div class="button-container">
+                <a href="{% url 'login' %}"  class="cta-button button">Join Us Today</a>
+            </div>            
+
+        </div>
+    </section>
+
+    <hr class="line">
+    
+    
+    <section class="about-us-section">
+        <div class="about-us-container">
+            <div class="about-us-content">
+                <h2>About Us</h2>
+                <p>We are a dedicated team of professionals committed to revolutionizing waste collection and management. With years of experience in the industry, we provide innovative and sustainable solutions to meet the evolving needs of our communities.</p>
+                <a href="{% url 'about' %}"  class="about-button">Learn More</a>
+            </div>
+            <div class="about-us-image">
+                <img src="/static/img/dustbin.jpg" alt="About Us Image">
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="blog-section">
+        <h2 class="blog-heading">Latest Blogs</h2>
+        <div class="blog-container">
+            <!-- Blog 1 -->
+            <div class="blog">
+                <img src="/static/img/wasteseg.jpg" alt="Blog 1">
+                <h3 class="blog-title">Mastering Waste Segregation: A Step-by-Step Guide</h3>
+                <p class="blog-description">Mastering Waste Segregation: A Step-by-Step Guide" offers valuable insights and practical tips for responsible waste management through effective segregation.</p>
+                <a href="{% url 'blog_post1' %}"  class="read-more">Read More</a>
+            </div>
+    
+            <!-- Blog 2 -->
+            <div class="blog">
+                <img src="/static/img/t2t.jpg" alt="Blog 2">
+                <h3 class="blog-title">From Trash to Treasure: Creative Ways to Upcycle</h3>
+                <p class="blog-description">"From Trash to Treasure: Creative Ways to Upcycle" explores innovative ways to repurpose discarded items into valuable and creative treasures.</p>
+                <a href="{% url 'blog_post2' %}"  class="read-more">Read More</a>
+            </div>
+        </div>
+         <!-- View All Blogs Button -->
+         <div class="view-all-blogs">
+            <a href="{% url 'blog' %}"  class="view-all-button">View All Blogs</a>
+        </div>
+    </section>
+    
+
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-image-container">
+                <img src="/static/img/contactus.png" alt="Contact Us Image" class="contact-image">
+            </div>
+            <div class="contact-content">
+                <h2>Contact Us</h2>
+                <p>We'd love to hear from you! Get in touch with us for any inquiries or feedback.</p>
+                <a href="{% url 'contact' %}" class="contact-button">Contact Now</a>
+            </div>
+        </div>
+    </section>
+    
+       
+    
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="terms">
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/PrejitaChaulagai" target="_blank">
+                    <img src="/static/img/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/prejita_chaulagai/" target="_blank">
+                    <img src="/static/img/instagram.png" alt="Twitter">
+                </a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>    
+
+</body>
+</html>

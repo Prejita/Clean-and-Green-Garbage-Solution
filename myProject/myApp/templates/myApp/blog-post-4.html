@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/blog-post.css"> 
+    <title>GreenEase - Blog</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">GreenEase</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="blog-post-4">
+        
+        <div class="blog-content">
+            <h1>5 Simple Tips for Greener Waste Disposal</h1>
+
+            <div class="image-content">
+                <img src="/static/img/recycling.png" alt="Blog Image">
+            </div>
+    
+            <p>As we become increasingly aware of the environmental challenges facing our planet, it's essential to adopt greener practices in our daily lives. One area where we can make a significant difference is waste disposal. By following these five simple tips for greener waste disposal, you can reduce your environmental footprint and contribute to a healthier planet.</p>
+
+            <h2>1. Embrace Recycling</h2>
+            <p>Recycling is one of the most effective ways to reduce waste and conserve resources. Start by familiarizing yourself with what can be recycled in your area, and then make recycling a part of your routine. Rinse out containers, separate recyclables from trash, and ensure that items are clean and dry to prevent contamination. By giving materials like paper, cardboard, glass, and plastics a second life, you help reduce the need for new resources and energy-intensive production processes.</p>
+
+            <h2>2. Reduce Single-Use Plastics</h2>
+            <p>Single-use plastics, such as plastic bags and disposable water bottles, contribute significantly to environmental pollution. To reduce your reliance on these items, invest in reusable alternatives. Carry a reusable shopping bag, use a stainless steel or glass water bottle, and opt for products with minimal packaging. Small changes in your daily habits can lead to substantial reductions in plastic waste.</p>
+
+            <h2>3. Composting</h2>
+            <p>Composting is a natural way to recycle organic waste, such as food scraps and yard trimmings. Setting up a compost bin or pile in your backyard can divert a significant portion of your waste from landfills. Compost enriches the soil, reduces methane emissions from landfills, and minimizes the need for chemical fertilizers. Plus, it's a valuable resource for gardeners. If you don't have outdoor space, look for community composting programs or consider indoor composting options.</p>
+
+            <h2>4. Mindful Consumption</h2>
+            <p>Before making a purchase, ask yourself whether you truly need the item. Reducing consumption is a powerful way to cut down on waste. Consider buying products with a longer lifespan and items made from sustainable materials. When disposing of electronics or appliances, explore repair options before replacing them. Extending the life of your possessions reduces the demand for new resources and decreases waste generation.</p>
+
+            <h2>5. Dispose of Hazardous Waste Responsibly</h2>
+            <p>Certain items, such as batteries, light bulbs, and electronic devices, contain hazardous materials that can harm the environment if improperly disposed of. Many communities have specific drop-off locations or recycling programs for these materials. Take the time to research and find out how to dispose of hazardous waste safely. By doing so, you protect the environment and prevent contamination of landfills.</p>
+
+            <p>Greener waste disposal is not just a responsibility; it's an opportunity for positive change. By recycling, reducing single-use plastics, composting, practicing mindful consumption, and disposing of hazardous waste responsibly, you can make a meaningful contribution to a cleaner, healthier planet. These simple tips are the building blocks of a more sustainable lifestyle, and they empower individuals to be agents of change in the global effort to combat waste and protect the environment.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="terms">
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/PrejitaChaulagai" target="_blank">
+                    <img src="/static/img/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/prejita_chaulagai/" target="_blank">
+                    <img src="/static/img/instagram.png" alt="Twitter">
+                </a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>    
+
+</body>
+</html>

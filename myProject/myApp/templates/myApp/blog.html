@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/blog.css"> 
+    <title>GreenEase - Blog</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">GreenEase</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <h1 class="blog-heading">Blog</h1>
+    </header>
+
+    <section class="blog">
+
+        <article class="blog-post">
+            <div class="image-content">
+                <img src="/static/img/wasteseg.jpg" alt="Blog Image" width="300">
+            </div>
+            <div class="text-content">
+                <h2>Mastering Waste Segregation: A Step-by-Step Guide</h2>
+                <p>"Mastering Waste Segregation: A Step-by-Step Guide" offers valuable insights and practical tips for responsible waste management through effective segregation. 
+                    It provides a clear, step-by-step approach to sorting different waste materials, promoting a cleaner and more sustainable environment.
+                </p>
+                <a href="{% url 'blog_post1' %}">Read More</a>
+            </div>
+        </article>
+        <hr style="width: 96%;">
+
+        <article class="blog-post">
+            <div class="image-content">
+                <img src="/static/img/t2t.jpg" alt="Blog Image" width="300">
+            </div>
+            <div class="text-content">
+                <h2>From Trash to Treasure: Creative Ways to Upcycle</h2>
+                <p>"From Trash to Treasure: Creative Ways to Upcycle" explores innovative ways to repurpose discarded items into valuable and creative treasures. 
+                    Discover inspiring ideas and methods for upcycling, turning what was once considered trash into unique and useful creations.
+                </p>
+                <a href="{% url 'blog_post2' %}">Read More</a>
+            </div>
+        </article>
+        <hr style="width: 96%;">
+
+        <article class="blog-post">
+            <div class="image-content">
+                <img src="/static/img/impact.jpg" alt="Blog Image" width="300" height="300">
+            </div>
+            <div class="text-content">
+                <h2>The Environmental Impact of Proper E-Waste Disposal</h2>
+                <p>"The Environmental Impact of Proper E-Waste Disposal" delves into the crucial subject of responsible electronic waste management. 
+                    Learn about the environmental consequences of improper disposal and the positive impact of recycling and disposing of e-waste correctly. 
+                </p>
+                <a href="{% url 'blog_post3' %}">Read More</a>
+            </div>
+        </article>
+        <hr style="width: 96%;">
+
+        <article class="blog-post">
+            <div class="image-content">
+                <img src="/static/img/recycling.png" alt="Blog Image" width="300" height="300">
+            </div>
+            <div class="text-content">
+                <h2>5 Simple Tips for Greener Waste Disposal</h2>
+                <p>"5 Simple Tips for Greener Waste Disposal" offers easy-to-follow advice for a more environmentally conscious waste management approach.
+                     Discover five practical tips that can make a significant difference in reducing your ecological footprint and contributing to a greener, more sustainable future.
+
+                </p>
+                <a href="{% url 'blog_post4' %}">Read More</a>
+            </div>
+        </article>
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="terms">
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/PrejitaChaulagai" target="_blank">
+                    <img src="/static/img/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/prejita_chaulagai/" target="_blank">
+                    <img src="/static/img/instagram.png" alt="Twitter">
+                </a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>    
+
+</body>
+</html>

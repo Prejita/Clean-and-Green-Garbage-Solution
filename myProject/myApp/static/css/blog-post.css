@@ -1,0 +1,142 @@
+/* Reset some default styles */
+/* Set the font family for the entire website to "Lato" */
+body {
+    font-family: "Lato", sans-serif; /* Use "Lato," and if not available, use a generic sans-serif font */
+}
+body, ul {margin: 0; padding: 0; list-style: none;}
+
+/* Style for the navigation bar */
+nav {
+    background-color: #3c3c3c; /* Black background color for the navigation bar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 74.5px; 
+}
+
+.logo a {
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    color: white; /* Green color for the logo */
+}
+
+.menu ul {
+    display: flex;
+    gap: 40px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: white; /* White text color for navigation links */
+    font-weight: 700;
+    transition: color 0.3s;
+}
+
+.menu ul li a:hover {
+    color: #00a859; /* Green color for navigation links on hover */
+}
+
+/* Style for image */
+.image-content img {
+    display: block;
+    margin: 0 auto; /* Center-aligns the image horizontally */
+    max-width: 60%; 
+    height: auto; /* Automatically adjust the height to maintain the aspect ratio */
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Style for blog content */
+.blog-content {
+    max-width: 800px; /* Limit the width of the content for readability */
+    margin: 0 auto; /* Center-align the content horizontally */
+    padding: 20px; /* Add some spacing around the content */
+}
+
+.blog-content h1 {
+    font-size: 35px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #00a859;
+}
+
+.blog-content h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+.blog-content p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.blog-content ol {
+    list-style-type: decimal;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    text-align: justify;
+}
+
+.blog-content li {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+/* Style for the footer */
+.footer {
+    background-color: #3c3c3c; /* Black background color for the footer */
+    color: #fff; /* Text color for the footer */
+    padding: 5px 0; /* Add padding to the top and bottom of the footer */
+    margin-top: 20px;
+}
+
+/* Style for the terms and conditions link */
+.terms {
+    margin-left: 20px; /* Add some left margin to the terms and conditions link */
+}
+
+.terms a {
+    color: #fff; /* Text color for the link */
+    text-decoration: none; /* Remove underlines from the link */
+    font-weight: bold; /* Make the link text bold */
+}
+
+.terms a:hover {
+    color: #00a859;
+}
+
+/* Style for the social icons */
+.social-icons {
+    margin-right: 20px; /* Add some right margin to the social icons */
+    margin-top: -10px; /* Add negative top margin to shift the icons upwards */
+}
+
+/* Style for individual social media icons */
+.social-icons a {
+    margin-left: 10px; /* Add some space between icons */
+    float: right;
+}
+
+.social-icons img {
+    width: 25px; /* Increase the width to make the icons larger */
+    height: 25px; /* Increase the height to match the width for a uniform size */
+    filter: invert(100%); /* Change the color to white using the invert filter */
+}
+
+
+/* Style for the copyright text */
+.copyright {
+    text-align: center; /* Center-align the copyright text */
+    padding: 0; /* Remove any padding */
+    margin-left: 80px; /* Add left margin to move it to the right */
+}
