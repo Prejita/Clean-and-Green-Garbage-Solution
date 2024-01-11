@@ -5,6 +5,7 @@ from django.http import JsonResponse
 import json
 from .models import DustbinData  # Import the DustbinData model
 from .models import Notification
+from .models import Event
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -173,3 +174,27 @@ def delete_all_notifications(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
+    
+
+def create_event(request):
+    if request.method == 'POST':
+        # Retrieve data from the POST request
+        event_data = json.loads(request.body)
+        
+        # Create a new Event object
+        new_event = Event(
+            name=event_data['name'],
+            organizer=event_data['organizer'],
+            start_date=event_data['start_date'],
+            end_date=event_data['end_date'],
+            location=event_data['location'],
+            category=event_data['category'],
+            description=event_data['description']
+        )
+
+        # Save the new event to the database
+        new_event.save()
+
+        return JsonResponse({'message': 'Event added successfully'}, status=201)
+    else:
+        return JsonResponse({'message': 'Invalid request method'}, status=400)

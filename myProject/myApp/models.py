@@ -39,3 +39,24 @@ class Notification(models.Model):
 
     def __str__(self):
         return f"{self.message} at {self.location} - {self.timestamp}"
+    
+
+class Event(models.Model):
+    name = models.CharField(max_length=255)
+    organizer = models.CharField(max_length=255)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    location = models.CharField(max_length=255)
+    category_choices = [
+        ('Conference', 'Conference'),
+        ('Seminar', 'Seminar'),
+        ('Workshop', 'Workshop'),
+        ('Clean-up Campaigns', 'Clean-up Campaigns'),
+        ('Tree-planting Drives', 'Tree-planting Drives'),
+        ('Others', 'Others'),
+    ]
+    category = models.CharField(max_length=20, choices=category_choices)
+    description = models.TextField()
+
+    def __str__(self):
+        return f"{self.name} ({self.start_date} to {self.end_date})"

@@ -102,6 +102,9 @@
                             <option value="Conference">Conference</option>
                             <option value="Seminar">Seminar</option>
                             <option value="Workshop">Workshop</option>
+                            <option value="Clean-up Campaigns">Clean-up Campaigns</option>
+                            <option value="Tree-planting Drives">Tree-planting Drives</option>
+                            <option value="Others">Others</option>
                         </select>
                     </div>
                 </div>
@@ -117,9 +120,9 @@
     </div>
 
     <script>
-        document.getElementById('eventForm').addEventListener('submit', function(event) {
+        document.getElementById('eventForm').addEventListener('submit', function (event) {
             event.preventDefault(); // Prevent the default form submission
-            
+
             // Get form values
             const eventName = document.getElementById('eventName').value;
             const eventStartDate = document.getElementById('eventStartDate').value;
@@ -129,21 +132,58 @@
             const eventCategory = document.getElementById('eventCategory').value;
             const eventDescription = document.getElementById('eventDescription').value;
 
+            // Validate event title, organizer, and location
+            if (/^\d/.test(eventName) || /^\d/.test(eventOrganizer) || /^\d/.test(eventLocation)) {
+                // If any of them starts with a digit, show an error message
+                Swal.fire('Invalid Input', 'Event title, organizer, and location cannot start with a number.', 'error');
+                return; // Stop the form submission
+            }
+
             // Create an object with event data
             const eventData = {
                 name: eventName,
-                startDate: eventStartDate,
-                endDate: eventEndDate,
-                location: eventLocation,
                 organizer: eventOrganizer,
+                start_date: eventStartDate,
+                end_date: eventEndDate,
+                location: eventLocation,
                 category: eventCategory,
                 description: eventDescription
             };
 
-            
-            console.log(eventData);
+            // Send the event data to the server using AJAX (you can use Fetch API or jQuery.ajax)
+            fetch('/create_event/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}' // Ensure to include the CSRF token
+                },
+                body: JSON.stringify(eventData)
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success notification
+                    Swal.fire('Event Added!', 'The event has been added successfully', 'success').then(() => {
+                        // Reset the form fields
+                        document.getElementById('eventName').value = '';
+                        document.getElementById('eventStartDate').value = '';
+                        document.getElementById('eventEndDate').value = '';
+                        document.getElementById('eventLocation').value = '';
+                        document.getElementById('eventOrganizer').value = '';
+                        document.getElementById('eventCategory').value = '';
+                        document.getElementById('eventDescription').value = '';
+                        
+                        // Reload the page to fetch updated data
+                        // window.location.reload();
+                    });
+                } else {
+                    console.error('Failed to add event');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         });
-    </script>
+    </script>   
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
