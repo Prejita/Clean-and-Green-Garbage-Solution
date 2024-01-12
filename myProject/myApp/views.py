@@ -159,7 +159,7 @@ def notify(request, notification_id):
 
     # Prepare email content
     subject = 'Alert! Dustbin is full'
-    message = f'Alert! Dustbin 1 is full at {notification.location} at {notification.timestamp}.'
+    message = f'Alert! Dustbin 1 is full at {notification.location}.'
 
     from_email = settings.DEFAULT_FROM_EMAIL
     recipient_list = ['prejita14@gmail.com']  
@@ -169,4 +169,3 @@ def notify(request, notification_id):
         return HttpResponse('Email sent successfully!')
     except Exception as e:
         return HttpResponse(f'Error sending email: {e}')
-
