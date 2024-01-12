@@ -89,7 +89,10 @@
                         <td>{{ notification.message }}</td>
                         <td>{{ notification.location }}</td>
                         <td>{{ notification.timestamp }}</td>
-                        <td><button class="delete-btn" data-notification-id="{{ notification.id }}">Delete</button></td>
+                        <td>
+                            <button class="delete-btn" data-notification-id="{{ notification.id }}">Delete</button>
+                            <a href="{% url 'notify' notification.id %}" class="notify-btn">Notify</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>

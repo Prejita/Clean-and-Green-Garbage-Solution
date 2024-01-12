@@ -31,14 +31,27 @@
                         </div>
                     </a>
                 </div>
-                <div class="menu-item">
+                <!-- <div class="menu-item">
                     <a href="{% url 'notifications' %}" style="text-decoration: none;">
                         <div class="menu-box">
                             <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
                             <span class="bold-text">Notifications</span>
                         </div>
                     </a>    
+                </div> -->
+                <!-- Add id="notification-icon" to the notification icon -->
+                <div class="menu-item">
+                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <div class="icon-container">
+                                <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                                <span id="notification-count" class="notification-count">0</span>
+                            </div>
+                            <span class="bold-text">Notifications</span>
+                        </div>
+                    </a>
                 </div>
+
                 <div class="menu-item">
                     <a href="{% url 'addevents' %}" style="text-decoration: none;">
                         <div class="menu-box">
@@ -71,81 +84,75 @@
 
         <div id="map" style="width: 100%; height: 580px;"></div>
     </div>
+    
+    <script>
+        // Function to update and display the notification count
+        function updateNotificationCount() {
+            // Check if the user is on the notifications page
+            var isOnNotificationsPage = window.location.pathname === '{% url "notifications" %}';
+
+            // Retrieve the notification count from localStorage
+            var currentCount = parseInt(localStorage.getItem('notificationCount')) || 0;
+
+            if (isOnNotificationsPage) {
+                // Reset the notification count to 0 when on the notifications page
+                localStorage.setItem('notificationCount', 0);
+            } else {
+                // Increment the notification count
+                var newCount = currentCount + 1;
+
+                // Update the notification count in localStorage
+                localStorage.setItem('notificationCount', newCount);
+
+                // Update the notification count element
+                var notificationCountElement = document.getElementById('notification-count');
+                notificationCountElement.innerText = newCount;
+            }
+        }
+    </script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Array to store timestamps that have been notified
-            const notifiedTimestamps = [];
-    
-            // Function to send a notification
-            function sendNotification(timestamp) {
-                // Check if the timestamp has already been notified
-                if (!notifiedTimestamps.includes(timestamp)) {
-                    // Perform the code to send the notification here
-                    console.log(`Notification sent for timestamp: ${timestamp}`);
-    
-                    // Add the timestamp to the list of notified timestamps
-                    notifiedTimestamps.push(timestamp);
-                }
-            }
-    
-            var map = L.map('map').setView([27.712265, 85.330702], 13);
-    
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-    
-            // Retrieve distance, status, time, and location from the Django context
-            var distance = '{{ distance }}';
-            var status = '{{ status }}';
-            var time = '{{ kathmandu_time }}';
-            var binlocation = '{{ location }}';
-    
-            // Assuming 'datetime' is the datetime field from your Django model
-            var datetimeFromDatabase = '{{ kathmandu_time }}';
-    
-            // Convert the Django datetime format to JavaScript Date object
-            var timestamp = new Date(datetimeFromDatabase).toLocaleString();
-    
-            // Check if the status is "Full" and change marker popup color to red
-            if (status === 'Full') {
-                // Define a red icon
-                var redIcon = L.icon({
-                    iconUrl: '/static/img/marker.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41],
-                    popupAnchor: [1, -34],
-                });
-                var marker = L.marker([27.712265, 85.330902], { icon: redIcon }).addTo(map)
-                    .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + timestamp)
-                    .openPopup();
-            } else {
-                var marker = L.marker([27.712265, 85.330902]).addTo(map)
-                    .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + timestamp)
-                    .openPopup();
-            }
-    
-            // Create and position the custom box in the top right corner
-            var customBox = L.control({ position: 'topright' });
-    
-            customBox.onAdd = function () {
-                var div = L.DomUtil.create('div', 'custom-box');
-                div.innerHTML = "<h2>Dustbin's Information</h2><hr>" + '<p>Dustbin: 1 <br>Distance: ' + distance + ' cm <br>Status: ' + status + '<br>Location: ' + binlocation + '<br> Time: ' + timestamp + '</p>';
-                return div;
-            };
-    
-            customBox.addTo(map);
-    
-            // Add an event listener to the map for a click event
-            map.on('click', function (e) {
-                // Use the timestamp from the clicked location
-                const clickedTimestamp = new Date().toLocaleString();
-    
-                // Call the sendNotification function with the clicked timestamp
-                sendNotification(clickedTimestamp);
+        var map = L.map('map').setView([27.712265, 85.330702], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Retrieve distance and status from the Django context
+        var distance = '{{ distance }}';
+        var status = '{{ status }}';
+        var time = '{{kathmandu_time}}';
+        var binlocation = '{{location}}';
+
+        // Check if the status is "Full" and change marker popup color to red
+        if (status === 'Full') {
+            // Define a red icon
+            var redIcon = L.icon({
+                iconUrl: '/static/img/marker.png',  // URL to red marker icon
+                iconSize: [25, 41],
+                iconAnchor: [12, 41],
+                popupAnchor: [1, -34],
             });
-        });
+            var marker = L.marker([27.712265, 85.330902], {icon:redIcon}).addTo(map)
+                .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + time)
+                .openPopup();
+        } else {
+            var marker = L.marker([27.712265, 85.330902]).addTo(map)
+                .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + time)
+                .openPopup();
+        }        
+
+        // Create and position the custom box in the top right corner
+        var customBox = L.control({ position: 'topright' });
+
+        customBox.onAdd = function () {
+            var div = L.DomUtil.create('div', 'custom-box');
+            div.innerHTML = "<h2>Dustbin's Information</h2><hr>" + '<p>Dustbin: 1 <br>Distance: ' + distance + ' cm <br>Status: ' + status + '<br>Location: ' + binlocation + '<br> Time: ' + time + '</p>';
+            return div;
+        };
+
+        customBox.addTo(map);
     </script>
 
     <script>
@@ -172,7 +179,7 @@
                             timer: 1500
                         }).then(() => {
                             // Redirect the user to the homepage or login page after logout
-                            window.location.href = '{% url "index" %}'; // Replace with your desired logout URL
+                            window.location.href = '{% url "index" %}'; 
                         });
                     }
                 });

@@ -7,6 +7,9 @@ from .models import DustbinData  # Import the DustbinData model
 from .models import Notification
 from .models import Event
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
+from django.http import HttpResponse
 
 def index(request):
     context = {}
@@ -149,3 +152,21 @@ def create_event(request):
         return JsonResponse({'message': 'Event added successfully'}, status=201)
     else:
         return JsonResponse({'message': 'Invalid request method'}, status=400)
+    
+
+def notify(request, notification_id):
+    notification = Notification.objects.get(id=notification_id)
+
+    # Prepare email content
+    subject = 'Alert! Dustbin is full'
+    message = f'Alert! Dustbin 1 is full at {notification.location} at {notification.timestamp}.'
+
+    from_email = settings.DEFAULT_FROM_EMAIL
+    recipient_list = ['prejita14@gmail.com']  
+
+    try:
+        send_mail(subject, message, from_email, recipient_list)
+        return HttpResponse('Email sent successfully!')
+    except Exception as e:
+        return HttpResponse(f'Error sending email: {e}')
+

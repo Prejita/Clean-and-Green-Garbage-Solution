@@ -131,6 +131,8 @@
             const eventName = document.getElementById('eventName').value;
             const eventStartDate = document.getElementById('eventStartDate').value;
             const eventEndDate = document.getElementById('eventEndDate').value;
+            const start_time = document.getElementById('eventStartTime').value;
+            const end_time = document.getElementById('eventEndTime').value;
             const eventLocation = document.getElementById('eventLocation').value;
             const eventOrganizer = document.getElementById('eventOrganizer').value;
             const eventCategory = document.getElementById('eventCategory').value;
@@ -149,6 +151,8 @@
                 organizer: eventOrganizer,
                 start_date: eventStartDate,
                 end_date: eventEndDate,
+                start_time: eventStartTime,
+                end_time: eventEndTime,
                 location: eventLocation,
                 category: eventCategory,
                 description: eventDescription
@@ -171,6 +175,8 @@
                         document.getElementById('eventName').value = '';
                         document.getElementById('eventStartDate').value = '';
                         document.getElementById('eventEndDate').value = '';
+                        document.getElementById('eventStartTime').value = '';
+                        document.getElementById('eventEndTime').value = '';
                         document.getElementById('eventLocation').value = '';
                         document.getElementById('eventOrganizer').value = '';
                         document.getElementById('eventCategory').value = '';
