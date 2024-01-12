@@ -20,5 +20,5 @@ urlpatterns = [
     path('delete_notification/<int:notification_id>/', views.delete_notification, name='delete_notification'),
     path('delete_all_notifications/', views.delete_all_notifications, name='delete_all_notifications'),
     path('create_event/', views.create_event, name='create_event'),
-
+    path('events/', views.events, name='events'),
     ]

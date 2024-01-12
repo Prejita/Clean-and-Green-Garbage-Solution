@@ -73,47 +73,79 @@
     </div>
 
     <script>
-        var map = L.map('map').setView([27.712265, 85.330702], 13);
+        document.addEventListener("DOMContentLoaded", function () {
+            // Array to store timestamps that have been notified
+            const notifiedTimestamps = [];
     
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+            // Function to send a notification
+            function sendNotification(timestamp) {
+                // Check if the timestamp has already been notified
+                if (!notifiedTimestamps.includes(timestamp)) {
+                    // Perform the code to send the notification here
+                    console.log(`Notification sent for timestamp: ${timestamp}`);
     
-        // Retrieve distance and status from the Django context
-        var distance = '{{ distance }}';
-        var status = '{{ status }}';
-        var time = '{{kathmandu_time}}';
-        var binlocation = '{{location}}';
+                    // Add the timestamp to the list of notified timestamps
+                    notifiedTimestamps.push(timestamp);
+                }
+            }
     
-       // Check if the status is "Full" and change marker popup color to red
-       if (status === 'Full') {
-            // Define a red icon
-            var redIcon = L.icon({
-                iconUrl: '/static/img/marker.png',  // URL to red marker icon
-                iconSize: [25, 41],
-                iconAnchor: [12, 41],
-                popupAnchor: [1, -34],
+            var map = L.map('map').setView([27.712265, 85.330702], 13);
+    
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+    
+            // Retrieve distance, status, time, and location from the Django context
+            var distance = '{{ distance }}';
+            var status = '{{ status }}';
+            var time = '{{ kathmandu_time }}';
+            var binlocation = '{{ location }}';
+    
+            // Assuming 'datetime' is the datetime field from your Django model
+            var datetimeFromDatabase = '{{ kathmandu_time }}';
+    
+            // Convert the Django datetime format to JavaScript Date object
+            var timestamp = new Date(datetimeFromDatabase).toLocaleString();
+    
+            // Check if the status is "Full" and change marker popup color to red
+            if (status === 'Full') {
+                // Define a red icon
+                var redIcon = L.icon({
+                    iconUrl: '/static/img/marker.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                });
+                var marker = L.marker([27.712265, 85.330902], { icon: redIcon }).addTo(map)
+                    .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + timestamp)
+                    .openPopup();
+            } else {
+                var marker = L.marker([27.712265, 85.330902]).addTo(map)
+                    .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + timestamp)
+                    .openPopup();
+            }
+    
+            // Create and position the custom box in the top right corner
+            var customBox = L.control({ position: 'topright' });
+    
+            customBox.onAdd = function () {
+                var div = L.DomUtil.create('div', 'custom-box');
+                div.innerHTML = "<h2>Dustbin's Information</h2><hr>" + '<p>Dustbin: 1 <br>Distance: ' + distance + ' cm <br>Status: ' + status + '<br>Location: ' + binlocation + '<br> Time: ' + timestamp + '</p>';
+                return div;
+            };
+    
+            customBox.addTo(map);
+    
+            // Add an event listener to the map for a click event
+            map.on('click', function (e) {
+                // Use the timestamp from the clicked location
+                const clickedTimestamp = new Date().toLocaleString();
+    
+                // Call the sendNotification function with the clicked timestamp
+                sendNotification(clickedTimestamp);
             });
-            var marker = L.marker([27.712265, 85.330902], {icon:redIcon}).addTo(map)
-                .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + time)
-                .openPopup();
-        } else {
-            var marker = L.marker([27.712265, 85.330902]).addTo(map)
-                .bindPopup('Dustbin 1 <br>Distance: ' + distance + ' cm<br>Status: ' + status + '<br>Location: ' + binlocation + '<br>Time: ' + time)
-                .openPopup();
-        }
-
-        // Create and position the custom box in the top right corner
-        var customBox = L.control({ position: 'topright' });
-
-        customBox.onAdd = function () {
-            var div = L.DomUtil.create('div', 'custom-box');
-            div.innerHTML = "<h2>Dustbin's Information</h2><hr>" + '<p>Dustbin: 1 <br>Distance: ' + distance + ' cm <br>Status: ' + status + '<br>Location: ' + binlocation + '<br> Time: ' + time + '</p>';
-            return div;
-        };
-        
-        customBox.addTo(map);
+        });
     </script>
 
     <script>

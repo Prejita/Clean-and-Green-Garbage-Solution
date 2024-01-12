@@ -1,15 +1,3 @@
-# from django.db import models
-
-# class DustbinData(models.Model):
-#     distance = models.FloatField(default=0.0)
-#     status = models.CharField(max_length=10, default='Pending')
-#     kathmandu_time = models.DateTimeField(null=True, blank=True)  # Add a new field for Kathmandu time
-#     timestamp = models.DateTimeField(auto_now_add=True)
-#     location = models.CharField(max_length=100, default='Null')
-
-#     def __str__(self):
-#         return f"Dustbin data: {self.distance} cm, Status: {self.status} ({self.timestamp})"
-
 from django.db import models
 
 class DustbinData(models.Model):
@@ -41,11 +29,33 @@ class Notification(models.Model):
         return f"{self.message} at {self.location} - {self.timestamp}"
     
 
+# class Event(models.Model):
+#     name = models.CharField(max_length=255)
+#     organizer = models.CharField(max_length=255)
+#     start_date = models.DateField()
+#     end_date = models.DateField()
+#     location = models.CharField(max_length=255)
+#     category_choices = [
+#         ('Conference', 'Conference'),
+#         ('Seminar', 'Seminar'),
+#         ('Workshop', 'Workshop'),
+#         ('Clean-up Campaigns', 'Clean-up Campaigns'),
+#         ('Tree-planting Drives', 'Tree-planting Drives'),
+#         ('Others', 'Others'),
+#     ]
+#     category = models.CharField(max_length=20, choices=category_choices)
+#     description = models.TextField()
+
+#     def __str__(self):
+#         return f"{self.name} ({self.start_date} to {self.end_date})"
+    
 class Event(models.Model):
     name = models.CharField(max_length=255)
     organizer = models.CharField(max_length=255)
     start_date = models.DateField()
     end_date = models.DateField()
+    start_time = models.TimeField()  # Add start_time field
+    end_time = models.TimeField()  # Add end_time field
     location = models.CharField(max_length=255)
     category_choices = [
         ('Conference', 'Conference'),
@@ -59,4 +69,4 @@ class Event(models.Model):
     description = models.TextField()
 
     def __str__(self):
-        return f"{self.name} ({self.start_date} to {self.end_date})"
+        return f"{self.name} ({self.start_date} {self.start_time} to {self.end_date} {self.end_time})"
