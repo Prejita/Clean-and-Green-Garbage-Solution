@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
+from django.utils import timezone
 
 def index(request):
     context = {}
@@ -153,19 +154,30 @@ def create_event(request):
     else:
         return JsonResponse({'message': 'Invalid request method'}, status=400)
     
-
+    
 def notify(request, notification_id):
-    notification = Notification.objects.get(id=notification_id)
-
-    # Prepare email content
-    subject = 'Alert! Dustbin is full'
-    message = f'Alert! Dustbin 1 is full at {notification.location}.'
-
-    from_email = settings.DEFAULT_FROM_EMAIL
-    recipient_list = ['prejita14@gmail.com']  
-
     try:
+        notification = Notification.objects.get(id=notification_id)
+
+        # Convert the timestamp to the desired time zone (Asia/Kathmandu)
+        timestamp_in_kathmandu_timezone = notification.timestamp.astimezone(timezone.get_current_timezone())
+
+        # Format the timestamp in 12-hour format with AM/PM and show only the hour and minute
+        formatted_time = timestamp_in_kathmandu_timezone.strftime('%I:%M %p')
+
+        # Prepare email content with datetime information
+        subject = 'FULL ALERT!'
+        message = f'Alert! Dustbin 1 is full at {notification.location} on {formatted_time}.'
+
+        from_email = settings.DEFAULT_FROM_EMAIL
+        recipient_list = ['prejita14@gmail.com']
+
         send_mail(subject, message, from_email, recipient_list)
-        return HttpResponse('Email sent successfully!')
+
+        messages.success(request, 'Email sent successfully!')
+    
     except Exception as e:
-        return HttpResponse(f'Error sending email: {e}')
+        messages.error(request, 'Error sending email!')
+    
+    return redirect('notifications')
+

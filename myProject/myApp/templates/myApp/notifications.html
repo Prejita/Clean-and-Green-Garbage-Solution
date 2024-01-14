@@ -219,63 +219,61 @@
         searchInput.addEventListener('input', searchNotifications);
     </script>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const deleteButtons = document.querySelectorAll(".delete-btn");
-        const clearAllButton = document.getElementById('clearAllNotifications');
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const deleteButtons = document.querySelectorAll(".delete-btn");
+            const clearAllButton = document.getElementById('clearAllNotifications');
 
-        deleteButtons.forEach(button => {
-            button.addEventListener("click", function() {
-                const notificationId = this.getAttribute("data-notification-id");
-                deleteNotification(notificationId);
+            deleteButtons.forEach(button => {
+                button.addEventListener("click", function() {
+                    const notificationId = this.getAttribute("data-notification-id");
+                    deleteNotification(notificationId);
+                });
             });
+
+            clearAllButton.addEventListener('click', function() {
+                // Show a confirmation dialog before clearing all notifications
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'This will clear all notifications. Are you sure you want to proceed?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, clear all!',
+                    cancelButtonText: 'No, keep them'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send an AJAX request to delete all notifications
+                        clearAllNotifications();
+                    }
+                });
+            });
+
+            // Function to clear all notifications
+            function clearAllNotifications() {
+                fetch('/delete_all_notifications/', {
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // If the deletion is successful, remove all rows from the table
+                        const notificationTable = document.getElementById('notificationTable');
+                        notificationTable.querySelectorAll('tbody tr').forEach(row => {
+                            row.remove();
+                        });
+                        // Show success notification
+                        Swal.fire('Cleared!', 'All notifications have been cleared', 'success');
+                    } else {
+                        console.error('Error deleting notifications');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
         });
-
-        clearAllButton.addEventListener('click', function() {
-            // Show a confirmation dialog before clearing all notifications
-            Swal.fire({
-                title: 'Are you sure?',
-                text: 'This will clear all notifications. Are you sure you want to proceed?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Yes, clear all!',
-                cancelButtonText: 'No, keep them'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // Send an AJAX request to delete all notifications
-                    clearAllNotifications();
-                }
-            });
-        });
-
-
-
-        // Function to clear all notifications
-        function clearAllNotifications() {
-            fetch('/delete_all_notifications/', {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRFToken': '{{ csrf_token }}',
-                },
-            })
-            .then(response => {
-                if (response.ok) {
-                    // If the deletion is successful, remove all rows from the table
-                    const notificationTable = document.getElementById('notificationTable');
-                    notificationTable.querySelectorAll('tbody tr').forEach(row => {
-                        row.remove();
-                    });
-                    // Show success notification
-                    Swal.fire('Cleared!', 'All notifications have been cleared', 'success');
-                } else {
-                    console.error('Error deleting notifications');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-    });
-</script>
+    </script>
 </body>
 </html> 
