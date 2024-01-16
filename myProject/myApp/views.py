@@ -181,3 +181,16 @@ def notify(request, notification_id):
     
     return redirect('notifications')
 
+def get_events(request):
+    if request.method == 'GET':
+        # Retrieve all events from the Event model
+        events = Event.objects.all().values()
+
+        # Convert QuerySet to list for serialization
+        events_list = list(events)
+
+        # Return events data in JSON format
+        return JsonResponse(events_list, safe=False)
+
+    # If the request method is not GET
+    return JsonResponse({'error': 'Invalid request method'}, status=400)

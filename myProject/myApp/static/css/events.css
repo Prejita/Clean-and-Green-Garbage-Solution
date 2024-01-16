@@ -10,7 +10,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1500px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     padding: 20px 74.5px; 
@@ -39,3 +39,133 @@ nav {
     color: #00a859; /* Green color for navigation links on hover */
 }
 
+/* Style for the event heading */
+.event-heading {
+    text-align: center;
+    color: #00a859;
+    padding: 5px 0; /* Add padding to the top and bottom of the heading */
+    font-size: 50px; /* Adjust the font size as needed */
+}
+
+.event-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.event-card {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.event-card:hover {
+    transform: scale(1.05); /* Scale up on hover for a subtle effect */
+    box-shadow:  0 0 10px rgba(0, 0, 0, 0.1); /* Dark green shadow on hover */
+}
+
+.event-card p {
+    text-align: justify; 
+}
+
+/* Style for the button container */
+.button-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Style for the Register button */
+.register-button {
+    background-color: #00a859; /* Set the Register button's background color to green */
+    color: white; /* Set the text color to white */
+    padding: 15px 30px; /* Add padding to the button for better styling */
+    text-decoration: none; /* Remove underline from the button */
+    border-radius: 5px; /* Add rounded corners to the button */
+    font-weight: bold; /* Make the button text bold */
+    transition: background-color 0.3s; /* Add a smooth transition for the background color */
+    border: none; /* Remove the button border */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    font-size: 16px; /* Set the font size for the button text */
+}
+
+.register-button:hover {
+    background-color: darkgreen;
+}
+
+/* Style for the Donate button */
+.donate-button {
+    background-color: #007f4f; /* Set the Donate button's background color to a different shade */
+    color: white; /* Set the text color to white */
+    padding: 15px 30px; /* Add padding to the button for better styling */
+    text-decoration: none; /* Remove underline from the button */
+    border-radius: 5px; /* Add rounded corners to the button */
+    font-weight: bold; /* Make the button text bold */
+    transition: background-color 0.3s; /* Add a smooth transition for the background color */
+    border: none; /* Remove the button border */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    font-size: 16px; /* Set the font size for the button text */
+}
+
+.donate-button:hover {
+    background-color: #005f39; /* Darker shade on hover for Donate button */
+}
+
+/* Style for the footer */
+.footer {
+    background-color: #3c3c3c; /* Black background color for the footer */
+    color: #fff; /* Text color for the footer */
+    padding: 5px 0; /* Add padding to the top and bottom of the footer */
+    margin-top: 20px;
+    opacity: 100%;
+}
+
+/* Style for the terms and conditions link */
+.terms {
+    margin-left: 20px; /* Add some left margin to the terms and conditions link */
+}
+
+.terms a {
+    color: #fff; /* Text color for the link */
+    text-decoration: none; /* Remove underlines from the link */
+    font-weight: bold; /* Make the link text bold */
+}
+
+.terms a:hover {
+    color: #00a859;
+}
+
+/* Style for the social icons */
+.social-icons {
+    margin-right: 20px; /* Add some right margin to the social icons */
+    margin-top: -10px; /* Add negative top margin to shift the icons upwards */
+}
+
+/* Style for individual social media icons */
+.social-icons a {
+    margin-left: 10px; /* Add some space between icons */
+    float: right;
+}
+
+.social-icons img {
+    width: 25px; /* Increase the width to make the icons larger */
+    height: 25px; /* Increase the height to match the width for a uniform size */
+    filter: invert(100%); /* Change the color to white using the invert filter */
+    object-fit: contain; /* Maintain the aspect ratio and contain within the specified dimensions */
+    opacity: 100%;
+}
+
+/* Style for the copyright text */
+.copyright {
+    text-align: center; /* Center-align the copyright text */
+    padding: 0; /* Remove any padding */
+    margin-left: 80px; /* Add left margin to move it to the right */
+}
