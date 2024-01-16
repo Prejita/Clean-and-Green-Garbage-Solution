@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse
 from django.utils import timezone
+from .models import Registration
 
 def index(request):
     context = {}
@@ -70,6 +71,11 @@ def addevents(request):
 def events(request):
     context = {}
     return render(request, "myApp/events.html", context)
+
+def register(request):
+    event_name = request.GET.get('event', '')
+    context = {'event_name': event_name}
+    return render(request, "myApp/register.html", context)
 
 @csrf_exempt
 def dustbin_data_receiver(request):
@@ -194,3 +200,32 @@ def get_events(request):
 
     # If the request method is not GET
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+def submit_registration(request):
+    if request.method == 'POST':
+        # Extract data from the submitted form
+        event_name = request.POST.get('eventName')
+        full_name = request.POST.get('fullName')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+        additional_info = request.POST.get('additionalInfo')
+
+        # Save the registration data to the database (assuming you have a Registration model)
+        Registration.objects.create(
+            event_name=event_name,
+            full_name=full_name,
+            email=email,
+            phone=phone,
+            address=address,
+            additional_info=additional_info
+        )
+
+        # Optionally, you can add a success message
+        messages.success(request, 'Registration submitted successfully.')
+
+        # Redirect to a success page 
+        return redirect('events') 
+    
+    # Handle cases where the form submission method is not POST
+    return redirect('events')  
