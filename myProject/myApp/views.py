@@ -77,6 +77,10 @@ def register(request):
     context = {'event_name': event_name}
     return render(request, "myApp/register.html", context)
 
+def userrequest(request):
+    context = {}
+    return render(request, "myApp/userrequest.html", context)
+
 @csrf_exempt
 def dustbin_data_receiver(request):
     if request.method == 'POST':
@@ -229,3 +233,8 @@ def submit_registration(request):
     
     # Handle cases where the form submission method is not POST
     return redirect('events')  
+
+def user_request_list(request):
+    registrations = Registration.objects.all()
+    context = {'registrations': registrations}
+    return render(request, 'userrequest.html', context)
