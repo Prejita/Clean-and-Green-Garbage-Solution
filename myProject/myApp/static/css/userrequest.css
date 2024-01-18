@@ -113,14 +113,14 @@ body {
 
 .table-container {
     overflow-x: auto; /* Enable horizontal scrolling */
-    width: 100%; /* Set the desired width for the table container */
-    margin-left: 25px; /* Adjust as needed */
+    width: 100%; 
+    margin-left: 10px; /* Adjust as needed */
 }
 
 .userrequest-table {
-    width: 1000px;
+    width: 1050px;
     border-collapse: collapse;
-    margin-left: 25px;
+    margin-left: 15px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
@@ -137,6 +137,52 @@ body {
     color: #fff;
 }
 
-.hidden {
-    display: none;
+/* CSS for checkbox */
+.userrequest-table th:first-child,
+.userrequest-table td:first-child {
+    width: 10px; 
+    text-align: center;
+}
+
+.userrequest-table th:first-child input,
+.userrequest-table td:first-child input {
+    width: 20px; 
+    height: 20px; 
+    margin: 0;
+}
+
+/* CSS for buttons */
+.accept-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;;
+    color: white;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.accept-btn:hover {
+    background-color: #45a049; 
+}
+
+.delete-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #DC143C;
+    color: white;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.delete-btn:hover {
+    background-color: #FF3355;
 }

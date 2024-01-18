@@ -205,6 +205,7 @@ def get_events(request):
     # If the request method is not GET
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
+@csrf_exempt
 def submit_registration(request):
     if request.method == 'POST':
         # Extract data from the submitted form
@@ -234,7 +235,6 @@ def submit_registration(request):
     # Handle cases where the form submission method is not POST
     return redirect('events')  
 
-def user_request_list(request):
+def userrequest(request):
     registrations = Registration.objects.all()
-    context = {'registrations': registrations}
-    return render(request, 'userrequest.html', context)
+    return render(request, 'myApp/userrequest.html', {'registrations': registrations})

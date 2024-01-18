@@ -65,6 +65,7 @@
             <table class="userrequest-table" id="userrequestTable">
                 <thead>
                     <tr>
+                        <th>Checkbox</th>
                         <th>Event</th>
                         <th>Full Name</th>
                         <th>Email</th>
@@ -77,6 +78,7 @@
                 <tbody>
                     {% for registration in registrations %}
                     <tr>
+                        <td><input type="checkbox" name="registration_ids[]" value="{{ registration.id }}"></td>
                         <td>{{ registration.event_name }}</td>
                         <td>{{ registration.full_name }}</td>
                         <td>{{ registration.email }}</td>
@@ -84,8 +86,8 @@
                         <td>{{ registration.address }}</td>
                         <td>{{ registration.additional_info }}</td>
                         <td>
-                            <button onclick="acceptRegistration('{{ registration.id }}')">Accept</button>
-                            <button onclick="declineRegistration('{{ registration.id }}')">Decline</button>
+                            <button class="accept-btn" onclick="acceptRegistration('{{ registration.id }}')">Accept</button>
+                            <button class="delete-btn" onclick="declineRegistration('{{ registration.id }}')">Delete</button>
                         </td>
                     </tr>
                     {% endfor %}

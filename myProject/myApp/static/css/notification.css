@@ -171,7 +171,7 @@ body {
     background-color: #FF3355;
 }
 
-/* Style for the notify button */
+/* Style for the delete button */
 .delete-btn {
     padding: 8px 10px;
     font-size: 14px;
@@ -181,6 +181,7 @@ body {
     background-color: #DC143C;
     color: white;
     transition: background-color 0.3s;
+    font-weight: bold;
 }
 
 .delete-btn:hover {
