@@ -78,8 +78,9 @@ def register(request):
     return render(request, "myApp/register.html", context)
 
 def userrequest(request):
-    context = {}
-    return render(request, "myApp/userrequest.html", context)
+    registrations = Registration.objects.all()
+    context = {'registrations': registrations}
+    return render(request, 'myApp/userrequest.html', context)
 
 @csrf_exempt
 def dustbin_data_receiver(request):
@@ -242,3 +243,16 @@ def clear_all_requests(request):
         return JsonResponse({'success': True, 'message': 'All requests cleared successfully'})
     except Exception as e:
         return JsonResponse({'success': False, 'message': str(e)})
+
+@csrf_exempt  
+def delete_registration(request):
+    if request.method == 'POST':
+        registration_id = request.POST.get('registration_id', '')
+        try:
+            registration = Registration.objects.get(id=registration_id)
+            registration.delete()
+            return JsonResponse({'message': 'Registration deleted successfully'})
+        except Registration.DoesNotExist:
+            return JsonResponse({'error': 'Registration does not exist'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
