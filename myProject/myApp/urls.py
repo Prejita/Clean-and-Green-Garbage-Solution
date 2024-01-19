@@ -26,4 +26,5 @@ urlpatterns = [
     path('get_events/', views.get_events, name='get_events'),
     path('register/', views.register, name='register'),
     path('submit_registration/', views.submit_registration, name='submit_registration'),
+    path('clear_all_requests/', views.clear_all_requests, name='clear_all_requests'),
     ]

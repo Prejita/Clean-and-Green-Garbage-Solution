@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/userrequest.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <title>GreenEase - UserRequest</title>
 </head>
@@ -65,7 +67,7 @@
                 <input type="text" id="search" placeholder="Search users or events...">
             </div>
             <button id ="DeleteRequest">Delete Selected</button>
-            <button id="clearAllRequests">Clear Requests</button>
+            <button id="clearAllRequests" onclick="clearAllRequests()">Clear Requests</button>
         </div>
 
         <!-- Table for users -->
@@ -105,6 +107,38 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Logout confirmation
+            const logoutLink = document.getElementById('logout-link');
+            logoutLink.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent the default link behavior
+    
+                // Show a confirmation dialog before logging out
+                Swal.fire({
+                    title: 'Are you sure you want to logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Logout',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If confirmed, proceed with logout
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logged out successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Redirect the user to the homepage or login page after logout
+                            window.location.href = '{% url "index" %}'; 
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
         // Function to perform search based on input value
         function searchUsers() {
             // Get input value and convert it to lowercase for case-insensitive search
@@ -139,6 +173,45 @@
 
         // Add 'input' event listener to trigger search on input change
         searchInput.addEventListener('input', searchUsers);
+    </script>
+
+    <script>
+        // Function to clear all requests
+        function clearAllRequests() {
+            // Show a confirmation dialog before clearing all requests
+            Swal.fire({
+                title: 'Are you sure you want to clear all requests?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Clear',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send AJAX request to the server to delete all requests
+                    $.ajax({
+                        type: 'POST', // or 'GET' depending on your server-side implementation
+                        url: '{% url "clear_all_requests" %}', // Replace with your backend URL
+                        success: function (data) {
+                            // If successful, remove all rows from the table
+                            const tbody = document.querySelector('.userrequest-table tbody');
+                            tbody.innerHTML = ''; // Clear the HTML content inside the tbody
+
+                            // Show success message
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'All requests cleared successfully!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        },
+                        error: function (error) {
+                            console.error('Error clearing requests:', error);
+                            // Handle error scenario if needed
+                        }
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html> 

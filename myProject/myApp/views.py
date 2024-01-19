@@ -235,6 +235,10 @@ def submit_registration(request):
     # Handle cases where the form submission method is not POST
     return redirect('events')  
 
-def userrequest(request):
-    registrations = Registration.objects.all()
-    return render(request, 'myApp/userrequest.html', {'registrations': registrations})
+def clear_all_requests(request):
+    try:
+        # Delete all records from the Registration model
+        Registration.objects.all().delete()
+        return JsonResponse({'success': True, 'message': 'All requests cleared successfully'})
+    except Exception as e:
+        return JsonResponse({'success': False, 'message': str(e)})
