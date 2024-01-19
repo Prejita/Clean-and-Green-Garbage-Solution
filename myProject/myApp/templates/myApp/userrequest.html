@@ -75,7 +75,7 @@
                     <tr>
                         <th>Checkbox</th>
                         <th>Event</th>
-                        <th>Full Name</th>
+                        <th>Username</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Address</th>
@@ -102,7 +102,43 @@
                 </tbody>
             </table> 
         </div>
-
     </div>
+
+    <script>
+        // Function to perform search based on input value
+        function searchUsers() {
+            // Get input value and convert it to lowercase for case-insensitive search
+            const searchValue = document.getElementById('search').value.toLowerCase();
+
+            // Get all rows in the table
+            const rows = document.querySelectorAll('.userrequest-table tbody tr');
+
+            // Loop through each row to check for matching values and show/hide rows accordingly
+            rows.forEach(row => {
+                const eventname = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const username = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                const email = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+
+                // Check if any of the row's columns contain the search value
+                if (
+                    eventname.includes(searchValue) ||
+                    username.includes(searchValue) ||
+                    email.includes(searchValue)
+                ) {
+                    // Show the row if it matches the search
+                    row.style.display = '';
+                } else {
+                    // Hide the row if it doesn't match the search
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Get the search input element
+        const searchInput = document.getElementById('search');
+
+        // Add 'input' event listener to trigger search on input change
+        searchInput.addEventListener('input', searchUsers);
+    </script>
 </body>
 </html> 
