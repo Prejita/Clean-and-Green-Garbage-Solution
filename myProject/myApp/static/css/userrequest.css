@@ -186,3 +186,67 @@ body {
 .delete-btn:hover {
     background-color: #FF3355;
 }
+
+/* Style for the search input and Clear All button container */
+.search-and-clear-container {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-end; 
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* Style for the search input */
+.search-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 290px;
+}
+
+.search-actions input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+/* Style for the Delete Requests button */
+#DeleteRequest {
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #DC143C;
+    color: white;
+    transition: background-color 0.3s;
+    margin-left: 190px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#DeleteRequest:hover {
+    background-color: #FF3355;
+}
+
+/* Style for the Clear All button */
+#clearAllRequests {
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #DC143C;
+    color: white;
+    transition: background-color 0.3s;
+    margin-left: 30px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#clearAllRequests:hover {
+    background-color: #FF3355;
+}
