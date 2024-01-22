@@ -1,9 +1,10 @@
+from email.message import EmailMessage
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
-from .models import DustbinData  # Import the DustbinData model
+from .models import DustbinData 
 from .models import Notification
 from .models import Event
 from django.contrib.auth.decorators import login_required
@@ -12,6 +13,14 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.utils import timezone
 from .models import Registration
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.shortcuts import get_object_or_404
+
+from django.core.mail import EmailMessage
+from io import BytesIO
+from reportlab.pdfgen import canvas
+
 
 def index(request):
     context = {}
@@ -256,3 +265,96 @@ def delete_registration(request):
             return JsonResponse({'error': 'Registration does not exist'}, status=404)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+@csrf_exempt
+def accept_registration(request):
+    if request.method == 'POST':
+        registration_id = request.POST.get('registration_id', '')
+
+        try:
+            # Get the registration record from the database
+            registration = get_object_or_404(Registration, id=registration_id)
+
+            # Mark the registration as accepted 
+            registration.accepted = True
+            registration.save()
+
+            # Send acceptance email
+            send_acceptance_email(registration)
+
+            return JsonResponse({'message': 'Registration accepted successfully'})
+        except Registration.DoesNotExist:
+            return JsonResponse({'error': 'Registration does not exist'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+def generate_invitation_pdf(username, eventname, event_start_date, event_start_time, event_location):
+    # Create a BytesIO buffer to store the PDF content
+    buffer = BytesIO()
+
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer, pagesize=(595.2755906, 841.8897638))  # A4 size in points
+
+    # Set font
+    p.setFont("Helvetica", 12)
+
+    # Add content to the PDF
+    p.drawString(50, 750, f"Dear {username},")
+    p.drawString(50, 720, f"You are cordially invited to attend the event:")
+    p.setFont("Helvetica-Bold", 14)
+    p.drawString(50, 700, f"{eventname}")
+    p.setFont("Helvetica", 12)
+    p.drawString(50, 670, f"Date: {event_start_date}")
+    p.drawString(50, 650, f"Time: {event_start_time}")
+    p.drawString(50, 630, f"Location: {event_location}")
+
+    p.drawString(50, 600, "We look forward to your participation.")
+    p.drawString(50, 550, "Best regards,")
+    p.drawString(50, 530, "GreenEase Team")
+
+    # Close the PDF object cleanly
+    p.showPage()
+    p.save()
+
+    # Get the value of the BytesIO buffer
+    pdf_content = buffer.getvalue()
+    buffer.close()
+
+    return pdf_content
+
+def send_acceptance_email(registration):
+    # Compose the subject for the email
+    subject = f'Registration Accepted for Event: {registration.event_name}'
+
+    context = {
+        'username': registration.full_name,
+        'eventname': registration.event_name,
+    }
+
+    message = render_to_string('myApp/acceptance_email_body.txt', context)
+
+    # Retrieve the event details
+    event = get_object_or_404(Event, name=registration.event_name)
+
+    # Generate the PDF content with event details
+    pdf_content = generate_invitation_pdf(
+        registration.full_name,
+        registration.event_name,
+        event.start_date,
+        event.start_time,
+        event.location
+    )
+
+    # Attach the PDF to the email
+    pdf_filename = f'Invitation to {registration.event_name}.pdf'
+    email = EmailMessage(
+        subject,
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [registration.email],
+    )
+    email.attach(pdf_filename, pdf_content, 'application/pdf')
+
+    # Send the email
+    email.send()

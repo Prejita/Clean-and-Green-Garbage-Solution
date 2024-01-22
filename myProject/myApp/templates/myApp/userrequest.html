@@ -271,5 +271,29 @@
             }
         }
     </script>
+    
+    <script>
+        // Add this function to your script
+        function acceptRegistration(registrationId) {
+            // Send AJAX request to accept the registration
+            $.ajax({
+                type: 'POST',
+                url: '{% url "accept_registration" %}',
+                data: {'registration_id': registrationId},
+                success: function (data) {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registration accepted!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function (error) {
+                    console.error('Error accepting registration:', error);
+                }
+            });
+        }
+    </script>
 </body>
 </html> 

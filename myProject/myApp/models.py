@@ -77,7 +77,13 @@ class Registration(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     address = models.TextField()
-    additional_info = models.TextField(blank=True, null=True, default = 'None')
+    additional_info = models.TextField(blank=True, null=True, default='None')
+
+    def save(self, *args, **kwargs):
+        # If additional_info is empty, set it to 'None'
+        if not self.additional_info:
+            self.additional_info = 'None'
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.full_name} - {self.event_name}"
