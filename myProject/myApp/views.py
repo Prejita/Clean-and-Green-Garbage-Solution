@@ -281,6 +281,9 @@ def accept_registration(request):
             # Send acceptance email
             send_acceptance_email(registration)
 
+            # Delete the registration from the database
+            registration.delete()
+
             return JsonResponse({'message': 'Registration accepted successfully'})
         except Registration.DoesNotExist:
             return JsonResponse({'error': 'Registration does not exist'}, status=404)
@@ -367,10 +370,14 @@ def decline_registration(request):
             # Get the registration record from the database
             registration = get_object_or_404(Registration, id=registration_id)
 
+            # Mark the registration as declined
+            registration.accepted = False
+            registration.save()
+
             # Send decline email
             send_decline_email(registration)
 
-            # Optionally, you can delete the registration from the database
+            # Delete the registration from the database
             registration.delete()
 
             return JsonResponse({'message': 'Registration declined successfully'})
