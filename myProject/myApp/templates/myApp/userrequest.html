@@ -97,7 +97,7 @@
                         <td>{{ registration.additional_info }}</td>
                         <td>
                             <button class="accept-btn" onclick="acceptRegistration('{{ registration.id }}')">Accept</button>
-                            <button class="delete-btn" onclick="declineRegistration('{{ registration.id }}')">Delete</button>
+                            <button class="delete-btn" onclick="declineRegistration('{{ registration.id }}')">Decline</button>
                         </td>
                     </tr>
                     {% endfor %}
@@ -295,5 +295,29 @@
             });
         }
     </script>
+
+    <script>
+        function declineRegistration(registrationId) {
+            // Send AJAX request to decline the registration
+            $.ajax({
+                type: 'POST',
+                url: '{% url "decline_registration" %}',
+                data: {'registration_id': registrationId},
+                success: function (data) {
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Registration declined!',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function (error) {
+                    console.error('Error declining registration:', error);
+                }
+            });
+        }
+    </script>
+
 </body>
 </html> 

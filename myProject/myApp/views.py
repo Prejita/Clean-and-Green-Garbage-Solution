@@ -16,7 +16,6 @@ from .models import Registration
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.shortcuts import get_object_or_404
-
 from django.core.mail import EmailMessage
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -355,6 +354,50 @@ def send_acceptance_email(registration):
         [registration.email],
     )
     email.attach(pdf_filename, pdf_content, 'application/pdf')
+
+    # Send the email
+    email.send()
+
+@csrf_exempt
+def decline_registration(request):
+    if request.method == 'POST':
+        registration_id = request.POST.get('registration_id', '')
+
+        try:
+            # Get the registration record from the database
+            registration = get_object_or_404(Registration, id=registration_id)
+
+            # Send decline email
+            send_decline_email(registration)
+
+            # Optionally, you can delete the registration from the database
+            registration.delete()
+
+            return JsonResponse({'message': 'Registration declined successfully'})
+        except Registration.DoesNotExist:
+            return JsonResponse({'error': 'Registration does not exist'}, status=404)
+    else:
+        return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+def send_decline_email(registration):
+    # Compose the subject for the email
+    subject = f'Registration Declined for Event: {registration.event_name}'
+
+    context = {
+        'username': registration.full_name,
+        'eventname': registration.event_name,
+    }
+
+    message = render_to_string('myApp/decline_email_body.txt', context)
+
+    # Create an EmailMessage object
+    email = EmailMessage(
+        subject,
+        message,
+        settings.DEFAULT_FROM_EMAIL,
+        [registration.email],
+    )
 
     # Send the email
     email.send()

@@ -1,8 +1,8 @@
 Congratulations, {{ username }}
 
-We are delighted to inform you that your registration for the event "{{ eventname }}" has been accepted.
+We are delighted to inform you that your registration for the event "{{ eventname }}" has been accepted. You can view the detailed invitation in the attached PDF. 
 
-You can view the detailed invitation in the attached PDF. If you have any questions, feel free to contact us.
+If you have any questions, feel free to contact us.
 
 Best regards,
 GreenEase Team

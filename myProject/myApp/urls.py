@@ -29,4 +29,5 @@ urlpatterns = [
     path('clear_all_requests/', views.clear_all_requests, name='clear_all_requests'),
     path('delete_registration/', views.delete_registration, name='delete_registration'),
     path('accept_registration/', views.accept_registration, name='accept_registration'),
+    path('decline_registration/', views.decline_registration, name='decline_registration'),
     ]
