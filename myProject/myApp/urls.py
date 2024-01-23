@@ -31,4 +31,5 @@ urlpatterns = [
     path('accept_registration/', views.accept_registration, name='accept_registration'),
     path('decline_registration/', views.decline_registration, name='decline_registration'),
     path('delete_selected_notifications/', views.delete_selected_notifications, name='delete_selected_notifications'),
+    path('eventlist/', views.eventlist, name='eventlist'),
     ]

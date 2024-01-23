@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenEase - Events</title>
+    <link rel="stylesheet" href="/static/css/eventlist.css"> 
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="/static/img/profile-pic.png" alt="User Profile Picture">
+                <div class="admin-label">Admin</div>
+            </div>
+            <div class="menu">
+                <div class="menu-item">
+                    <a href="{% url 'dashboard' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/dashboard.png" alt="Dashboard Icon" class="icon">
+                            <span class="bold-text">Dashboard</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                            <span class="bold-text">Notifications</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'addevents' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/event.png" alt="Event Icon" class="icon">
+                            <span class="bold-text">Events</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'userrequest' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                            <span class="bold-text">User Requests</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item" id="logout">
+                    <a href="#" id="logout-link" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
+                            <span class="bold-text">Logout</span>
+                        </div>
+                    </a>                    
+                </div>
+                
+            <!-- <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div> -->
+        </aside>
+    </div>
+
+    <div class="content">
+        <div class="title-box">
+            <h1>GreenEase</h1>
+        </div>
+
+        <hr class="line">
+
+        <div class="events-container" id="eventsContainer"></div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Fetch and display events
+                fetch('/get_events/') // Replace with your backend URL for getting events
+                    .then(response => response.json())
+                    .then(events => {
+                        const eventsContainer = document.getElementById('eventsContainer');
+
+                        if (events.length === 0) {
+                            eventsContainer.innerHTML = '<p>No events available.</p>';
+                        } else {
+                            // Create a table to display events
+                            const table = document.createElement('table');
+                            table.classList.add('events-table');
+
+                            // Create table header
+                            const thead = document.createElement('thead');
+                            const headerRow = document.createElement('tr');
+                            headerRow.innerHTML = '<th>Event Name</th><th>Organizer</th><th>Location</th><th>Start Date</th><th>Actions</th>';
+                            thead.appendChild(headerRow);
+                            table.appendChild(thead);
+
+                            // Create table body
+                            const tbody = document.createElement('tbody');
+                            events.forEach(event => {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                    <td>${event.name}</td>
+                                    <td>${event.organizer}</td>
+                                    <td>${event.location}</td>
+                                    <td>${event.start_date}</td>
+                                    <td>
+                                        <button class="edit-btn" onclick="editEvent('${event.id}')">Edit</button>
+                                        <button class="delete-btn" onclick="deleteEvent('${event.id}')">Delete</button>
+                                    </td>
+                                `;
+                                tbody.appendChild(row);
+                            });
+                            table.appendChild(tbody);
+
+                            // Append the table to the container
+                            eventsContainer.appendChild(table);
+                        }
+                    })
+                    .catch(error => console.error('Error fetching events:', error));
+            });
+
+            // Function to handle editing an event
+            function editEvent(eventId) {
+                // Redirect to the edit event page with the event ID
+                window.location.href = `/edit_event/${eventId}`; // Replace with your edit event URL
+            }
+
+            // Function to handle deleting an event
+            function deleteEvent(eventId) {
+                // Show a confirmation dialog before deleting the event
+                Swal.fire({
+                    title: 'Are you sure you want to delete the event?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Delete',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send AJAX request to delete the event with the given ID
+                        fetch(`/delete_event/${eventId}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': '{{ csrf_token }}' // Ensure to include the CSRF token
+                            },
+                        })
+                        .then(response => {
+                            if (response.ok) {
+                                // Reload the page after deletion
+                                window.location.reload();
+                            } else {
+                                console.error('Failed to delete event');
+                            }
+                        })
+                        .catch(error => console.error('Error deleting event:', error));
+                    }
+                });
+            }
+        </script>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    </div>
+</body>
+</html>

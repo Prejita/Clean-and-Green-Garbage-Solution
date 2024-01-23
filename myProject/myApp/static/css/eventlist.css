@@ -1,0 +1,173 @@
+
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background: #3c3c3c;
+    color: #fff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.user-profile img {
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.admin-label {
+    font-size: 17px;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu .menu-item {
+    cursor: pointer;
+    color: #fff;
+    width: 100%;
+}
+
+.menu .menu-item:nth-child(3) .menu-box {
+    background: #00a859;
+}
+
+.menu .menu-box {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 0;
+    background: none;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.menu .menu-box .icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    filter: invert(100%);
+}
+
+.menu .menu-box .bold-text {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+
+.menu .menu-item:hover .menu-box {
+    background: #00a859;
+}
+
+.copyright {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 5px;
+}
+
+.title-box {
+    background: #fff;
+    color: #00a859;
+    text-align: left;
+    height: 35px;
+    margin-left: 30px;
+    width: 100%;
+}
+
+.title-box h1 {
+    font-size: 26px;
+}
+
+.line {
+    border: none;
+    border-top: 2px solid #ccc;
+    width: 103%;
+    margin-bottom: 3px;
+}
+
+.events-container {
+    padding: 20px;
+}
+
+.events-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.events-table th {
+    text-align: center; /* Center the text in table headings */
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.events-table td {
+    text-align: left; /* Left-align the text in table cells */
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+/* Style for the delete button */
+.delete-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #DC143C;
+    color: white;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.delete-btn:hover {
+    background-color: #FF3355;
+}
+
+/* Style for the edit button */
+.edit-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #2196F3; 
+    color: white;
+    margin-left: 5px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.edit-btn:hover {
+    background-color: #1565C0;; 
+}

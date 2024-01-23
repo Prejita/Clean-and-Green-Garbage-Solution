@@ -91,6 +91,10 @@ def userrequest(request):
     context = {'registrations': registrations}
     return render(request, 'myApp/userrequest.html', context)
 
+def eventlist(request):
+    context = {}
+    return render(request, "myApp/eventlist.html", context)
+
 @csrf_exempt
 def dustbin_data_receiver(request):
     if request.method == 'POST':

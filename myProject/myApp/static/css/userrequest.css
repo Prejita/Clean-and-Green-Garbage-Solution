@@ -133,8 +133,8 @@ body {
 }
 
 .userrequest-table th {
-    background-color: #00a859;
-    color: #fff;
+    background-color: #f2f2f2;
+    color: #000;
 }
 
 .userrequest-table td:nth-child(4) {
