@@ -172,7 +172,7 @@ body {
 }
 
 /* Style for the delete button */
-.delete-btn {
+/* .delete-btn {
     padding: 8px 10px;
     font-size: 14px;
     cursor: pointer;
@@ -186,6 +186,37 @@ body {
 
 .delete-btn:hover {
     background-color: #FF3355;
+} */
+
+/* Style for the notify button */
+.notify-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #2196F3; 
+    color: white;
+    /* margin-left: 25px; */
+    transition: background-color 0.3s;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.notify-btn:hover {
+    background-color: #1565C0;; 
+}
+
+/* Increase the size of the checkbox */
+.notification-table input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* Decrease the column width of the "Select" column */
+.notification-table th:first-child,
+.notification-table td:first-child {
+    width: 30px; /* Adjust the width as needed */
 }
 
 /* Style for the search input and Clear All button container */
@@ -195,6 +226,42 @@ body {
     justify-content: flex-end; 
     margin-top: 10px;
     width: 100%;
+}
+
+/* Style for the search input */
+.search-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 290px;
+}
+
+.search-actions input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    margin-top: 10px;
+    margin-left: 50px;
+}
+
+/* Style for the Delete Requests button */
+#DeleteRequest {
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #DC143C;
+    color: white;
+    transition: background-color 0.3s;
+    margin-left: 120px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#DeleteRequest:hover {
+    background-color: #FF3355;
 }
 
 /* Style for the Clear All button */
@@ -207,30 +274,11 @@ body {
     background-color: #DC143C;
     color: white;
     transition: background-color 0.3s;
-    margin-left: 300px;
+    margin-left: 30px;
     margin-top: 10px;
     font-weight: bold;
 }
 
 #clearAllNotifications:hover {
     background-color: #FF3355;
-}
-
-/* Style for the notify button */
-.notify-btn {
-    padding: 8px 10px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #2196F3; 
-    color: white;
-    margin-left: 25px;
-    transition: background-color 0.3s;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-.notify-btn:hover {
-    background-color: #1565C0;; 
 }

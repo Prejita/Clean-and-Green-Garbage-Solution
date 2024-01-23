@@ -19,6 +19,7 @@ from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMessage
 from io import BytesIO
 from reportlab.pdfgen import canvas
+from django.views.decorators.http import require_POST
 
 
 def index(request):
@@ -124,17 +125,17 @@ def notifications(request):
     notification = Notification.objects.all()
     return render(request, 'myApp/notifications.html', {'notifications': notification})
 
-@csrf_exempt
-def delete_notification(request, notification_id):
-    if request.method == 'POST':
-        try:
-            notification = Notification.objects.get(id=notification_id)
-            notification.delete()
-            return JsonResponse({'message': 'Notification deleted successfully'})
-        except Notification.DoesNotExist:
-            return JsonResponse({'error': 'Notification does not exist'}, status=404)
-    else:
-        return JsonResponse({'error': 'Invalid request method'}, status=400)
+# @csrf_exempt
+# def delete_notification(request, notification_id):
+#     if request.method == 'POST':
+#         try:
+#             notification = Notification.objects.get(id=notification_id)
+#             notification.delete()
+#             return JsonResponse({'message': 'Notification deleted successfully'})
+#         except Notification.DoesNotExist:
+#             return JsonResponse({'error': 'Notification does not exist'}, status=404)
+#     else:
+#         return JsonResponse({'error': 'Invalid request method'}, status=400)
     
 def delete_all_notifications(request):
     if request.method == 'DELETE':
@@ -147,7 +148,6 @@ def delete_all_notifications(request):
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
     
-
 def create_event(request):
     if request.method == 'POST':
         # Retrieve data from the POST request
@@ -408,3 +408,17 @@ def send_decline_email(registration):
 
     # Send the email
     email.send()
+
+@csrf_exempt  
+@require_POST
+def delete_selected_notifications(request):
+    try:
+        data = json.loads(request.body)
+        selected_notification_ids = data.get('selectedNotificationIds', [])
+
+        # Perform deletion in the database
+        Notification.objects.filter(id__in=selected_notification_ids).delete()
+
+        return JsonResponse({'success': True})
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})

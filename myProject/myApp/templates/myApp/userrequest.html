@@ -41,6 +41,14 @@
                         </div>
                     </a>    
                 </div>
+                <div class="menu-item">
+                    <a href="{% url 'userrequest' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                            <span class="bold-text">User Requests</span>
+                        </div>
+                    </a>    
+                </div>
                 <div class="menu-item" id="logout">
                     <a href="#" id="logout-link" style="text-decoration: none;">
                         <div class="menu-box">
@@ -80,7 +88,7 @@
             <table class="userrequest-table" id="userrequestTable">
                 <thead>
                     <tr>
-                        <th>Checkbox</th>
+                        <th>Select</th>
                         <th>Event</th>
                         <th>Username</th>
                         <th>Email</th>
@@ -259,7 +267,6 @@
                                 },
                                 error: function (error) {
                                     console.error('Error deleting requests:', error);
-                                    // Handle error scenario if needed
                                 }
                             });
                         });

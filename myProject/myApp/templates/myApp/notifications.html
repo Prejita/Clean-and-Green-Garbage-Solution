@@ -41,6 +41,14 @@
                         </div>
                     </a>    
                 </div>
+                <div class="menu-item">
+                    <a href="{% url 'userrequest' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                            <span class="bold-text">User Requests</span>
+                        </div>
+                    </a>    
+                </div>
                 <div class="menu-item" id="logout">
                     <a href="#" id="logout-link" style="text-decoration: none;">
                         <div class="menu-box">
@@ -67,15 +75,45 @@
             <div class="search-actions">
                 <input type="text" id="search" placeholder="Search notification...">
             </div>
+            <button id ="DeleteRequest" onclick="deleteSelectedNotifications()">Delete Selected</button>
             <button id="clearAllNotifications">Clear Notifications</button>
         </div>
 
+        <!-- Table for notifications -->
+        <!-- <div class="table-container">
+            <table class="notification-table" id="notificationTable">
+                <thead>
+                    <tr>
+                        <th>SN</th>
+                        <th>Notification</th>
+                        <th>Location</th>
+                        <th>DateTime</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for notification in notifications %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ notification.message }}</td>
+                        <td>{{ notification.location }}</td>
+                        <td>{{ notification.timestamp }}</td>
+                        <td>
+                            <button class="delete-btn" data-notification-id="{{ notification.id }}">Delete</button>
+                            <a href="{% url 'notify' notification.id %}" class="notify-btn">Notify</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div> -->
         <!-- Table for notifications -->
         <div class="table-container">
             <table class="notification-table" id="notificationTable">
                 <!-- Table header -->
                 <thead>
                     <tr>
+                        <th>Select</th> 
                         <th>SN</th>
                         <th>Notification</th>
                         <th>Location</th>
@@ -87,12 +125,12 @@
                     <!-- Rows with notification data -->
                     {% for notification in notifications %}
                     <tr>
+                        <td><input type="checkbox" name="selectedNotifications" value="{{ notification.id }}"></td>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ notification.message }}</td>
                         <td>{{ notification.location }}</td>
                         <td>{{ notification.timestamp }}</td>
                         <td>
-                            <button class="delete-btn" data-notification-id="{{ notification.id }}">Delete</button>
                             <a href="{% url 'notify' notification.id %}" class="notify-btn">Notify</a>
                         </td>
                     </tr>
@@ -274,6 +312,63 @@
                 });
             }
         });
+    </script>
+
+    <script>
+        function deleteSelectedNotifications() {
+        const selectedNotifications = document.querySelectorAll('input[name="selectedNotifications"]:checked');
+        const selectedNotificationIds = Array.from(selectedNotifications).map(input => input.value);
+
+        if (selectedNotificationIds.length === 0) {
+            // Show a SweetAlert message when no notifications are selected
+            Swal.fire({
+                title: 'No Notifications Selected',
+                text: 'Please select notifications to delete.',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        // Show a confirmation dialog before deleting selected notifications
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'This will delete the selected notifications. Are you sure you want to proceed?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete them!',
+            cancelButtonText: 'No, keep them'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Send an AJAX request to delete selected notifications
+                fetch('/delete_selected_notifications/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: JSON.stringify({ selectedNotificationIds }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // If the deletion is successful, remove selected rows from the table
+                        selectedNotifications.forEach(input => {
+                            const tableRow = input.closest('tr');
+                            tableRow.remove();
+                        });
+                        // Show success notification
+                        Swal.fire('Deleted!', 'Selected notifications have been deleted', 'success');
+                    } else {
+                        console.error('Error deleting selected notifications:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+        });
+    }
     </script>
 </body>
 </html> 

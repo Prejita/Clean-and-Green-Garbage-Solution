@@ -18,7 +18,7 @@ urlpatterns = [
     path("addevents/", views.addevents, name="addevents"),
     path('userrequest/', views.userrequest, name='userrequest'),
     path('api/dustbin_data_receiver', views.dustbin_data_receiver, name='dustbin_data_receiver'),    
-    path('delete_notification/<int:notification_id>/', views.delete_notification, name='delete_notification'),
+    # path('delete_notification/<int:notification_id>/', views.delete_notification, name='delete_notification'),
     path('delete_all_notifications/', views.delete_all_notifications, name='delete_all_notifications'),
     path('create_event/', views.create_event, name='create_event'),
     path('events/', views.events, name='events'),
@@ -30,4 +30,5 @@ urlpatterns = [
     path('delete_registration/', views.delete_registration, name='delete_registration'),
     path('accept_registration/', views.accept_registration, name='accept_registration'),
     path('decline_registration/', views.decline_registration, name='decline_registration'),
+    path('delete_selected_notifications/', views.delete_selected_notifications, name='delete_selected_notifications'),
     ]
