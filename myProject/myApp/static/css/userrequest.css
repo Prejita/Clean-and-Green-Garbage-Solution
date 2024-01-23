@@ -121,7 +121,7 @@ body {
     width: 1050px;
     border-collapse: collapse;
     margin-left: 15px;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-bottom: 20px;
 }
 
@@ -135,6 +135,14 @@ body {
 .userrequest-table th {
     background-color: #00a859;
     color: #fff;
+}
+
+.userrequest-table td:nth-child(4) {
+    max-width: 200px; 
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+    word-wrap: break-word;
 }
 
 /* CSS for checkbox */
@@ -250,3 +258,25 @@ body {
 #clearAllRequests:hover {
     background-color: #FF3355;
 }
+
+/* CSS for Select All checkbox */
+.select-all-container {
+    display: flex;
+    align-items: center;
+    margin-left: 15px; 
+    margin-top: 20px;
+}
+
+.select-all-container input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    transform: scale(1.5); 
+    box-shadow: none;
+}
+
+.select-all-label {
+    color: #333;
+    font-weight: bold;
+}
+

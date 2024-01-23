@@ -72,6 +72,11 @@
 
         <!-- Table for users -->
         <div class="table-container">
+            <div class="select-all-container">
+                <input type="checkbox" id="selectAll" onclick="selectAllRows()">
+                <label for="selectAll">Select All</label>
+            </div>
+
             <table class="userrequest-table" id="userrequestTable">
                 <thead>
                     <tr>
@@ -319,5 +324,32 @@
         }
     </script>
 
+    <!-- <script>
+        // Function to handle selecting all rows
+        function selectAllRows() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.userrequest-table tbody input[type="checkbox"]');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAllCheckbox.checked;
+            });
+        }
+    </script> -->
+    <script>
+        // Function to handle selecting all visible rows
+        function selectAllRows() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.userrequest-table tbody input[type="checkbox"]');
+    
+            checkboxes.forEach(checkbox => {
+                // Check if the checkbox is in a visible row
+                const isVisible = checkbox.closest('tr').style.display !== 'none';
+    
+                if (isVisible) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                }
+            });
+        }
+    </script>    
 </body>
 </html> 
