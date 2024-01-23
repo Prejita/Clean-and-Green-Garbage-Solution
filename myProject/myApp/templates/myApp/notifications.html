@@ -109,6 +109,11 @@
         </div> -->
         <!-- Table for notifications -->
         <div class="table-container">
+            <div class="select-all-container">
+                <input type="checkbox" id="selectAll" onclick="selectAllRows()">
+                <label for="selectAll">Select All</label>
+            </div>
+
             <table class="notification-table" id="notificationTable">
                 <!-- Table header -->
                 <thead>
@@ -316,59 +321,85 @@
 
     <script>
         function deleteSelectedNotifications() {
-        const selectedNotifications = document.querySelectorAll('input[name="selectedNotifications"]:checked');
-        const selectedNotificationIds = Array.from(selectedNotifications).map(input => input.value);
+            const selectedNotifications = document.querySelectorAll('input[name="selectedNotifications"]:checked');
+            const selectedNotificationIds = Array.from(selectedNotifications).map(input => input.value);
 
-        if (selectedNotificationIds.length === 0) {
-            // Show a SweetAlert message when no notifications are selected
-            Swal.fire({
-                title: 'No Notifications Selected',
-                text: 'Please select notifications to delete.',
-                icon: 'info',
-                confirmButtonText: 'OK'
-            });
-            return;
-        }
-
-        // Show a confirmation dialog before deleting selected notifications
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'This will delete the selected notifications. Are you sure you want to proceed?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Yes, delete them!',
-            cancelButtonText: 'No, keep them'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Send an AJAX request to delete selected notifications
-                fetch('/delete_selected_notifications/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{ csrf_token }}',
-                    },
-                    body: JSON.stringify({ selectedNotificationIds }),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        // If the deletion is successful, remove selected rows from the table
-                        selectedNotifications.forEach(input => {
-                            const tableRow = input.closest('tr');
-                            tableRow.remove();
-                        });
-                        // Show success notification
-                        Swal.fire('Deleted!', 'Selected notifications have been deleted', 'success');
-                    } else {
-                        console.error('Error deleting selected notifications:', data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
+            if (selectedNotificationIds.length === 0) {
+                // Show a SweetAlert message when no notifications are selected
+                Swal.fire({
+                    title: 'No Notifications Selected',
+                    text: 'Please select notifications to delete.',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
                 });
+                return;
             }
-        });
-    }
+
+            // Show a confirmation dialog before deleting selected notifications
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'This will delete the selected notifications. Are you sure you want to proceed?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete them!',
+                cancelButtonText: 'No, keep them'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Send an AJAX request to delete selected notifications
+                    fetch('/delete_selected_notifications/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
+                        body: JSON.stringify({ selectedNotificationIds }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // If the deletion is successful, remove selected rows from the table
+                            selectedNotifications.forEach(input => {
+                                const tableRow = input.closest('tr');
+                                tableRow.remove();
+                            });
+                            // Show success notification
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'Selected notifications have been deleted',
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                // Refresh the page after deletion
+                                window.location.reload();
+                            });
+                        } else {
+                            console.error('Error deleting selected notifications:', data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        }
     </script>
+
+    <script>
+        // Function to handle selecting all visible rows
+        function selectAllRows() {
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.notification-table tbody input[type="checkbox"]');
+    
+            checkboxes.forEach(checkbox => {
+                // Check if the checkbox is in a visible row
+                const isVisible = checkbox.closest('tr').style.display !== 'none';
+    
+                if (isVisible) {
+                    checkbox.checked = selectAllCheckbox.checked;
+                }
+            });
+        }
+    </script>    
 </body>
 </html> 

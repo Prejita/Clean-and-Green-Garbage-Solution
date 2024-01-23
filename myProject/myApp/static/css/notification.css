@@ -282,3 +282,24 @@ body {
 #clearAllNotifications:hover {
     background-color: #FF3355;
 }
+
+/* CSS for Select All checkbox */
+.select-all-container {
+    display: flex;
+    align-items: center;
+    margin-left: 25px; 
+    margin-top: 20px;
+}
+
+.select-all-container input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+    margin-right: 10px;
+    transform: scale(1.5); 
+    box-shadow: none;
+}
+
+.select-all-label {
+    color: #333;
+    font-weight: bold;
+}

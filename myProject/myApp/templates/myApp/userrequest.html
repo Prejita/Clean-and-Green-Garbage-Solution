@@ -263,6 +263,9 @@
                                         title: 'Selected requests deleted successfully!',
                                         showConfirmButton: false,
                                         timer: 1500
+                                    }).then(() => {
+                                        // Refresh the page after deletion
+                                        window.location.reload();
                                     });
                                 },
                                 error: function (error) {
@@ -331,17 +334,6 @@
         }
     </script>
 
-    <!-- <script>
-        // Function to handle selecting all rows
-        function selectAllRows() {
-            const selectAllCheckbox = document.getElementById('selectAll');
-            const checkboxes = document.querySelectorAll('.userrequest-table tbody input[type="checkbox"]');
-
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = selectAllCheckbox.checked;
-            });
-        }
-    </script> -->
     <script>
         // Function to handle selecting all visible rows
         function selectAllRows() {
