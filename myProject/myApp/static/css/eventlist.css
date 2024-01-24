@@ -1,9 +1,12 @@
-
 body {
     font-family: "Lato", sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
+}
+
+* {
+    box-sizing: border-box;
 }
 
 .sidebar {
@@ -108,7 +111,7 @@ body {
     border: none;
     border-top: 2px solid #ccc;
     width: 103%;
-    margin-bottom: 3px;
+    margin-bottom: 1px;
 }
 
 .events-container {
@@ -122,52 +125,108 @@ body {
     margin-left: 10px;
 }
 
-.events-table th {
-    text-align: center; /* Center the text in table headings */
-    background-color: #f2f2f2;
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
+.events-table th,
 .events-table td {
-    text-align: left; /* Left-align the text in table cells */
-    border: 1px solid #ddd;
+    text-align: left;
     padding: 8px;
+    border: 1px solid #ddd;
 }
 
-/* Style for the delete button */
-.delete-btn {
-    padding: 8px 10px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #DC143C;
-    color: white;
-    transition: background-color 0.3s;
-    font-weight: bold;
-    margin-left: 10px;
+.events-table th {
+    background-color: #f2f2f2;
 }
 
-.delete-btn:hover {
-    background-color: #FF3355;
+.events-table th:nth-child(2),
+.events-table td:nth-child(2) {
+    width: 910px;
 }
 
-/* Style for the edit button */
-.edit-btn {
-    padding: 8px 16px;
+.events-table td:nth-child(3) {
+    width: 50px; 
+    text-align: center; 
+}
+
+.events-table button {
+    padding: 8px 14px;
     font-size: 14px;
     cursor: pointer;
     border: none;
     border-radius: 5px;
     background-color: #2196F3; 
     color: white;
-    margin-left: 5px;
     transition: background-color 0.3s;
     font-weight: bold;
     text-decoration: none;
+    display: inline-block;
 }
 
-.edit-btn:hover {
-    background-color: #1565C0;; 
+.events-table button:hover {
+    background-color: #1565C0;
+}
+
+
+/* Style for the search input and Clear All button container */
+.search-and-clear-container {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-end; 
+    margin-top: 1px;
+    width: 100%;
+}
+
+/* Style for the search input */
+.search-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-actions input[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 300px;
+}
+
+/* Style for the Delete Eventss button */
+#DeleteEvent {
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #DC143C;
+    color: white;
+    transition: background-color 0.3s;
+    margin-left: 190px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#DeleteEvent:hover {
+    background-color: #FF3355;
+}
+
+/* Style for the Add Button button */
+.button-link {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s;
+    margin-left: 30px;
+    margin-top: 10px;
+    font-weight:bolder;
+    text-decoration: none;  
+}
+
+.button-link:hover {
+    background-color: #45a049;
 }
