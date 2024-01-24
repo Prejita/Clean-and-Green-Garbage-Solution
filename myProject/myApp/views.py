@@ -95,6 +95,10 @@ def eventlist(request):
     context = {}
     return render(request, "myApp/eventlist.html", context)
 
+def editevent(request):
+    context = {}
+    return render(request, "myApp/editevent.html", context)
+
 @csrf_exempt
 def dustbin_data_receiver(request):
     if request.method == 'POST':

@@ -1,0 +1,240 @@
+/* CSS for Add Event */
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    background: #3c3c3c;
+    color: #fff;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+.user-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.user-profile img {
+    width: 100px;
+    border-radius: 50%;
+    margin-top: 20px;
+}
+
+.admin-label {
+    font-size: 17px;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu .menu-item {
+    cursor: pointer;
+    color: #fff;
+    width: 100%;
+}
+
+.menu .menu-item:nth-child(3) .menu-box {
+    background: #00a859;
+}
+
+.menu .menu-box {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 0;
+    background: none;
+    transition: background 0.3s;
+    width: 100%;
+}
+
+.menu .menu-box .icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    filter: invert(100%);
+}
+
+.menu .menu-box .bold-text {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+
+.menu .menu-item:hover .menu-box {
+    background: #00a859;
+}
+
+.copyright {
+    font-size: 12px;
+    color: #fff;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 5px;
+}
+
+.content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.title-box {
+    background: #fff;
+    color: #00a859;
+    text-align: left;
+    height: 50px;
+    margin-left: 30px;
+}
+
+.title-box h1 {
+    font-size: 26px;
+}
+
+.line {
+    border: none;
+    /* Remove the default border style of the <hr> element */
+    border-top: 2px solid #ccc;
+    /* Set the line color to gray and thickness */
+    width: 100%;
+    /* Set the width to 100% to make it full-width */
+    margin-bottom: 3px;
+}
+
+/* CSS for Add Event Form */
+.event-form {
+    margin: 20px 20px 20px 60px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    width: 86%;
+}
+
+.event-form h1 {
+    font-size: 24px;
+    color: #00a859;
+    margin-bottom: 22px;
+    margin-top: 1px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="time"],
+.form-group select,
+.form-group textarea {
+    width: calc(100% - 12px);
+    /* Adjust input width */
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    resize: vertical;
+    /* Allow vertical resizing */
+}
+
+.submit-button {
+    background-color: #00a859;
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 16px;
+    border: none;
+    font-weight: bold;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: darkgreen;
+    ;
+}
+
+/* Flexbox setup for date groups */
+.form-group.flex-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.form-group.flex-row .date-group {
+    flex: 1;
+}
+
+.form-group.flex-row .date-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group.flex-row .date-group input[type="date"],
+.form-group.flex-row .date-group input[type="time"] {
+    width: calc(100% - 12px);
+    /* Adjust input width */
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.form-group.flex-row .date-group input[type="date"]{
+    margin-bottom: 15px;
+}
+
+/* Flexbox setup for text groups */
+.form-group.flex-row .text-group {
+    flex: 1;
+}
+
+.form-group.flex-row .text-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group.flex-row .text-group input[type="text"] {
+    width: calc(100% - 12px);
+    /* Adjust input width */
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}

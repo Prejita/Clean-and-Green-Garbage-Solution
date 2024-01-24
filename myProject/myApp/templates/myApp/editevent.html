@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenEase - Edit Event</title>
+    <link rel="stylesheet" href="/static/css/editevent.css">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="user-profile">
+                <img src="/static/img/profile-pic.png" alt="User Profile Picture">
+                <div class="admin-label">Admin</div>
+            </div>
+            <div class="menu">
+                <div class="menu-item">
+                    <a href="{% url 'dashboard' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/dashboard.png" alt="Dashboard Icon" class="icon">
+                            <span class="bold-text">Dashboard</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                            <span class="bold-text">Notifications</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'addevents' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/event.png" alt="Event Icon" class="icon">
+                            <span class="bold-text">Events</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item">
+                    <a href="{% url 'userrequest' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                            <span class="bold-text">User Requests</span>
+                        </div>
+                    </a>    
+                </div>
+                <div class="menu-item" id="logout">
+                    <a href="#" id="logout-link" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <img src="/static/img/logout.png" alt="Logout Icon" class="icon">
+                            <span class="bold-text">Logout</span>
+                        </div>
+                    </a>                    
+                </div>
+                
+            <!-- <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div> -->
+        </aside>
+    </div>
+    
+    <div class="content">
+        <div class="title-box">
+            <h1>GreenEase</h1>
+        </div>
+
+        <hr class = "line">
+   
+        <div class="container">
+            <form class="event-form" id="eventForm">
+                <h1>Edit Event</h1>
+
+                <div class="form-group flex-row">
+                    <div class="text-group">
+                        <label for="eventName">Event Name</label>
+                        <input type="text" id="eventName" name="eventName" required>
+                    </div>
+                    
+                    <div class="text-group">
+                        <label for="eventOrganizer">Organizer</label>
+                        <input type="text" id="eventOrganizer" name="eventOrganizer" required>
+                    </div>
+                </div>
+
+                <div class="form-group flex-row">
+                    <div class="date-group">
+                        <label for="eventStartDate">Start Date</label>
+                        <input type="date" id="eventStartDate" name="eventStartDate" required>
+                        <label for="eventStartTime">Start Time</label>
+                        <input type="time" id="eventStartTime" name="eventStartTime">
+                    </div>
+                
+                    <div class="date-group">
+                        <label for="eventEndDate">End Date</label>
+                        <input type="date" id="eventEndDate" name="eventEndDate" required>
+                        <label for="eventEndTime">End Time</label>
+                        <input type="time" id="eventEndTime" name="eventEndTime">
+                    </div>
+                </div>
+
+                <div class="form-group flex-row">
+                    <div class="text-group">
+                        <label for="eventLocation">Event Location</label>
+                        <input type="text" id="eventLocation" name="eventLocation" required>
+                    </div>
+                    
+                    <div class="text-group">
+                        <label for="eventCategory">Category</label>
+                        <select id="eventCategory" name="eventCategory" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option value="Conference">Conference</option>
+                            <option value="Seminar">Seminar</option>
+                            <option value="Workshop">Workshop</option>
+                            <option value="Clean-up Campaigns">Clean-up Campaigns</option>
+                            <option value="Tree-planting Drives">Tree-planting Drives</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="eventDescription">Event Description</label>
+                    <textarea id="eventDescription" name="eventDescription" rows="4" required></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Edit Event</button>
+            </form>
+        </div>
+    </div>  
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Logout confirmation
+            const logoutLink = document.getElementById('logout-link');
+            logoutLink.addEventListener('click', function (e) {
+                e.preventDefault(); // Prevent the default link behavior
+
+                // Show a confirmation dialog before logging out
+                Swal.fire({
+                    title: 'Are you sure you want to logout?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonText: 'Logout',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // If confirmed, proceed with logout
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Logged out successfully!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Redirect the user to the homepage or login page after logout
+                            window.location.href = '{% url "index" %}'; // Replace with your desired logout URL
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
