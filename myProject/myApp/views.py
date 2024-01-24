@@ -426,3 +426,23 @@ def delete_selected_notifications(request):
         return JsonResponse({'success': True})
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)})
+
+@csrf_exempt     
+@require_POST
+def delete_events(request):
+    try:
+        # Assuming your request data is JSON with a list of event IDs
+        data = json.loads(request.body.decode('utf-8'))
+        event_ids = data.get('eventIds', [])
+
+        # Perform the deletion in your database
+        Event.objects.filter(id__in=event_ids).delete()
+
+        # Return a success response
+        response_data = {'success': True}
+    except Exception as e:
+        # Handle errors and return an error response
+        print(f'Error deleting events: {e}')
+        response_data = {'success': False}
+
+    return JsonResponse(response_data)

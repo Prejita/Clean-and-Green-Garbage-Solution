@@ -73,7 +73,7 @@
                 <div class="search-actions">
                     <input type="text" id="search" placeholder="Search events...">
                 </div>
-                <button id ="DeleteEvent" onclick="deleteSelectedEventss()">Delete Selected</button>
+                <button id ="DeleteEvent" onclick="deleteSelectedEvents()">Delete Selected</button>
                 <a href="{% url 'addevents' %}" id="AddEvents" class="button-link">Add Events</a>
             </div>
 
@@ -164,6 +164,70 @@
             });
         </script>
 
+        <script>
+            // Function to delete selected events
+            function deleteSelectedEvents() {
+                // Get all checkboxes in the table
+                const checkboxes = document.getElementsByName('eventCheckbox');
+
+                // Filter out the checked checkboxes
+                const selectedEventIds = Array.from(checkboxes)
+                    .filter(checkbox => checkbox.checked && checkbox.value !== 'eventHeading') // Exclude the table heading checkbox
+                    .map(checkbox => checkbox.value);
+
+                if (selectedEventIds.length === 0) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'No events selected',
+                        text: 'Please select events to delete.',
+                    });
+                    return;
+                }
+
+                // Confirm the deletion with the user
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: 'You won\'t be able to revert this!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete them!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Send a request to delete selected events permanently
+                        fetch('/delete_events/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({ eventIds: selectedEventIds }),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                // Show success message
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Events deleted successfully',
+                                    text: 'The selected events have been deleted.',
+                                }).then(() => {
+                                    // Refresh the current page
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error',
+                                    text: 'Failed to delete events. Please try again.',
+                                });
+                            }
+                        })
+                        .catch(error => console.error('Error deleting events:', error));
+                    }
+                });
+            }
+        </script>
     </div>
 </body>
 
