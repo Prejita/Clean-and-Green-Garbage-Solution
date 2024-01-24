@@ -117,6 +117,53 @@
                     .catch(error => console.error('Error fetching events:', error));
             });
         </script>
+        <script>
+            // Function to perform search based on input value
+            function searchEvents() {
+                // Get input value and convert it to lowercase for case-insensitive search
+                const searchValue = document.getElementById('search').value.toLowerCase();
+
+                // Get all rows in the table
+                const rows = document.querySelectorAll('.events-table tbody tr');
+                let eventsFound = false; // Flag to track if any events are found
+
+                // Loop through each row to check for matching values and show/hide rows accordingly
+                rows.forEach(row => {
+                    const eventname = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+
+                    // Check if any of the row's columns contain the search value
+                    if (eventname.includes(searchValue)) {
+                        // Show the row if it matches the search
+                        row.style.display = '';
+                        eventsFound = true; // Set flag to true if events are found
+                    } else {
+                        // Hide the row if it doesn't match the search
+                        row.style.display = 'none';
+                    }
+                });
+
+                // Display SweetAlert if no events are found
+                if (!eventsFound) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'No events found',
+                        text: 'There are no events matching your search criteria.',
+                    }).then(() => {
+                        // Redirect to the eventlist page
+                        window.location.href = "{% url 'eventlist' %}";
+                    });
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get the search input element
+                const searchInput = document.getElementById('search');
+
+                // Add 'input' event listener to trigger search on input change
+                searchInput.addEventListener('input', searchEvents);
+            });
+        </script>
+
     </div>
 </body>
 
