@@ -228,7 +228,31 @@
                 });
             }
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get the checkbox in the events heading
+                const headingCheckbox = document.querySelector('input[name="eventCheckbox"][value="eventHeading"]');
+
+                // Add a click event listener to the heading checkbox
+                headingCheckbox.addEventListener('click', function () {
+                    // Log to check if the event listener is triggered
+                    console.log("Header checkbox clicked");
+
+                    // Get all checkboxes in the table
+                    const checkboxes = document.getElementsByName('eventCheckbox');
+
+                    // Filter out the visible checkboxes
+                    const visibleCheckboxes = Array.from(checkboxes)
+                        .filter(checkbox => checkbox.closest('tr').style.display !== 'none');
+
+                    // Check/uncheck the checkboxes based on the heading checkbox state
+                    visibleCheckboxes.forEach(checkbox => {
+                        checkbox.checked = headingCheckbox.checked;
+                    });
+                });
+            });
+        </script>
     </div>
 </body>
-
 </html>
