@@ -7,6 +7,7 @@
     <title>GreenEase - Event Lists</title>
     <link rel="stylesheet" href="/static/css/eventlist.css">
     <script src="/static/js/notification_count.js"></script>
+    <script src="/static/js/user_count.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -26,14 +27,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- <div class="menu-item">
-                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
-                        <div class="menu-box">
-                            <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
-                            <span class="bold-text">Notifications</span>
-                        </div>
-                    </a>
-                </div> -->
                 <div class="menu-item">
                     <a href="{% url 'notifications' %}" style="text-decoration: none;">
                         <div class="menu-box">
@@ -56,10 +49,13 @@
                 <div class="menu-item">
                     <a href="{% url 'userrequest' %}" style="text-decoration: none;">
                         <div class="menu-box">
-                            <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                            <div class="icon-container">
+                                <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                                <span id="user-count" class="user-count">0</span>
+                            </div>
                             <span class="bold-text">User Requests</span>
                         </div>
-                    </a>
+                    </a>    
                 </div>
                 <div class="menu-item" id="logout">
                     <a href="#" id="logout-link" style="text-decoration: none;">
@@ -76,6 +72,7 @@
     <script>
         // Initial update when the page loads
         updateNotificationCount();
+        updateUserCountBadge();
     </script>
     
     <div class="content">

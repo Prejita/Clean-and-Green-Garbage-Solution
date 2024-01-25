@@ -1,4 +1,4 @@
-/* CSS for Add Event */
+/* Set the font family for the entire website to "Lato" */
 body {
     font-family: "Lato", sans-serif;
     margin: 0;
@@ -6,6 +6,7 @@ body {
     display: flex;
 }
 
+/* Sidebar Styles */
 .sidebar {
     width: 250px;
     background: #3c3c3c;
@@ -39,6 +40,7 @@ body {
     font-weight: bold;
 }
 
+/* Menu Styles */
 .menu {
     list-style: none;
     padding: 0;
@@ -82,6 +84,7 @@ body {
     background: #00a859;
 }
 
+/* Badge Styles */
 .notification-count {
     position: absolute;
     top: -8px;
@@ -100,6 +103,22 @@ body {
     position: relative;
 }
 
+/* User Badge Styles */
+.user-count {
+    position: absolute;
+    top: -8px;
+    right: 1px;
+    background-color: #ff5858; 
+    color: #fff; 
+    border-radius: 50%;
+    padding: 3px 0.5px;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Copyright Styles */
 .copyright {
     font-size: 12px;
     color: #fff;
@@ -108,6 +127,7 @@ body {
     margin-bottom: 5px;
 }
 
+/* Content Styles */
 .content {
     flex: 1;
     display: flex;
@@ -115,6 +135,7 @@ body {
     height: 100%;
 }
 
+/* Title Box Styles */
 .title-box {
     background: #fff;
     color: #00a859;
@@ -127,13 +148,11 @@ body {
     font-size: 26px;
 }
 
+/* Line Styles */
 .line {
     border: none;
-    /* Remove the default border style of the <hr> element */
     border-top: 2px solid #ccc;
-    /* Set the line color to gray and thickness */
     width: 100%;
-    /* Set the width to 100% to make it full-width */
     margin-bottom: 3px;
 }
 
@@ -156,6 +175,7 @@ body {
     text-align: center;
 }
 
+/* Form Group Styles */
 .form-group {
     margin-bottom: 15px;
 }
@@ -184,6 +204,7 @@ body {
     resize: vertical;
 }
 
+/* Submit Button Styles */
 .submit-button {
     background-color: #00a859;
     color: #fff;
@@ -200,7 +221,6 @@ body {
 
 .submit-button:hover {
     background-color: darkgreen;
-    ;
 }
 
 /* Flexbox setup for date groups */
@@ -223,7 +243,6 @@ body {
 .form-group.flex-row .date-group input[type="date"],
 .form-group.flex-row .date-group input[type="time"] {
     width: calc(100% - 12px);
-    /* Adjust input width */
     padding: 8px;
     font-size: 16px;
     border-radius: 4px;

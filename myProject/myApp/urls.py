@@ -37,4 +37,5 @@ urlpatterns = [
     path('get_event_details/<int:event_id>/', views.get_event_details, name='get_event_details'),
     path('edit_event/', views.edit_event, name='edit_event'),
     path('get_notification_count/', views.get_notification_count, name='get_notification_count'),
+    path('get_total_user_count/', views.get_total_user_count, name='get_total_user_count'),
     ]

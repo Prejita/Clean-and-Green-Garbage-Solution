@@ -101,6 +101,21 @@ body {
     position: relative;
 }
 
+/* User Badge Styles */
+.user-count {
+    position: absolute;
+    top: -8px;
+    right: 1px;
+    background-color: #ff5858; 
+    color: #fff; 
+    border-radius: 50%;
+    padding: 3px 0.5px;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
 .copyright {
     font-size: 12px;
     color: #fff;
@@ -234,7 +249,7 @@ body {
 /* Decrease the column width of the "Select" column */
 .notification-table th:first-child,
 .notification-table td:first-child {
-    width: 30px; /* Adjust the width as needed */
+    width: 30px; 
 }
 
 /* Style for the search input and Clear All button container */

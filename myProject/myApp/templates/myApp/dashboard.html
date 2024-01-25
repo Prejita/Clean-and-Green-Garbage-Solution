@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/dashboard.css"/>
     <script src="/static/js/notification_count.js"></script>
+    <script src="/static/js/user_count.js"></script>
 
     <!-- Header file for the Leaflet map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -32,14 +33,6 @@
                         </div>
                     </a>
                 </div>
-                <!-- <div class="menu-item">
-                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
-                        <div class="menu-box">
-                            <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
-                            <span class="bold-text">Notifications</span>
-                        </div>
-                    </a>    
-                </div> -->
                 <div class="menu-item">
                     <a href="{% url 'notifications' %}" style="text-decoration: none;">
                         <div class="menu-box">
@@ -62,7 +55,10 @@
                 <div class="menu-item">
                     <a href="{% url 'userrequest' %}" style="text-decoration: none;">
                         <div class="menu-box">
-                            <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                            <div class="icon-container">
+                                <img src="/static/img/adduser.png" alt="UserRequest Icon" class="icon">
+                                <span id="user-count" class="user-count">0</span>
+                            </div>
                             <span class="bold-text">User Requests</span>
                         </div>
                     </a>    
@@ -85,6 +81,7 @@
     <script>
         // Initial update when the page loads
         updateNotificationCount();
+        updateUserCountBadge();
     </script>
     
     <div class="content">

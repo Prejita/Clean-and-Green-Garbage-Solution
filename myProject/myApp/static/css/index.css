@@ -1,4 +1,3 @@
-/* Reset some default styles */
 /* Set the font family for the entire website to "Lato" */
 body {
     font-family: "Lato", sans-serif; /* Use "Lato," and if not available, use a generic sans-serif font */
@@ -7,7 +6,7 @@ body, ul {margin: 0; padding: 0; list-style: none;}
 
 /* Style for the image container */
 .hero {
-    position: relative; /* Needed for absolute positioning */
+    position: relative; 
 }
 
 /* Style for the black overlay above the image */
@@ -76,19 +75,19 @@ img {
 /* Style for the text overlay container */
 .text-overlay {
     position: absolute;
-    top: 35%; /* Vertically center the container within the .hero section */
-    left: 50%; /* Horizontally center the container within the .hero section */
+    top: 35%; 
+    left: 50%; 
     transform: translate(-50%, -100%);
     text-align: center;
-    z-index: 4; /* Place the container above the black overlay */
-    color: #fff; /* Text color (adjust as needed) */
+    z-index: 4; 
+    color: #fff; 
 }
 
 /* Style for the "GreenEase" text */
 .green-ease-text {
     font-size: 59px; 
     font-weight: bold;
-    margin-bottom: 12px; /* Add margin to create space between elements */
+    margin-bottom: 12px; 
 }
 
 /* Style for the "Innovative Waste Collection" text */
@@ -270,7 +269,7 @@ Style for the subheading wrapper
 
 /* Style for the "Learn More" link in the "About Us" section */
 .about-button {
-    color: #000; /* Set the text color to white */
+    color: #000; 
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;

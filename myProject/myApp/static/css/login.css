@@ -1,4 +1,3 @@
-/* Reset some default styles */
 /* Set the font family for the entire website to "Lato" */
 body {
     font-family: "Lato", sans-serif; /* Use "Lato," and if not available, use a generic sans-serif font */
@@ -125,7 +124,6 @@ header {
     background-color: darkgreen; /* Change the background color on hover */
 }
 
-/* Adjust the margin for user-info and input-container to shift it to the right */
 .user-info,
 .password-info,
 .input-container {
@@ -133,7 +131,6 @@ header {
     margin-right: 20px; /* Adjust the right margin to shift it to the right */
 }
 
-/* Increase the width of the input container */
 .input-container {
     width: 90%; /* Increase the width to 100% for full width */
 }

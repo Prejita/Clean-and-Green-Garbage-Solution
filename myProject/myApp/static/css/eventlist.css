@@ -1,3 +1,4 @@
+/* Set the font family for the entire website to "Lato" */
 body {
     font-family: "Lato", sans-serif;
     margin: 0;
@@ -5,10 +6,12 @@ body {
     display: flex;
 }
 
+/* Box-sizing for all elements */
 * {
     box-sizing: border-box;
 }
 
+/* Sidebar styles */
 .sidebar {
     width: 250px;
     background: #3c3c3c;
@@ -21,6 +24,7 @@ body {
     overflow-x: hidden;
 }
 
+/* User profile styles */
 .user-profile {
     display: flex;
     flex-direction: column;
@@ -43,6 +47,7 @@ body {
     font-weight: bold;
 }
 
+/* Menu styles */
 .menu {
     list-style: none;
     padding: 0;
@@ -86,7 +91,27 @@ body {
     background: #00a859;
 }
 
+/* Notification Badge styles */
 .notification-count {
+    position: absolute;
+    top: -8px;
+    right: 1px;
+    background-color: #ff5858;
+    color: #fff;
+    border-radius: 50%;
+    padding: 3px 0.5px;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+.icon-container {
+    position: relative;
+}
+
+/* User Badge Styles */
+.user-count {
     position: absolute;
     top: -8px;
     right: 1px;
@@ -100,10 +125,7 @@ body {
     text-align: center;
 }
 
-.icon-container {
-    position: relative;
-}
-
+/* Copyright styles */
 .copyright {
     font-size: 12px;
     color: #fff;
@@ -112,6 +134,7 @@ body {
     margin-bottom: 5px;
 }
 
+/* Title box styles */
 .title-box {
     background: #fff;
     color: #00a859;
@@ -125,6 +148,7 @@ body {
     font-size: 26px;
 }
 
+/* Line styles */
 .line {
     border: none;
     border-top: 2px solid #ccc;
@@ -132,10 +156,12 @@ body {
     margin-bottom: 1px;
 }
 
+/* Events container styles */
 .events-container {
     padding: 20px;
 }
 
+/* Events table styles */
 .events-table {
     width: 100%;
     border-collapse: collapse;
@@ -160,39 +186,20 @@ body {
 }
 
 .events-table td:nth-child(3) {
-    width: 50px; 
-    text-align: center; 
+    width: 50px;
+    text-align: center;
 }
 
-/* .events-table button {
-    padding: 8px 14px;
-    font-size: 14px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #2196F3; 
-    color: white;
-    transition: background-color 0.3s;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.events-table button:hover {
-    background-color: #1565C0;
-} */
-
-
-/* Style for the search input and Clear All button container */
+/* Search and clear container styles */
 .search-and-clear-container {
     display: flex;
-    align-items: center; 
-    justify-content: flex-end; 
+    align-items: center;
+    justify-content: flex-end;
     margin-top: 1px;
     width: 100%;
 }
 
-/* Style for the search input */
+/* Search input styles */
 .search-actions {
     display: flex;
     justify-content: flex-end;
@@ -209,7 +216,7 @@ body {
     margin-right: 300px;
 }
 
-/* Style for the Delete Eventss button */
+/* Delete Events button styles */
 #DeleteEvent {
     padding: 10px 16px;
     font-size: 14px;
@@ -228,7 +235,7 @@ body {
     background-color: #FF3355;
 }
 
-/* Style for the Add Button button */
+/* Add Button button styles */
 .button-link {
     display: inline-block;
     padding: 10px 20px;
@@ -241,21 +248,22 @@ body {
     transition: background-color 0.3s;
     margin-left: 30px;
     margin-top: 10px;
-    font-weight:bolder;
-    text-decoration: none;  
+    font-weight: bolder;
+    text-decoration: none;
 }
 
 .button-link:hover {
     background-color: #45a049;
 }
 
+/* Edit Button styles */
 #editButton {
     padding: 8px 14px;
     font-size: 14px;
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #2196F3; 
+    background-color: #2196F3;
     color: white;
     transition: background-color 0.3s;
     font-weight: bold;

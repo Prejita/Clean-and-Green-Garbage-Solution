@@ -1,12 +1,17 @@
 /* Set the font family for the entire website to "Lato" */
 body {
-    font-family: "Lato", sans-serif; /* Use "Lato," and if not available, use a generic sans-serif font */
+    font-family: "Lato", sans-serif;
 }
-body, ul {margin: 0; padding: 0; list-style: none;}
+
+body, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
 
 /* Style for the navigation bar */
 nav {
-    background-color: #3c3c3c; /* Black background color for the navigation bar */
+    background-color: #3c3c3c;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,13 +21,15 @@ nav {
     padding: 20px 74.5px; 
 }
 
+/* Style for the logo */
 .logo a {
     font-size: 24px;
     text-decoration: none;
     font-weight: bold;
-    color: white; /* Green color for the logo */
+    color: white;
 }
 
+/* Style for the menu */
 .menu ul {
     display: flex;
     gap: 40px;
@@ -30,23 +37,24 @@ nav {
 
 .menu ul li a {
     text-decoration: none;
-    color: white; /* White text color for navigation links */
+    color: white;
     font-weight: 700;
     transition: color 0.3s;
 }
 
 .menu ul li a:hover {
-    color: #00a859; /* Green color for navigation links on hover */
+    color: #00a859;
 }
 
 /* Style for the event heading */
 .event-heading {
     text-align: center;
     color: #00a859;
-    padding: 5px 0; /* Add padding to the top and bottom of the heading */
-    font-size: 50px; 
+    padding: 5px 0;
+    font-size: 50px;
 }
 
+/* Style for the event container */
 .event-container {
     display: flex;
     flex-wrap: wrap;
@@ -55,6 +63,7 @@ nav {
     padding: 20px;
 }
 
+/* Style for the event card */
 .event-card {
     background-color: #fff;
     color: #000;
@@ -68,8 +77,8 @@ nav {
 }
 
 .event-card:hover {
-    transform: scale(1.05); /* Scale up on hover for a subtle effect */
-    box-shadow:  0 0 10px rgba(0, 0, 0, 0.1); /* Dark green shadow on hover */
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .event-card p {
@@ -86,16 +95,16 @@ nav {
 
 /* Style for the Register button */
 .register-button {
-    background-color: #00a859; /* Set the Register button's background color to green */
-    color: white; /* Set the text color to white */
-    padding: 15px 30px; /* Add padding to the button for better styling */
-    text-decoration: none; /* Remove underline from the button */
-    border-radius: 5px; /* Add rounded corners to the button */
-    font-weight: bold; /* Make the button text bold */
-    transition: background-color 0.3s; /* Add a smooth transition for the background color */
-    border: none; /* Remove the button border */
-    cursor: pointer; /* Change the cursor to a pointer on hover */
-    font-size: 16px; /* Set the font size for the button text */
+    background-color: #00a859;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .register-button:hover {
@@ -104,40 +113,40 @@ nav {
 
 /* Style for the Donate button */
 .donate-button {
-    background-color: #007f4f; /* Set the Donate button's background color to a different shade */
-    color: white; /* Set the text color to white */
-    padding: 15px 30px; /* Add padding to the button for better styling */
-    text-decoration: none; /* Remove underline from the button */
-    border-radius: 5px; /* Add rounded corners to the button */
-    font-weight: bold; /* Make the button text bold */
-    transition: background-color 0.3s; /* Add a smooth transition for the background color */
-    border: none; /* Remove the button border */
-    cursor: pointer; /* Change the cursor to a pointer on hover */
-    font-size: 16px; /* Set the font size for the button text */
+    background-color: #007f4f;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
 }
 
 .donate-button:hover {
-    background-color: #005f39; /* Darker shade on hover for Donate button */
+    background-color: #005f39;
 }
 
 /* Style for the footer */
 .footer {
-    background-color: #3c3c3c; /* Black background color for the footer */
-    color: #fff; /* Text color for the footer */
-    padding: 5px 0; /* Add padding to the top and bottom of the footer */
+    background-color: #3c3c3c;
+    color: #fff;
+    padding: 5px 0;
     margin-top: 20px;
     opacity: 100%;
 }
 
 /* Style for the terms and conditions link */
 .terms {
-    margin-left: 20px; /* Add some left margin to the terms and conditions link */
+    margin-left: 20px;
 }
 
 .terms a {
-    color: #fff; /* Text color for the link */
-    text-decoration: none; /* Remove underlines from the link */
-    font-weight: bold; /* Make the link text bold */
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .terms a:hover {
@@ -146,27 +155,26 @@ nav {
 
 /* Style for the social icons */
 .social-icons {
-    margin-right: 20px; /* Add some right margin to the social icons */
-    margin-top: -10px; /* Add negative top margin to shift the icons upwards */
+    margin-right: 20px;
+    margin-top: -10px;
 }
 
 /* Style for individual social media icons */
 .social-icons a {
-    margin-left: 10px; /* Add some space between icons */
+    margin-left: 10px;
     float: right;
 }
 
 .social-icons img {
-    width: 25px; /* Increase the width to make the icons larger */
-    height: 25px; /* Increase the height to match the width for a uniform size */
-    filter: invert(100%); /* Change the color to white using the invert filter */
-    object-fit: contain; /* Maintain the aspect ratio and contain within the specified dimensions */
+    width: 25px;
+    height: 25px;
+    filter: invert(100%);
+    object-fit: contain;
     opacity: 100%;
 }
 
 /* Style for the copyright text */
 .copyright {
-    text-align: center; /* Center-align the copyright text */
-    padding: 0; /* Remove any padding */
-    margin-left: 80px; /* Add left margin to move it to the right */
+    text-align: center;
+    margin-left: 80px;
 }

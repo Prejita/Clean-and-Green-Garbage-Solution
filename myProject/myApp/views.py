@@ -517,3 +517,7 @@ def get_notification_count(request):
     notification_count = Notification.objects.count()
 
     return JsonResponse({'count': notification_count})
+
+def get_total_user_count(request):
+    total_users = Registration.objects.count()
+    return JsonResponse({'total_users': total_users})
