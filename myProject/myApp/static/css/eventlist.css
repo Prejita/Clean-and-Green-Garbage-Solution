@@ -146,7 +146,7 @@ body {
     text-align: center; 
 }
 
-.events-table button {
+/* .events-table button {
     padding: 8px 14px;
     font-size: 14px;
     cursor: pointer;
@@ -162,7 +162,7 @@ body {
 
 .events-table button:hover {
     background-color: #1565C0;
-}
+} */
 
 
 /* Style for the search input and Clear All button container */
@@ -229,4 +229,22 @@ body {
 
 .button-link:hover {
     background-color: #45a049;
+}
+
+#editButton {
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #2196F3; 
+    color: white;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+}
+
+#editButton:hover {
+    background-color: #1565C0;
 }

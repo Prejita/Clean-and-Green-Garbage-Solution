@@ -450,3 +450,27 @@ def delete_events(request):
         response_data = {'success': False}
 
     return JsonResponse(response_data)
+
+def get_event_details(request, event_id):
+    try:
+        # Fetch the event details based on the provided event ID
+        event = Event.objects.get(pk=event_id)
+
+        # Serialize event details to a dictionary
+        serialized_event = {
+            'id': event.id,
+            'name': event.name,
+            'organizer': event.organizer,
+            'start_date': str(event.start_date),
+            'end_date': str(event.end_date),
+            'start_time': event.start_time,
+            'end_time': event.end_time,
+            'location': event.location,
+            'category': event.category,
+            'description': event.description,
+        }
+
+        return JsonResponse(serialized_event)
+    except Event.DoesNotExist:
+        # Return a JSON response indicating that the event was not found
+        return JsonResponse({'error': 'Event not found'}, status=404)

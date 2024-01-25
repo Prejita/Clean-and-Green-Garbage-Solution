@@ -108,7 +108,7 @@
                                 row.innerHTML = `
                                     <td><input type="checkbox" name="eventCheckbox" value="${event.id}"></td>
                                     <td>${event.name} (${event.start_date} to ${event.end_date})</td>
-                                    <td><button onclick="editEvent(${event.id})">Edit</button></td>
+                                    <td><a href="{% url 'editevent' %}?eventId=${event.id}" id="editButton">Edit</a></td>
                                 `;
                                 eventsBody.appendChild(row);
                             });
