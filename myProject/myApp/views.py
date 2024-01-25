@@ -512,3 +512,8 @@ def edit_event(request):
 
     # Handle cases where the form is not submitted via POST
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+def get_notification_count(request):
+    notification_count = Notification.objects.count()
+
+    return JsonResponse({'count': notification_count})

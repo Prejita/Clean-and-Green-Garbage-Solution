@@ -82,45 +82,22 @@ body {
     background: #00a859;
 }
 
-/* CSS for notification count */
-.menu .menu-box {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-radius: 0;
-    background: none;
-    transition: background 0.3s;
-    position: relative;
-    width: 100%;
-}
-
-.menu .icon-container {
-    position: relative;
-    margin-right: 12px; /* Adjust as needed */
-}
-
-.menu .icon {
-    width: 18px;
-    height: 18px;
-    filter: invert(100%);
-}
-
-#notification-count {
+.notification-count {
     position: absolute;
-    top: -8px; /* Adjust as needed */
-    left: 10px;
-    background-color: #ff0000;
-    color: #fff;
+    top: -8px;
+    right: 1px;
+    background-color: #ff5858; 
+    color: #fff; 
     border-radius: 50%;
-    padding: 2px 4px;
-    font-size: 10px;
+    padding: 3px 0.5px;
+    font-size: 11px;
     font-weight: bold;
+    min-width: 20px;
+    text-align: center;
 }
 
-.menu .bold-text {
-    font-weight: bold;
-    color: #fff;
-    font-size: 16px;
+.icon-container {
+    position: relative;
 }
 
 .copyright {

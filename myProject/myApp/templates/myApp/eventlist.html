@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenEase - Event Lists</title>
     <link rel="stylesheet" href="/static/css/eventlist.css">
+    <script src="/static/js/notification_count.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
@@ -25,10 +26,21 @@
                         </div>
                     </a>
                 </div>
-                <div class="menu-item">
+                <!-- <div class="menu-item">
                     <a href="{% url 'notifications' %}" style="text-decoration: none;">
                         <div class="menu-box">
                             <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                            <span class="bold-text">Notifications</span>
+                        </div>
+                    </a>
+                </div> -->
+                <div class="menu-item">
+                    <a href="{% url 'notifications' %}" style="text-decoration: none;">
+                        <div class="menu-box">
+                            <div class="icon-container">
+                                <img src="/static/img/notification.png" alt="Notifications Icon" class="icon">
+                                <span id="notification-count" class="notification-count">0</span>
+                            </div>
                             <span class="bold-text">Notifications</span>
                         </div>
                     </a>
@@ -61,6 +73,11 @@
         </aside>
     </div>
 
+    <script>
+        // Initial update when the page loads
+        updateNotificationCount();
+    </script>
+    
     <div class="content">
         <div class="title-box">
             <h1>GreenEase</h1>
