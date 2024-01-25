@@ -474,3 +474,41 @@ def get_event_details(request, event_id):
     except Event.DoesNotExist:
         # Return a JSON response indicating that the event was not found
         return JsonResponse({'error': 'Event not found'}, status=404)
+
+@csrf_exempt  
+def edit_event(request):
+    if request.method == 'POST':
+        # Retrieve form data from POST request
+        event_id = request.POST.get('eventId')
+        event_name = request.POST.get('eventName')
+        event_organizer = request.POST.get('eventOrganizer')
+        event_start_date = request.POST.get('eventStartDate')
+        event_start_time = request.POST.get('eventStartTime')
+        event_end_date = request.POST.get('eventEndDate')
+        event_end_time = request.POST.get('eventEndTime')
+        event_location = request.POST.get('eventLocation')
+        event_category = request.POST.get('eventCategory')
+        event_description = request.POST.get('eventDescription')
+
+        # Get the existing event from the database
+        existing_event = Event.objects.get(id=event_id)
+
+        # Update the event with the new data
+        existing_event.name = event_name
+        existing_event.organizer = event_organizer
+        existing_event.start_date = event_start_date
+        existing_event.start_time = event_start_time
+        existing_event.end_date = event_end_date
+        existing_event.end_time = event_end_time
+        existing_event.location = event_location
+        existing_event.category = event_category
+        existing_event.description = event_description
+
+        # Save the updated event
+        existing_event.save()
+
+        # Return a JsonResponse indicating success
+        return JsonResponse({'success': True})
+
+    # Handle cases where the form is not submitted via POST
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})

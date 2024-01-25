@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GreenEase - Add Event</title>
     <link rel="stylesheet" href="/static/css/addevents.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -192,6 +193,8 @@
                         
                         // Reload the page to fetch updated data
                         // window.location.reload();
+                    }) .then(() => {
+                            window.location.href = '{% url "eventlist" %}'; 
                     });
                 } else {
                     console.error('Failed to add event');
@@ -227,13 +230,12 @@
                             timer: 1500
                         }).then(() => {
                             // Redirect the user to the homepage or login page after logout
-                            window.location.href = '{% url "index" %}'; // Replace with your desired logout URL
+                            window.location.href = '{% url "index" %}'; 
                         });
                     }
                 });
             });
         });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
