@@ -201,6 +201,9 @@ def notify(request, notification_id):
 
         send_mail(subject, message, from_email, recipient_list)
 
+        # Delete the notification after sending the email
+        notification.delete()
+
         messages.success(request, 'Email sent successfully!')
     
     except Exception as e:
