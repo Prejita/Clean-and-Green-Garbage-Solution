@@ -7,10 +7,9 @@ import json
 from .models import DustbinData 
 from .models import Notification
 from .models import Event
-from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils import timezone
 from .models import Registration
 from django.template.loader import render_to_string
@@ -20,6 +19,9 @@ from django.core.mail import EmailMessage
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from django.views.decorators.http import require_POST
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.decorators import login_required
+import requests
 
 
 def index(request):
@@ -58,7 +60,7 @@ def contact(request):
     context = {}
     return render(request, "myApp/contact.html", context)
 
-@login_required
+@login_required(login_url=reverse_lazy('login'))
 def dashboard(request):
     # You can retrieve messages from other views here and display them in your dashboard.
     messages_data = messages.get_messages(request)
@@ -69,6 +71,7 @@ def termsandconditions(request):
     context = {}
     return render(request, "myApp/terms-and-conditions.html", context)
 
+@login_required(login_url=reverse_lazy('login'))
 def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
@@ -144,7 +147,7 @@ def notifications(request):
 #             return JsonResponse({'error': 'Notification does not exist'}, status=404)
 #     else:
 #         return JsonResponse({'error': 'Invalid request method'}, status=400)
-    
+
 def delete_all_notifications(request):
     if request.method == 'DELETE':
         try:
@@ -155,7 +158,7 @@ def delete_all_notifications(request):
             return JsonResponse({'error': str(e)}, status=500)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
-    
+   
 def create_event(request):
     if request.method == 'POST':
         # Retrieve data from the POST request
@@ -180,8 +183,7 @@ def create_event(request):
         return JsonResponse({'message': 'Event added successfully'}, status=201)
     else:
         return JsonResponse({'message': 'Invalid request method'}, status=400)
-    
-    
+      
 def notify(request, notification_id):
     try:
         notification = Notification.objects.get(id=notification_id)
@@ -524,3 +526,30 @@ def get_notification_count(request):
 def get_total_user_count(request):
     total_users = Registration.objects.count()
     return JsonResponse({'total_users': total_users})
+
+def donate(request):
+    if request.method == 'POST':
+        print("call")
+        data = json.loads(request.body)
+        payment_token = data.get('payment_token')
+        payment_amount = data.get('payment_amount')
+        event_name = data.get('event_name') 
+        print(payment_token, payment_amount,event_name)
+
+        khalti_secret_key = "test_secret_key_ce1adf77ac904ffbba3bc3687d287103"
+        verification_url = "https://khalti.com/api/v2/payment/verify/"
+        headers = {
+            'Authorization': f'key {khalti_secret_key}',
+        }
+        payload = {
+            'token': payment_token,
+            'amount': payment_amount,
+        }
+        print("success")
+        response = requests.post(verification_url, headers=headers, json=payload)
+
+        messages.success(request,'Donation Successful')
+        print('hello')
+        return JsonResponse({'success': True})
+
+    return JsonResponse({'error': 'Invalid request method'}, status=400)

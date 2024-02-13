@@ -16,7 +16,7 @@ body, ul {margin: 0; padding: 0; list-style: none;}
     top: 0;
     left: 0;
     width: 100%;
-    height: 53%; /* Cover the entire image */
+    height: 54.5%; /* Cover the entire image */
     background-color: rgba(0, 0, 0, 0.65); /* Black overlay with transparency */
     z-index: 2; /* Place the overlay above the image */
 }

@@ -75,7 +75,7 @@ class Registration(models.Model):
     event_name = models.CharField(max_length=255)
     full_name = models.CharField(max_length=255)
     email = models.EmailField()
-    phone = models.CharField(max_length=20)
+    phone = models.CharField(max_length=10)
     address = models.TextField()
     additional_info = models.TextField(blank=True, null=True, default='None')
 

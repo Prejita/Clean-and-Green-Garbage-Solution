@@ -267,6 +267,37 @@
                 });
             });
         </script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Logout confirmation
+                const logoutLink = document.getElementById('logout-link');
+                logoutLink.addEventListener('click', function (e) {
+                    e.preventDefault(); // Prevent the default link behavior
+        
+                    // Show a confirmation dialog before logging out
+                    Swal.fire({
+                        title: 'Are you sure you want to logout?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonText: 'Logout',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If confirmed, proceed with logout
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Logged out successfully!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                // Redirect the user to the homepage or login page after logout
+                                window.location.href = '{% url "index" %}'; 
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
 </body>
 </html>

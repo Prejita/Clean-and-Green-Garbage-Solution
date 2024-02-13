@@ -38,4 +38,5 @@ urlpatterns = [
     path('edit_event/', views.edit_event, name='edit_event'),
     path('get_notification_count/', views.get_notification_count, name='get_notification_count'),
     path('get_total_user_count/', views.get_total_user_count, name='get_total_user_count'),
+    path('khalti-payment/', views.donate, name='khalti-payment'),
     ]

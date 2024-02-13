@@ -10,6 +10,11 @@ header {
     padding: 60px 0 20px; /* Add padding to the top and bottom for spacing */
 }
 
+/* .logo img {
+    display: block;
+    margin: 0 auto; 
+} */
+
 .logo a {
     font-size: 48px; /* Adjust the font size as needed for a big letter */
     font-weight: bold; /* Make the text bold */

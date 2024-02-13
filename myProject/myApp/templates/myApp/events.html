@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/events.css"> 
     <title>GreenEase - Events</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://unpkg.com/khalti-checkout-web"></script>
 </head>
 <body>
     <header>
@@ -25,6 +29,32 @@
 
         <h1 class="event-heading">Events</h1>
     </header>
+
+    <div class="donation-section">
+        <div class="donation-image">
+            <img src="/static/img/donate.png" alt="Donation Image" class="donation-img">
+            
+            <div class="donation-box">
+                <p class="donation-text">Support our cause with your generous donation!</p>
+                <button class="donate-button" onclick="donate(this)">Donate Now</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        const donateButton = document.querySelector(".donate-button");
+        const donationImg = document.querySelector(".donation-img");
+
+        donateButton.addEventListener("mouseover", function() {
+            donationImg.src = "/static/img/happy.png";
+        });
+
+        donateButton.addEventListener("mouseout", function() {
+            donationImg.src = "/static/img/donate.png";
+        });
+    });
+    </script>
 
     <div class="event-container">
         <!-- Event cards will be dynamically added here -->
@@ -52,8 +82,10 @@
                         <p><strong>Description:</strong> ${event.description}</p>
     
                         <div class="button-container">
+                            
                             <button class="register-button" data-event-name="${event.name}">Register</button>
-                            <button class="donate-button">Donate</button>
+                            <button class="donate-button" onclick="donate(this)">Donate</button>
+                     
                         </div>
                     `;
     
@@ -71,6 +103,61 @@
             window.location.href = `/register/?event=${encodeURIComponent(eventName)}`;
         }
     </script>    
+
+<script>
+    const csrf_token = "{{ csrf_token }}"; // Include CSRF token here
+   
+    async function donate(button) {
+        console.log("clicked");
+        const eventName = button.parentElement.querySelector('.register-button').getAttribute('data-event-name');
+        console.log(eventName);
+        const config = {
+            publicKey: "test_public_key_dc1970829015486687411487e45d789a",
+            productIdentity: eventName,
+            productName: "GreenEase",
+            productUrl: "http://192.168.254.3:8000/",
+            eventHandler: {
+                onSuccess: async (payload) => {
+                    await pays(payload.token, payload.amount, eventName);
+                    Swal.fire('Donation Successful', 'Thank you for your donation!', 'success');
+                },
+                onError: (error) => {
+                    console.log(error);
+                },
+                onClose: () => {
+                    // Handle modal close
+                },
+            },
+            paymentPreference: [
+                "KHALTI",
+                "CONNECT_IPS"
+            ],
+        };
+        try {
+            const checkout = new KhaltiCheckout(config);
+            checkout.show({ amount: 1000 });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function pays(paymentToken, amount, eventName) {
+      const response = await fetch('/khalti-payment',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrf_token,
+        },
+        body: JSON.stringify({
+          payment_token: paymentToken,
+          payment_amount: amount,
+          event_name: eventName,
+        }),
+      });
+      console.log(csrf_token)
+      console.log(response.status);
+    };
+    </script>
     
     <footer class="footer">
         <div class="footer-content">
@@ -94,3 +181,4 @@
     </footer>    
 </body>
 </html>
+

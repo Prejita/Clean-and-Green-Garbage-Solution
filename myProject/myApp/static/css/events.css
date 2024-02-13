@@ -111,8 +111,8 @@ nav {
     background-color: darkgreen;
 }
 
-/* Style for the Donate button */
-.donate-button {
+/*Style for the Donate button */
+/* .donate-button {
     background-color: #007f4f;
     color: white;
     padding: 15px 30px;
@@ -127,7 +127,7 @@ nav {
 
 .donate-button:hover {
     background-color: #005f39;
-}
+}*/
 
 /* Style for the footer */
 .footer {
@@ -178,3 +178,79 @@ nav {
     text-align: center;
     margin-left: 80px;
 }
+
+.donation-section {
+    text-align: center;
+    position: relative;
+    margin-top: 50px;
+}
+
+.donation-image {
+    position: relative;
+    display: inline-block;
+}
+
+.donation-img {
+    width: 250px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.donation-box {
+    position: absolute;
+    top: 50%;
+    left: 140%; /* Initially off-screen */
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 200px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 0; /* Ensure box is behind the image */
+}
+
+.donation-image:hover{
+    margin-right: 200px;
+    transition: all 0.3s ease;
+}
+
+/* .donation-image:hover img{
+    content: url('/static/img/happy.png');
+    margin-right: 150px;
+    transition: all 0.3s ease;
+    width: 250px;
+    height: auto;
+} */
+
+.donation-image:hover .donation-box {
+    visibility: visible;
+    opacity: 1;
+    left: calc(100% + 90px); /* Slide out from the image */
+}
+
+.donation-text {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.donate-button {
+    background-color: #00a859;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.donate-button:hover {
+    background-color: darkgreen;
+}
+
