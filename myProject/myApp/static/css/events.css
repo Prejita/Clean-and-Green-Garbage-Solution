@@ -61,6 +61,7 @@ nav {
     gap: 40px;
     justify-content: center;
     padding: 20px;
+    margin-top: 20px;
 }
 
 /* Style for the event card */
@@ -179,6 +180,19 @@ nav {
     margin-left: 80px;
 }
 
+.intro-text {
+    text-align: center;
+    margin-top: 50px; /* Adjust the margin for proper spacing */
+    padding: 0 20px; /* Add some padding for better readability */
+}
+
+.intro-text p {
+    font-size: 18px;
+    color: #555; /* Adjust the color to your preference */
+    margin-bottom: 20px; /* Add margin bottom for spacing between the text and the donation box */
+}
+
+
 .donation-section {
     text-align: center;
     position: relative;
@@ -206,7 +220,7 @@ nav {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
-    width: 200px;
+    width: 400px;
     visibility: hidden;
     opacity: 0;
     transition: all 0.3s ease;
@@ -214,7 +228,7 @@ nav {
 }
 
 .donation-image:hover{
-    margin-right: 200px;
+    margin-right: 500px;
     transition: all 0.3s ease;
 }
 
@@ -229,7 +243,7 @@ nav {
 .donation-image:hover .donation-box {
     visibility: visible;
     opacity: 1;
-    left: calc(100% + 90px); /* Slide out from the image */
+    left: calc(100% + 196px); /* Slide out from the image */
 }
 
 .donation-text {

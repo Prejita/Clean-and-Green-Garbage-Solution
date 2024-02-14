@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/blog-post.css"> 
+    <title>GreenEase - Blog</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">GreenEase</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="blog-post-8">
+        
+        <div class="blog-content">
+            <h1>Impact of Improper Waste Management on Public Health</h1>
+
+            <div class="image-content">
+                <img src="/static/img/harm.jpg" alt="Blog Image">
+            </div>
+            
+            <div class="post-content">
+                <p>Improper waste management poses significant risks to public health and the environment. When waste is not handled and disposed of correctly, it can lead to a range of health problems and environmental degradation.</p>
+
+                <h2>1. Air Pollution</h2>
+                <p>Open burning of waste releases harmful pollutants into the air, including particulate matter, carbon monoxide, and volatile organic compounds. Prolonged exposure to these pollutants can lead to respiratory issues such as asthma, bronchitis, and lung cancer.</p>
+
+                <h2>2. Water Contamination</h2>
+                <p>Improper disposal of hazardous waste and untreated sewage can contaminate water sources, posing serious health risks to communities. Contaminated water can spread diseases such as cholera, typhoid, and dysentery, leading to widespread illness and even death.</p>
+
+                <h2>3. Vector-Borne Diseases</h2>
+                <p>Uncontrolled waste accumulation provides breeding grounds for disease-carrying vectors such as mosquitoes, flies, and rodents. These vectors can transmit diseases such as malaria, dengue fever, and leptospirosis, putting communities at risk of outbreaks.</p>
+
+                <h2>4. Soil Contamination</h2>
+                <p>Toxic chemicals leaching from improperly disposed waste can contaminate soil and affect agricultural productivity. Contaminated soil can accumulate heavy metals and persistent organic pollutants, making it unsuitable for farming and posing risks to food safety.</p>
+
+                <h2>5. Aesthetic and Psychological Impact</h2>
+                <p>Living in areas with high levels of waste pollution can have negative effects on mental well-being. The sight and smell of waste can cause stress, anxiety, and depression among residents, leading to decreased quality of life and social cohesion.</p>
+
+                <p>Addressing the impact of improper waste management requires a multi-faceted approach involving government action, community engagement, and individual responsibility. By promoting waste reduction, implementing proper waste disposal practices, and investing in waste management infrastructure, we can protect public health and create a cleaner, safer environment for all.</p>
+            </div>
+        </div>  
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="terms">
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/PrejitaChaulagai" target="_blank">
+                    <img src="/static/img/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/prejita_chaulagai/" target="_blank">
+                    <img src="/static/img/instagram.png" alt="Twitter">
+                </a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>    
+
+</body>
+</html>

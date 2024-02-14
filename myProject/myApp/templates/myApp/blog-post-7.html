@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/blog-post.css"> 
+    <title>GreenEase - Blog</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">GreenEase</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="blog-post-7">
+        
+        <div class="blog-content">
+            <h1>Waste Collection Best Practices</h1>
+
+            <div class="image-content">
+                <img src="/static/img/bestpractice.jpg" alt="Blog Image">
+            </div>
+            
+            <div class="post-content">
+                <p>Proper waste collection is essential for effective waste management and environmental conservation. Implementing best practices in waste collection not only ensures cleanliness but also facilitates recycling and minimizes the negative impacts of waste on our ecosystems.</p>
+
+                <h2>Separation at Source</h2>
+                <p>The first step in waste collection is separating different types of waste at the source. This includes segregating recyclable materials such as paper, plastic, glass, and metal from non-recyclable waste. Communities should provide separate bins or collection containers for different types of waste to encourage proper segregation by residents.</p>
+
+                <h2>Education and Awareness</h2>
+                <p>Education plays a crucial role in promoting responsible waste disposal practices. Local authorities and environmental organizations should conduct awareness campaigns to educate residents about the importance of waste segregation, proper disposal methods, and the benefits of recycling. Providing clear guidelines and instructional materials can help ensure widespread compliance.</p>
+
+                <h2>Regular Collection Schedule</h2>
+                <p>Establishing a regular waste collection schedule is vital for maintaining cleanliness and preventing waste accumulation. Municipalities should coordinate with waste management companies to ensure timely collection of waste from residential areas, commercial establishments, and public spaces. Consistent collection schedules help prevent overflowing bins and reduce the risk of environmental pollution.</p>
+
+                <h2>Safe Handling and Transportation</h2>
+                <p>Waste collection workers should receive proper training in safe handling and transportation practices to minimize health risks and ensure worker safety. Workers should wear appropriate personal protective equipment (PPE) when handling waste and follow established protocols for loading, transporting, and unloading waste containers. Regular maintenance of collection vehicles is also essential to prevent leaks and spills during transportation.</p>
+
+                <h2>Monitoring and Evaluation</h2>
+                <p>Monitoring and evaluation are essential components of an effective waste collection system. Local authorities should regularly assess the performance of waste collection services, identify areas for improvement, and implement corrective measures as needed. Feedback from residents and stakeholders can provide valuable insights into the effectiveness of waste management initiatives and help guide future planning and decision-making.</p>
+
+                <p>By implementing these best practices, communities can achieve more efficient waste collection, reduce environmental pollution, and move closer to achieving sustainable waste management goals.</p>
+            </div>
+        </div>  
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="terms">
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/PrejitaChaulagai" target="_blank">
+                    <img src="/static/img/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/prejita_chaulagai/" target="_blank">
+                    <img src="/static/img/instagram.png" alt="Twitter">
+                </a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>    
+
+</body>
+</html>

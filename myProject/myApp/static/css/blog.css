@@ -1,6 +1,9 @@
 /* Set the font family for the entire website to "Lato" */
 body {
     font-family: "Lato", sans-serif;
+}
+
+body, ul {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -147,4 +150,29 @@ nav {
     text-align: center;
     padding: 0;
     margin-left: 80px;
+}
+
+.pagination {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pagination a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin: 0 2px;
+    background-color: #00a859;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.pagination a:hover {
+    background-color: darkgreen;
+}
+
+.pagination .prev,
+.pagination .next {
+    font-weight: bold;
 }

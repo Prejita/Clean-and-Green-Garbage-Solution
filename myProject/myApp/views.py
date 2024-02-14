@@ -52,9 +52,29 @@ def blog_post4(request):
     context = {}
     return render(request, "myApp/blog-post-4.html", context)
 
+def blog_post5(request):
+    context = {}
+    return render(request, "myApp/blog-post-5.html", context)
+
+def blog_post6(request):
+    context = {}
+    return render(request, "myApp/blog-post-6.html", context)
+
+def blog_post7(request):
+    context = {}
+    return render(request, "myApp/blog-post-7.html", context)
+
+def blog_post8(request):
+    context = {}
+    return render(request, "myApp/blog-post-8.html", context)
+
 def blog(request):
     context = {}
     return render(request, "myApp/blog.html", context)
+
+def blog2(request):
+    context = {}
+    return render(request, "myApp/blog2.html", context)
 
 def contact(request):
     context = {}

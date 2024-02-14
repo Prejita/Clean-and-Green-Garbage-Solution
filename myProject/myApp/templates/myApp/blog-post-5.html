@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/blog-post.css"> 
+    <title>GreenEase - Blog</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="/">GreenEase</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'blog' %}">Blog</a></li>
+                    <li><a href="{% url 'contact' %}"">Contact</a></li>
+                    <li><a href="{% url 'events' %}">Events</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="blog-post-5">
+        
+        <div class="blog-content">
+            <h1>Eco-Friendly Living Tips</h1>
+
+            <div class="image-content">
+                <img src="/static/img/tips.jpg" alt="Blog Image">
+            </div>
+            
+            <div class="tips-content">
+                <h2>1. Reduce, Reuse, Recycle</h2>
+                <p>One of the most fundamental eco-friendly practices is to follow the principle of "Reduce, Reuse, Recycle." This entails minimizing waste by reducing consumption, reusing items whenever possible, and recycling materials such as paper, glass, plastic, and metal. Start by assessing your daily habits and finding ways to incorporate these principles into your lifestyle.</p>
+    
+                <h2>2. Conserve Water</h2>
+                <p>Water conservation is vital for preserving this precious resource and minimizing your environmental impact. Simple steps like fixing leaks, taking shorter showers, and installing water-saving appliances can significantly reduce water consumption. Additionally, consider collecting rainwater for outdoor use and landscaping.</p>
+    
+                <h2>3. Use Energy Efficiently</h2>
+                <p>Efficient energy usage not only reduces your carbon footprint but also saves you money on utility bills. Opt for energy-efficient appliances and light bulbs, and remember to turn off lights, unplug electronics, and utilize natural light whenever possible. Consider installing a programmable thermostat to regulate heating and cooling systems efficiently.</p>
+    
+                <h2>4. Choose Sustainable Transportation</h2>
+                <p>Transportation is a significant contributor to greenhouse gas emissions. Reduce your carbon footprint by choosing eco-friendly transportation options such as walking, cycling, carpooling, or using public transportation. If you must drive, consider investing in a fuel-efficient or electric vehicle, and practice eco-driving techniques to optimize fuel efficiency.</p>
+    
+                <h2>5. Eat Sustainably</h2>
+                <p>Your food choices have a profound impact on the environment. Support sustainable food practices by choosing locally sourced, organic, and seasonal produce. Reduce your meat consumption, especially of red meat, as livestock farming is a major contributor to deforestation and greenhouse gas emissions. Consider incorporating more plant-based meals into your diet for a healthier and more sustainable lifestyle.</p>
+    
+                <h2>6. Go Paperless</h2>
+                <p>Reducing paper usage is not only eco-friendly but also convenient in today's digital age. Opt for digital alternatives whenever possible, such as email instead of printed letters, electronic billing, and online subscriptions for newspapers and magazines. Use cloud storage and digital document management systems to organize and store important documents, reducing the need for paper files.</p>
+    
+                <h2>7. Support Eco-Friendly Businesses</h2>
+                <p>Choose to support businesses and brands that prioritize sustainability and environmental responsibility. Look for certifications such as Fair Trade, Organic, and Forest Stewardship Council (FSC) when making purchasing decisions. By voting with your wallet, you can encourage more companies to adopt eco-friendly practices and contribute to positive change.</p>
+    
+                <h2>8. Practice Mindful Consumption</h2>
+                <p>Before making a purchase, consider whether you truly need the item and its environmental impact. Opt for products with minimal packaging, durable materials, and minimalistic designs. Avoid single-use plastics and disposable items whenever possible, and opt for reusable alternatives such as water bottles, shopping bags, and containers.</p>
+            </div>
+        </div>  
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="terms">
+                <a href="{% url 'termsandconditions' %}">Terms and Conditions</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.facebook.com/PrejitaChaulagai" target="_blank">
+                    <img src="/static/img/facebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/prejita_chaulagai/" target="_blank">
+                    <img src="/static/img/instagram.png" alt="Twitter">
+                </a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 GreenEase, All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>    
+
+</body>
+</html>
