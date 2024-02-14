@@ -190,6 +190,39 @@
                 var formData = new FormData(this);
                 formData.append('eventId', eventId);
 
+                // Get the current date in Kathmandu timezone
+                const kathmanduDate = new Date().toLocaleString('en-US', {
+                    timeZone: 'Asia/Kathmandu'
+                });
+
+                // Convert the current date string to a Date object
+                const currentDateInKathmandu = new Date(kathmanduDate);
+
+                // Get the selected start and end dates
+                const startDate = new Date(document.getElementById('eventStartDate').value);
+                const endDate = new Date(document.getElementById('eventEndDate').value);
+
+                // Validate start date not in the past
+                if (startDate < currentDateInKathmandu) {
+                    // If start date is less than current date, show an error message
+                    Swal.fire('Invalid Date', 'Event start date cannot be in the past.', 'error');
+                    return; // Stop the form submission
+                }
+
+                // Validate end date not in the past
+                if (endDate < currentDateInKathmandu) {
+                    // If end date is less than current date, show an error message
+                    Swal.fire('Invalid Date', 'Event end date cannot be in the past.', 'error');
+                    return; // Stop the form submission
+                }
+
+                // Validate end date not less than start date
+                if (endDate < startDate) {
+                    // If end date is less than start date, show an error message
+                    Swal.fire('Invalid Date', 'End date cannot be less than start date.', 'error');
+                    return; // Stop the form submission
+                }
+
                 // Send an AJAX request to the Django view
                 fetch('/edit_event/', {
                         method: 'POST',
