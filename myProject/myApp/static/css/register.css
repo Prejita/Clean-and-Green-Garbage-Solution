@@ -65,6 +65,15 @@ h1 {
     color: #00a859;
 }
 
+/* Style for the note below the heading */
+.registration-container p {
+    font-size: 14px; 
+    color: #DC143C; 
+    margin-top: 5px; 
+    text-align: justify; 
+    font-weight: bold;
+}
+
 form {
     display: grid;
     grid-gap: 10px;
@@ -73,7 +82,7 @@ form {
 label {
     font-weight: bold;
     font-size: 16px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 input,

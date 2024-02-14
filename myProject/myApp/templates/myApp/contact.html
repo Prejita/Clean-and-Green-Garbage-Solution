@@ -40,7 +40,8 @@
         <div class="rectangles">
             <div class="rectangle1">
                 <div class="icon">
-                    <img src="/static/img/phone.png" alt="Phone">
+                    <!-- <img src="/static/img/phone.png" alt="Phone"> -->
+                    <img id="phoneIcon" src="/static/img/call1.png" alt="Phone">
                 </div> 
                 <h3>Call Us</h3>
                 <p1>For any inquiries</p1>
@@ -49,13 +50,45 @@
 
             <div class="rectangle2">
                 <div class="icon">
-                    <img src="/static/img/email.png" alt="Email">
+                    <!-- <img src="/static/img/email.png" alt="Email"> -->
+                    <img id="emailIcon" src="/static/img/message.png" alt="Email">
                 </div> 
                 <h3>Email Us</h3>
                 <p1>For any information</p1>
-                <p><a href="mailto:np03cs4m210037@heraldcollege.edu.np">greenease77@gmail.com</a></p>
+                <p><a href="mailto:greenease77@gmail.com">greenease77@gmail.com</a></p>
             </div>
         </div>
+
+        <script>
+            // Get references to the phone and email link elements
+            const phoneLink = document.querySelector('.rectangle1 a');
+            const emailLink = document.querySelector('.rectangle2 a');
+        
+            // Get references to the phone and email icon images
+            const phoneIcon = document.getElementById('phoneIcon');
+            const emailIcon = document.getElementById('emailIcon');
+        
+            // Add event listeners for hovering over the links
+            phoneLink.addEventListener('mouseover', function() {
+                // Change the source of the phone icon image when hovering over the phone link
+                phoneIcon.src = '/static/img/call.png'; 
+            });
+        
+            phoneLink.addEventListener('mouseout', function() {
+                // Change back to the original source when mouse leaves the phone link
+                phoneIcon.src = '/static/img/call1.png'; 
+            });
+        
+            emailLink.addEventListener('mouseover', function() {
+                // Change the source of the email icon image when hovering over the email link
+                emailIcon.src = '/static/img/message1.png'; 
+            });
+        
+            emailLink.addEventListener('mouseout', function() {
+                // Change back to the original source when mouse leaves the email link
+                emailIcon.src = '/static/img/message.png'; 
+            });
+        </script>
     </section>
 
     <footer class="footer">

@@ -161,6 +161,13 @@
             const eventCategory = document.getElementById('eventCategory').value;
             const eventDescription = document.getElementById('eventDescription').value;
 
+            // Validate end date not less than start date
+            if (eventEndDate < eventStartDate) {
+                // If end date is less than start date, show an error message
+                Swal.fire('Invalid Date', 'End date cannot be less than start date.', 'error');
+                return; // Stop the form submission
+            }
+
             // Validate event title, organizer, and location
             if (/^\d/.test(eventName) || /^\d/.test(eventOrganizer) || /^\d/.test(eventLocation)) {
                 // If any of them starts with a digit, show an error message

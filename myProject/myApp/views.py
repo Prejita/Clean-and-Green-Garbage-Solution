@@ -247,7 +247,7 @@ def get_events(request):
     # If the request method is not GET
     return JsonResponse({'error': 'Invalid request method'}, status=400)
 
-@csrf_exempt
+csrf_exempt
 def submit_registration(request):
     if request.method == 'POST':
         # Extract data from the submitted form
@@ -268,14 +268,11 @@ def submit_registration(request):
             additional_info=additional_info
         )
 
-        # Optionally, you can add a success message
-        messages.success(request, 'Registration submitted successfully.')
+        # Return a JSON response indicating success
+        return JsonResponse({'success': True})
 
-        # Redirect to a success page 
-        return redirect('events') 
-    
     # Handle cases where the form submission method is not POST
-    return redirect('events')  
+    return redirect('events')
 
 def clear_all_requests(request):
     try:
