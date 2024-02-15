@@ -163,13 +163,15 @@ nav {
     text-decoration: none;
     padding: 10px 15px;
     margin: 0 2px;
-    background-color: #00a859;
-    border: 1px solid #ccc;
+    background-color: #fff;
+    border: 1.5px solid #00a859;
+    color: #00a859;
     border-radius: 3px;
 }
 
 .pagination a:hover {
-    background-color: darkgreen;
+    background-color: #00a859;
+    color: #fff;
 }
 
 .pagination .prev,

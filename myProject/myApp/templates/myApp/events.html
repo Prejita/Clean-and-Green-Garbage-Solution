@@ -40,7 +40,10 @@
             
             <div class="donation-box">
                 <p class="donation-text">Help us grow and organize more events to support environmental causes. Your generous donations enable us to make a greater impact and promote sustainability. Together, we can make a difference!</p>
-                <button class="donate-button" onclick="donate(this)">Donate Now</button>
+                <button class="donate-button" onclick="donate(this)">
+                    <img src="/static/img/heart.png" alt="Donate Icon" class="icon">
+                    Donate Now
+                </button>
             </div>
         </div>
     </div>
@@ -86,9 +89,10 @@
                         <p><strong>Description:</strong> ${event.description}</p>
     
                         <div class="button-container">
-                            
-                            <button class="register-button" data-event-name="${event.name}">Register</button>
-                     
+                            <button class="register-button" data-event-name="${event.name}">
+                                <img src="/static/img/contract.png" alt="Register Icon" class="icon">
+                                Register
+                            </button>
                         </div>
                     `;
     

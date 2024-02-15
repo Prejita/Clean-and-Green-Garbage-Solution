@@ -68,10 +68,10 @@ nav {
 .event-card {
     background-color: #fff;
     color: #000;
-    border: 1px solid #ddd;
+    border: 2px solid #ddd;
     border-radius: 15px;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
     max-width: 500px;
     width: 100%;
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -79,7 +79,8 @@ nav {
 
 .event-card:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    border: 2px solid #00a859;
 }
 
 .event-card p {
@@ -96,9 +97,11 @@ nav {
 
 /* Style for the Register button */
 .register-button {
+    display: flex; 
+    align-items: center;
     background-color: #00a859;
     color: white;
-    padding: 15px 30px;
+    padding: 15px 20px;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
@@ -106,6 +109,13 @@ nav {
     border: none;
     cursor: pointer;
     font-size: 16px;
+}
+
+.register-button img {
+    margin-right: 8px; 
+    width: 20px; 
+    height: 20px; 
+    filter: invert(1); 
 }
 
 .register-button:hover {
@@ -212,6 +222,10 @@ nav {
 }
 
 .donation-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Horizontally center the button within the container */
+    text-align: center; 
     position: absolute;
     top: 50%;
     left: 140%; /* Initially off-screen */
@@ -252,6 +266,8 @@ nav {
 }
 
 .donate-button {
+    display: flex; 
+    align-items: center;
     background-color: #00a859;
     color: white;
     padding: 15px 30px;
@@ -263,6 +279,14 @@ nav {
     cursor: pointer;
     font-size: 16px;
 }
+
+.donate-button img {
+    margin-right: 8px; 
+    width: 25px; 
+    height: 25px; 
+    filter: invert(1); 
+}
+
 
 .donate-button:hover {
     background-color: darkgreen;

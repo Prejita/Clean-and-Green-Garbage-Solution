@@ -133,8 +133,8 @@ nav {
 }
 
 .rectangle2 .icon img {
-    width: 70px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
     margin-bottom: 10px;
     display: block;
     margin: 0 auto;
@@ -146,12 +146,63 @@ nav {
     color: #3c3c3c;
     text-decoration: none;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 21px;
 }
 
 .rectangle1 a:hover,
 .rectangle2 a:hover {
     color: #00a859;
+}
+
+/* CSS for map section */
+.map-section {
+    display: flex;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+/* CSS for map container */
+.map-container {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    margin-left: 250px;
+}
+
+/* CSS for map info */
+.map-info {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    margin-right: 40px;
+}
+
+/* CSS for map info text */
+.map-info h2 {
+    font-size: 16px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #A9A9A9;
+}
+
+/* CSS for map info text */
+.map-info h1 {
+    font-size: 36px;
+    margin: 0;
+    margin-bottom: 10px;
+    color: #00a859;
+}
+
+.map-info h3{
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+/* CSS for map info paragraph */
+.map-info p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 0.3;
 }
 
 /* Style for the footer */

@@ -68,11 +68,11 @@
             
             <div class="impact-container">
                 <h2 class="impact-heading">Your Impact Matters</h2>
-                <p class="impact-text">Every action on our platform contributes to a cleaner world.</p>
+                <p class="impact-text">Every action on our platform contributes to a cleaner world.<br> Participate in our Events.</p>
             </div>
             
             <div class="button-container">
-                <a href="{% url 'login' %}"  class="cta-button button">Join Us Today</a>
+                <a href="{% url 'events' %}"  class="cta-button button">Join Us Today</a>
             </div>            
 
         </div>
@@ -129,7 +129,10 @@
             <div class="contact-content">
                 <h2>Contact Us</h2>
                 <p>We'd love to hear from you! Get in touch with us for any inquiries or feedback.</p>
-                <a href="{% url 'contact' %}" class="contact-button">Contact Now</a>
+                <a href="{% url 'contact' %}" class="contact-button">
+                    <!-- <img src="/static/img/call1.png" alt="Donate Icon" class="icon"> -->
+                    Contact Now
+                </a>
             </div>
         </div>
     </section>

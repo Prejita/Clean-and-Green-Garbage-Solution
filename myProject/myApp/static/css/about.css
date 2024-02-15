@@ -47,12 +47,12 @@ nav {
 /* Styles for the image inside the "about" section */
 .about img {
     width: 100%;
-    max-width: 700px;
+    max-width: 400px;
     display: block;
     margin: 0 auto;
     position: relative;
     z-index: 2;
-    bottom: -30px;
+
 }
 
 /* Styles for the green box below the image */
@@ -90,6 +90,76 @@ nav {
     font-size: 18px;
     margin-top: 20px;
     line-height: 1.6;
+}
+
+/* Center alignment for all content */
+.about {
+    text-align: center;
+}
+
+/* Style for the "About" heading */
+.about h2 {
+    font-size: 15px;
+    margin-bottom: 5px;
+    margin-top: 45px;
+    color: #A9A9A9;
+}
+
+/* Style for the "GreenEase" heading */
+.about h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 10px; /* Adjust margin as needed */
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+/* Style for the paragraph */
+.about p {
+    font-size: 18px;
+    margin-top: 10px; /* Adjust margin as needed */
+    margin-bottom: 1px; /* Adjust margin as needed */
+}
+
+.boxes {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1500px;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.box {
+    flex: 1;
+    background-color: #00a859;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin: 40px; /* Add margin between boxes */
+    overflow: hidden; /* Hide overflow content when width changes */
+}
+
+.box:hover {
+    width: calc(33.33% + 80px); /* Increase width */
+    transform: translateY(30px); /* Shift downwards */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.box h3 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.box p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.content-box{
+    background-color: #3c3c3c;
+    padding: 5px;
 }
 
 /* Style for the footer */
