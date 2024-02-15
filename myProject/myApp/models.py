@@ -57,6 +57,8 @@ class Event(models.Model):
     start_time = models.CharField(null="True", max_length=50)  
     end_time = models.CharField(null="True", max_length=50) 
     location = models.CharField(max_length=255)
+    # latitude = models.FloatField(blank=True, null=True)
+    # longitude = models.FloatField(blank=True, null=True)
     category_choices = [
         ('Conference', 'Conference'),
         ('Seminar', 'Seminar'),

@@ -140,7 +140,7 @@ body {
 .line {
     border: none;
     border-top: 2px solid #ccc;
-    width: 103%;
+    width: 105%;
     margin-bottom: 3px;
 }
 
@@ -223,7 +223,9 @@ body {
 
 /* Style for the notify button */
 .notify-btn {
-    padding: 8px 10px;
+    display: flex; 
+    align-items: center; /* Vertically center the content */
+    padding: 8px 1px;
     font-size: 14px;
     cursor: pointer;
     border: none;
@@ -231,9 +233,18 @@ body {
     background-color: #2196F3; 
     color: white;
     /* margin-left: 25px; */
+    
     transition: background-color 0.3s;
     font-weight: bold;
     text-decoration: none;
+    justify-content: center;
+}
+
+.notify-btn img {
+    margin-right: 4px; 
+    width: 25px; 
+    height: 25px; 
+    filter: invert(1); 
 }
 
 .notify-btn:hover {
@@ -265,7 +276,7 @@ body {
 .search-actions {
     display: flex;
     justify-content: flex-end;
-    margin-right: 290px;
+    margin-right: 310px;
 }
 
 .search-actions input[type="text"] {
@@ -280,7 +291,9 @@ body {
 
 /* Style for the Delete Requests button */
 #DeleteRequest {
-    padding: 10px 16px;
+    display: flex; 
+    align-items: center; /* Vertically center the content */
+    padding: 8px 7px;
     font-size: 14px;
     cursor: pointer;
     border: none;
@@ -288,9 +301,16 @@ body {
     background-color: #DC143C;
     color: white;
     transition: background-color 0.3s;
-    margin-left: 120px;
+    margin-left: 90px;
     margin-top: 10px;
     font-weight: bold;
+}
+
+#DeleteRequest img {
+    margin-right: 6px; 
+    width: 20px; 
+    height: 20px; 
+    filter: invert(1); 
 }
 
 #DeleteRequest:hover {
@@ -299,7 +319,9 @@ body {
 
 /* Style for the Clear All button */
 #clearAllNotifications {
-    padding: 10px 16px;
+    display: flex; 
+    align-items: center; /* Vertically center the content */
+    padding: 8px 7px;
     font-size: 14px;
     cursor: pointer;
     border: none;
@@ -310,6 +332,13 @@ body {
     margin-left: 30px;
     margin-top: 10px;
     font-weight: bold;
+}
+
+#clearAllNotifications img {
+    margin-right: 6px; 
+    width: 20px; 
+    height: 20px; 
+    filter: invert(1); 
 }
 
 #clearAllNotifications:hover {
@@ -334,5 +363,24 @@ body {
 
 .select-all-label {
     color: #333;
+    font-weight: bold;
+}
+
+/* Style for the container holding the message and image */
+#noNotificationsMessage {
+    display: none;
+    margin-top: 20px;
+    text-align: center;
+}
+
+#noNotificationsMessage img {
+    width:100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+#noNotificationsMessage .message {
+    color: #888;;
+    font-size: 22px;
     font-weight: bold;
 }

@@ -88,8 +88,14 @@
             <div class="search-actions">
                 <input type="text" id="search" placeholder="Search users or events...">
             </div>
-            <button id ="DeleteRequest" onclick="deleteSelectedRequests()">Delete Selected</button>
-            <button id="clearAllRequests" onclick="clearAllRequests()">Clear Requests</button>
+            <button id ="DeleteRequest" onclick="deleteSelectedRequests()">
+                <img src="/static/img/trash.png" alt="Delete Icon" class="icon">
+                Delete Selected
+            </button>
+            <button id="clearAllRequests" onclick="clearAllRequests()">
+                <img src="/static/img/clean.png" alt="Clear Icon" class="icon">
+                Clear Requests
+            </button>
         </div>
 
         <!-- Table for users -->
@@ -123,13 +129,24 @@
                         <td>{{ registration.address }}</td>
                         <td>{{ registration.additional_info }}</td>
                         <td>
-                            <button class="accept-btn" onclick="acceptRegistration('{{ registration.id }}')">Accept</button>
-                            <button class="delete-btn" onclick="declineRegistration('{{ registration.id }}')">Decline</button>
+                            <button class="accept-btn" onclick="acceptRegistration('{{ registration.id }}')">
+                                <img src="/static/img/accept.png" alt="Accept Icon" class="icon">
+                                Accept
+                            </button>
+                            <button class="delete-btn" onclick="declineRegistration('{{ registration.id }}')">
+                                <img src="/static/img/cross.png" alt="Decline Icon" class="icon">
+                                Decline
+                            </button>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table> 
+        </div>
+
+        <div id="noSearchMessage">
+            <img src="/static/img/search.png" alt="No Search Found">
+            <div class="message">No matching search found.</div>
         </div>
     </div>
 
@@ -174,6 +191,8 @@
             // Get all rows in the table
             const rows = document.querySelectorAll('.userrequest-table tbody tr');
 
+            let searchFound = false;
+
             // Loop through each row to check for matching values and show/hide rows accordingly
             rows.forEach(row => {
                 const eventname = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
@@ -188,9 +207,17 @@
                 ) {
                     // Show the row if it matches the search
                     row.style.display = '';
+                    searchFound = true;
                 } else {
                     // Hide the row if it doesn't match the search
                     row.style.display = 'none';
+                }
+                // Display "No events found" message if no events are found
+                const noSearchMessage = document.getElementById('noSearchMessage');
+                if (!searchFound) {
+                    noSearchMessage.style.display = 'block';
+                } else {
+                    noSearchMessage.style.display = 'none';
                 }
             });
         }
@@ -316,6 +343,9 @@
                         title: 'Registration accepted!',
                         showConfirmButton: false,
                         timer: 1500
+                    }).then(() => {
+                        // Reload the page after the SweetAlert is closed
+                        location.reload();
                     });
                 },
                 error: function (error) {
@@ -323,7 +353,7 @@
                 }
             });
         }
-    </script>
+    </script>    
 
     <script>
         function declineRegistration(registrationId) {

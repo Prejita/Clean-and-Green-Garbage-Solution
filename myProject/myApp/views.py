@@ -193,6 +193,8 @@ def create_event(request):
             start_time=event_data['start_time'],  
             end_time=event_data['end_time'],
             location=event_data['location'],
+            # latitude = event_data['latitude'],
+            # longitude = event_data['longitude'],
             category=event_data['category'],
             description=event_data['description']
         )
@@ -203,7 +205,8 @@ def create_event(request):
         return JsonResponse({'message': 'Event added successfully'}, status=201)
     else:
         return JsonResponse({'message': 'Invalid request method'}, status=400)
-      
+
+@csrf_exempt
 def notify(request, notification_id):
     try:
         notification = Notification.objects.get(id=notification_id)
@@ -226,12 +229,12 @@ def notify(request, notification_id):
         # Delete the notification after sending the email
         notification.delete()
 
-        messages.success(request, 'Email sent successfully!')
-    
+        # Send success response
+        return JsonResponse({'success': True, 'message': 'Email sent successfully!'})
+
     except Exception as e:
-        messages.error(request, 'Error sending email!')
-    
-    return redirect('notifications')
+        # Send error response
+        return JsonResponse({'success': False, 'error': str(e)})
 
 def get_events(request):
     if request.method == 'GET':
@@ -509,6 +512,8 @@ def edit_event(request):
         event_end_date = request.POST.get('eventEndDate')
         event_end_time = request.POST.get('eventEndTime')
         event_location = request.POST.get('eventLocation')
+        # event_latitude = request.POST.get('latitude')
+        # event_longitude = request.POST.get('longitude')
         event_category = request.POST.get('eventCategory')
         event_description = request.POST.get('eventDescription')
 
@@ -544,6 +549,7 @@ def get_total_user_count(request):
     total_users = Registration.objects.count()
     return JsonResponse({'total_users': total_users})
 
+@csrf_exempt
 def donate(request):
     if request.method == 'POST':
         print("call")

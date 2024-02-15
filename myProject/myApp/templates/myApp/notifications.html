@@ -89,8 +89,14 @@
             <div class="search-actions">
                 <input type="text" id="search" placeholder="Search notification...">
             </div>
-            <button id ="DeleteRequest" onclick="deleteSelectedNotifications()">Delete Selected</button>
-            <button id="clearAllNotifications">Clear Notifications</button>
+            <button id ="DeleteRequest" onclick="deleteSelectedNotifications()">
+                <img src="/static/img/trash.png" alt="Delete Icon" class="icon">
+                Delete Selected
+            </button>
+            <button id="clearAllNotifications">
+                <img src="/static/img/clean.png" alt="Clear Icon" class="icon">
+                Clear Notifications
+            </button>
         </div>
 
         <!-- Table for notifications -->
@@ -150,13 +156,22 @@
                         <td>{{ notification.location }}</td>
                         <td>{{ notification.timestamp }}</td>
                         <td>
-                            <a href="{% url 'notify' notification.id %}" class="notify-btn">Notify</a>
+                            <a href="{% url 'notify' notification.id %}" class="notify-btn">
+                                <img src="/static/img/notify.png" alt="Edit Icon" class="icon">
+                                Notify
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
+
+        <div id="noNotificationsMessage">
+            <img src="/static/img/search.png" alt="No Notifications Found">
+            <div class="message">No notifications found.</div>
+        </div>
+    
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -189,7 +204,7 @@
             });
         });
     </script>
-
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const deleteButtons = document.querySelectorAll(".delete-btn");
@@ -238,6 +253,53 @@
         });
    
     </script>
+    
+    <script>
+        $(document).ready(function() {
+            // Function to handle notification sending
+            function sendNotification(notificationId) {
+                $.ajax({
+                    url: `/notify/${notificationId}/`,
+                    type: 'POST',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Email sent successfully!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function() {
+                                // Reload the page after displaying the success message
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error sending email!',
+                                text: response.error,
+                            });
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(xhr.responseText);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Server error',
+                            text: 'Please try again later.',
+                        });
+                    }
+                });
+            }
+
+            // Trigger sending notification when the notify button is clicked
+            $('.notify-btn').click(function(e) {
+                e.preventDefault();
+                const notificationId = $(this).closest('tr').find('input[name="selectedNotifications"]').val();
+                sendNotification(notificationId);
+            });
+        });
+    </script>
 
     <script>
         // Function to perform search based on input value
@@ -247,6 +309,9 @@
 
             // Get all rows in the table
             const rows = document.querySelectorAll('.notification-table tbody tr');
+
+            // Variable to track if any search results are found
+            let searchResultsFound = false;
 
             // Loop through each row to check for matching values and show/hide rows accordingly
             rows.forEach(row => {
@@ -262,11 +327,20 @@
                 ) {
                     // Show the row if it matches the search
                     row.style.display = '';
+                    searchResultsFound = true; // Set the flag to true if at least one result is found
                 } else {
                     // Hide the row if it doesn't match the search
                     row.style.display = 'none';
                 }
             });
+
+            // Display "No notifications found" message if no notifications are found
+            const noNotificationsMessage = document.getElementById('noNotificationsMessage');
+            if (!searchResultsFound) {
+                noNotificationsMessage.style.display = 'block';
+            } else {
+                noNotificationsMessage.style.display = 'none';
+            }
         }
 
         // Get the search input element

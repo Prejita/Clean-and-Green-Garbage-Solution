@@ -146,7 +146,7 @@
         }
 
         async function pays(paymentToken, amount, eventName) {
-        const response = await fetch('/khalti-payment',{
+        const response = await fetch('khalti-payment',{
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',

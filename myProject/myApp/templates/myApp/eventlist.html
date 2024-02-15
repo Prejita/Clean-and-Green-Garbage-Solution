@@ -87,8 +87,14 @@
                 <div class="search-actions">
                     <input type="text" id="search" placeholder="Search events...">
                 </div>
-                <button id ="DeleteEvent" onclick="deleteSelectedEvents()">Delete Selected</button>
-                <a href="{% url 'addevents' %}" id="AddEvents" class="button-link">Add Events</a>
+                <button id ="DeleteEvent" onclick="deleteSelectedEvents()">
+                    <img src="/static/img/trash.png" alt="Delete Icon" class="icon">
+                    Delete Selected
+                </button>
+                <a href="{% url 'addevents' %}" id="AddEvents" class="button-link">
+                    <img src="/static/img/add.png" alt="Add Icon" class="icon">
+                    Add Events
+                </a>
             </div>
 
             <table class="events-table">
@@ -122,7 +128,10 @@
                                 row.innerHTML = `
                                     <td><input type="checkbox" name="eventCheckbox" value="${event.id}"></td>
                                     <td>${event.name} (${event.start_date} to ${event.end_date})</td>
-                                    <td><a href="{% url 'editevent' %}?eventId=${event.id}" id="editButton">Edit</a></td>
+                                    <td><a href="{% url 'editevent' %}?eventId=${event.id}" id="editButton">
+                                        <img src="/static/img/pencil.png" alt="Edit Icon" class="icon">
+                                        Edit
+                                    </a></td>
                                 `;
                                 eventsBody.appendChild(row);
                             });
@@ -131,6 +140,12 @@
                     .catch(error => console.error('Error fetching events:', error));
             });
         </script>
+        
+        <div id="noEventsMessage">
+            <img src="/static/img/search.png" alt="No Events Found">
+            <div class="message">No matching events found.</div>
+        </div>
+
         <script>
             // Function to perform search based on input value
             function searchEvents() {
@@ -156,16 +171,12 @@
                     }
                 });
 
-                // Display SweetAlert if no events are found
+                // Display "No events found" message if no events are found
+                const noEventsMessage = document.getElementById('noEventsMessage');
                 if (!eventsFound) {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'No events found',
-                        text: 'There are no events matching your search criteria.',
-                    }).then(() => {
-                        // Redirect to the eventlist page
-                        window.location.href = "{% url 'eventlist' %}";
-                    });
+                    noEventsMessage.style.display = 'block';
+                } else {
+                    noEventsMessage.style.display = 'none';
                 }
             }
 
