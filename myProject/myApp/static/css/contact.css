@@ -166,7 +166,7 @@ nav {
     flex: 1;
     margin: 0;
     padding: 0;
-    margin-left: 250px;
+    margin-left: 290px;
 }
 
 /* CSS for map info */
@@ -174,7 +174,7 @@ nav {
     flex: 1;
     margin: 0;
     padding: 0;
-    margin-right: 40px;
+    margin-right: 10px;
 }
 
 /* CSS for map info text */
@@ -190,12 +190,12 @@ nav {
     font-size: 36px;
     margin: 0;
     margin-bottom: 10px;
-    color: #00a859;
+    color: #000;
 }
 
 .map-info h3{
     font-size: 16px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 /* CSS for map info paragraph */
