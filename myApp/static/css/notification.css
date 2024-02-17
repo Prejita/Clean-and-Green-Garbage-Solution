@@ -137,6 +137,13 @@ body {
     font-size: 26px;
 }
 
+/* .line {
+    border: none;
+    border-top: 2px solid #ccc;
+    width: 105%;
+    margin-bottom: 3px;
+} */
+
 .line {
     border: none;
     border-top: 2px solid #ccc;
@@ -145,7 +152,6 @@ body {
     top: 47px; /* Set the top position below the title box */
     left: 250px; /* Set the left position to align with the sidebar */
 }
-
 
 .table-container {
     overflow-x: auto; /* Enable horizontal scrolling */

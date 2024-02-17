@@ -149,11 +149,19 @@ body {
 }
 
 /* Line styles */
-.line {
+/* .line {
     border: none;
     border-top: 2px solid #ccc;
     width: 103%;
     margin-bottom: 1px;
+} */
+.line {
+    border: none;
+    border-top: 2px solid #ccc;
+    width: calc(100% - 250px); /* Set width to cover the width of the content area (excluding sidebar) */
+    position: absolute; /* Position the line absolutely */
+    top: 47px; /* Set the top position below the title box */
+    left: 250px; /* Set the left position to align with the sidebar */
 }
 
 /* Events container styles */
