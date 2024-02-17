@@ -23,7 +23,6 @@ from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 import requests
 
-
 def index(request):
     context = {}
     return render(request, "myApp/index.html", context)
