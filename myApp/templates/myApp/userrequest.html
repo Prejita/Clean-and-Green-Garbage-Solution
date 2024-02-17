@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
     <link rel="stylesheet" href="/static/css/userrequest.css"/>
     <script src="/static/js/notification_count.js"></script>
     <script src="/static/js/user_count.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
     <title>GreenEase - UserRequest</title>
 </head>
 <body>
@@ -244,7 +245,7 @@
                     // Send AJAX request to the server to delete all requests
                     $.ajax({
                         type: 'POST', // or 'GET' depending on your server-side implementation
-                        url: '{% url "clear_all_requests" %}', // Replace with your backend URL
+                        url: '{% url "clear_all_requests" %}', 
                         success: function (data) {
                             // If successful, remove all rows from the table
                             const tbody = document.querySelector('.userrequest-table tbody');

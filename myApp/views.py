@@ -277,6 +277,7 @@ def submit_registration(request):
     # Handle cases where the form submission method is not POST
     return redirect('events')
 
+@csrf_exempt 
 def clear_all_requests(request):
     try:
         # Delete all records from the Registration model

@@ -10,15 +10,27 @@ body, ul {margin: 0; padding: 0; list-style: none;}
 }
 
 /* Style for the black overlay above the image */
-.hero::before {
+/* .hero::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 53.2%; /* Cover the entire image */
-    background-color: rgba(0, 0, 0, 0.65); /* Black overlay with transparency */
-    z-index: 2; /* Place the overlay above the image */
+    height: 53.2%; 
+    background-color: rgba(0, 0, 0, 0.65); 
+} */
+
+.image-overlay {
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.65);
 }
 
 /* Style for the header and navigation bar */
@@ -37,7 +49,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
 }
 

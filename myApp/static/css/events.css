@@ -15,24 +15,23 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    width: 100%;
+    width: 100%; /* Set width to 100% */
     margin: 0 auto;
-    padding: 20px 74.5px; 
+    padding: 20px 0; /* Remove fixed padding */
 }
 
-/* Style for the logo */
 .logo a {
     font-size: 24px;
     text-decoration: none;
     font-weight: bold;
     color: white;
+    margin-left: 70px;
 }
 
-/* Style for the menu */
 .menu ul {
     display: flex;
     gap: 40px;
+    padding: 0 80px; /* Add padding to the left and right sides */
 }
 
 .menu ul li a {

@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- {% load static %} -->
+    {% load static %}
     <link rel="stylesheet" href="/static/css/index.css"/> 
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
     <title>GreenEase - Home</title>
 </head>
 <body>
@@ -31,8 +32,11 @@
             <div class="innovative-text">Innovative Waste Collection</div>
         </div>
 
-        <img src="/static/img/waste.jpg" alt="Waste Collection">
-
+        <div class="image-overlay">
+            <img src="/static/img/waste.jpg" alt="Waste Collection">
+            <div class="overlay"></div>
+        </div>
+        
         <div class="hero-content">
             <h1 class="hero-title">Why Choose Us?</h1>
      
