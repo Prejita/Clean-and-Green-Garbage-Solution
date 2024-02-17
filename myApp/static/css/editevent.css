@@ -153,7 +153,7 @@ body {
 .line {
     border: none;
     border-top: 2px solid #ccc;
-    width: calc(100% + 30px); 
+    width: 100%;
     margin-bottom: 3px;
 }
 

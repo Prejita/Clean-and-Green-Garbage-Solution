@@ -152,7 +152,7 @@ body {
 .line {
     border: none;
     border-top: 2px solid #ccc;
-    width: calc(100% + 30px); 
+    width: 103%;
     margin-bottom: 1px;
 }
 
