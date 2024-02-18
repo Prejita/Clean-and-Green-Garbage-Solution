@@ -19,8 +19,8 @@ from django.core.mail import EmailMessage
 from io import BytesIO
 from reportlab.pdfgen import canvas
 from django.views.decorators.http import require_POST
-from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse, reverse_lazy
 import requests
 
 def index(request):
@@ -79,9 +79,7 @@ def contact(request):
     context = {}
     return render(request, "myApp/contact.html", context)
 
-@login_required(login_url=reverse_lazy('login'))
 def dashboard(request):
-    # You can retrieve messages from other views here and display them in your dashboard.
     messages_data = messages.get_messages(request)
     context = {'messages_data': messages_data}
     return render(request, "myApp/dashboard.html", context)
@@ -90,7 +88,7 @@ def termsandconditions(request):
     context = {}
     return render(request, "myApp/terms-and-conditions.html", context)
 
-@login_required(login_url=reverse_lazy('login'))
+
 def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
@@ -139,7 +137,8 @@ def dustbin_data_receiver(request):
             return JsonResponse({'error': 'Invalid JSON format'})
     else:
         return JsonResponse({'error': 'Invalid request method'})
-    
+
+
 def dashboard(request):
     # Retrieve the latest DustbinData instance
     latest_data = DustbinData.objects.latest('timestamp')

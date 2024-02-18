@@ -162,6 +162,7 @@ body {
     position: absolute; /* Position the line absolutely */
     top: 47px; /* Set the top position below the title box */
     left: 250px; /* Set the left position to align with the sidebar */
+    margin-bottom: 5px;
 }
 
 /* Events container styles */
