@@ -225,6 +225,24 @@
                     return; // Stop the form submission
                 }
 
+                // Retrieve form input values
+                var eventName = document.getElementById('eventName').value;
+                var eventOrganizer = document.getElementById('eventOrganizer').value;
+                var eventLocation = document.getElementById('eventLocation').value;
+                var eventDescription = document.getElementById('eventDescription').value;
+
+                // Function to check if a string starts with a digit
+                function startsWithDigit(str) {
+                    return /^\d/.test(str);
+                } 
+
+                // Validate input fields
+                if (startsWithDigit(eventName) || startsWithDigit(eventOrganizer) || startsWithDigit(eventLocation) || startsWithDigit(eventDescription)) {
+                    // If any input starts with a digit, show an error message
+                    Swal.fire('Invalid Input', 'Event name, organizer, location, and description cannot start with a number.', 'error');
+                    return; // Stop the form submission
+                }
+
                 // Send an AJAX request to the Django view
                 fetch('/edit_event/', {
                         method: 'POST',

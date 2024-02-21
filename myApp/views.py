@@ -22,6 +22,8 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 import requests
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 def index(request):
     context = {}
@@ -79,6 +81,7 @@ def contact(request):
     context = {}
     return render(request, "myApp/contact.html", context)
 
+@login_required
 def dashboard(request):
     messages_data = messages.get_messages(request)
     context = {'messages_data': messages_data}
@@ -88,7 +91,8 @@ def termsandconditions(request):
     context = {}
     return render(request, "myApp/terms-and-conditions.html", context)
 
-
+@staff_member_required
+@login_required
 def notifications(request):
     context = {}
     return render(request, "myApp/notifications.html", context)
@@ -558,7 +562,7 @@ def donate(request):
         event_name = data.get('event_name') 
         print(payment_token, payment_amount,event_name)
 
-        khalti_secret_key = "test_secret_key_ce1adf77ac904ffbba3bc3687d287103"
+        khalti_secret_key = "test_secret_key_cf0998dea28f4789ba00f302c09d3b21"
         verification_url = "https://khalti.com/api/v2/payment/verify/"
         headers = {
             'Authorization': f'key {khalti_secret_key}',

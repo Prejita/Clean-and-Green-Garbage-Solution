@@ -69,7 +69,7 @@
         <!-- Event cards will be dynamically added here -->
     </div>
 
-    <script>
+    <!-- <script>
         // Fetch events data from the server and dynamically create event cards
         fetch('/get_events/') 
             .then(response => response.json())
@@ -111,6 +111,77 @@
             // Redirect to the registration page with the event name in the URL
             window.location.href = `/register/?event=${encodeURIComponent(eventName)}`;
         }
+    </script>     -->
+
+    <script>
+        // Fetch events data from the server and dynamically create event cards
+        fetch('/get_events/') 
+            .then(response => response.json())
+            .then(events => {
+                const eventContainer = document.querySelector('.event-container');
+    
+                // Filter out expired events
+                const currentDate = new Date();
+    
+                const filteredEvents = events.filter(event => {
+                    const endDate = new Date(event.end_date);
+                    const endTime = event.end_time ? new Date(`${event.end_date} ${event.end_time}`) : null;
+                    
+                    // Compare end date and end time with current date and time
+                    if (endDate < currentDate) {
+                        return false; // Event has already ended
+                    }
+    
+                    if (endTime && endTime < currentDate) {
+                        return false; // Event has already ended
+                    }
+    
+                    return true; // Event is still ongoing
+                });
+    
+                filteredEvents.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.classList.add('event-card');
+    
+                    // Populate event card content
+                    eventCard.innerHTML = `
+                        <h2>${event.name}</h2>
+                        <p><strong>Organizer:</strong> ${event.organizer}</p>
+                        <p><strong>Date:</strong> ${event.start_date} to ${event.end_date}</p>
+                        <p><strong>Time:</strong> ${formatTime(event.start_time)} to ${formatTime(event.end_time)}</p>
+                        <p><strong>Location:</strong> ${event.location}</p>
+                        <p><strong>Category:</strong> ${event.category}</p>
+                        <p><strong>Description:</strong> ${event.description}</p>
+                        <div class="button-container">
+                            <button class="register-button" data-event-name="${event.name}">
+                                <img src="/static/img/contract.png" alt="Register Icon" class="icon">
+                                Register
+                            </button>
+                        </div>
+                    `;
+
+                    // Function to format time with AM/PM
+                    function formatTime(time) {
+                        if (!time) return 'TBD';
+                        const [hours, minutes] = time.split(':');
+                        const formattedHours = hours % 12 || 12; // Convert to 12-hour format
+                        const period = hours >= 12 ? 'PM' : 'AM'; // Determine AM/PM
+                        return `${formattedHours}:${minutes} ${period}`;
+                    }
+                        
+                    // Add event listener to register button
+                    const registerButton = eventCard.querySelector('.register-button');
+                    registerButton.addEventListener('click', () => openRegistrationForm(event.name));
+    
+                    eventContainer.appendChild(eventCard);
+                });
+            })
+            .catch(error => console.error('Error fetching events:', error));
+    
+        function openRegistrationForm(eventName) {
+            // Redirect to the registration page with the event name in the URL
+            window.location.href = `/register/?event=${encodeURIComponent(eventName)}`;
+        }
     </script>    
 
     <script>
@@ -122,7 +193,7 @@
             // console.log(eventName);
             const eventName = 'Donation';
             const config = {
-                publicKey: "test_public_key_dc1970829015486687411487e45d789a",
+                publicKey: "test_public_key_cfa6ce2b69d64ef9adf92f07c66b8739",
                 productIdentity: eventName,
                 productName: "GreenEase",
                 productUrl: "http://192.168.254.3:8000/",
@@ -152,7 +223,7 @@
         }
 
         async function pays(paymentToken, amount, eventName) {
-        const response = await fetch('khalti-payment',{
+        const response = await fetch('/khalti-payment/',{
             method: 'POST',
             headers: {
             'Content-Type': 'application/json',
