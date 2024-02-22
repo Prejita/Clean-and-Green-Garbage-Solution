@@ -11,9 +11,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.utils import timezone
-from .models import Registration
+from .models import Registration, AcceptedRegistration,DeclinedRegistration
 from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 from django.shortcuts import get_object_or_404
 from django.core.mail import EmailMessage
 from io import BytesIO
@@ -181,11 +180,42 @@ def delete_all_notifications(request):
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
    
+# def create_event(request):
+#     if request.method == 'POST':
+#         # Retrieve data from the POST request
+#         event_data = json.loads(request.body)
+        
+#         # Create a new Event object
+#         new_event = Event(
+#             name=event_data['name'],
+#             organizer=event_data['organizer'],
+#             start_date=event_data['start_date'],
+#             end_date=event_data['end_date'],
+#             start_time=event_data['start_time'],  
+#             end_time=event_data['end_time'],
+#             location=event_data['location'],
+#             # latitude = event_data['latitude'],
+#             # longitude = event_data['longitude'],
+#             category=event_data['category'],
+#             description=event_data['description']
+#         )
+
+#         # Save the new event to the database
+#         new_event.save()
+
+#         return JsonResponse({'message': 'Event added successfully'}, status=201)
+#     else:
+#         return JsonResponse({'message': 'Invalid request method'}, status=400)
 def create_event(request):
     if request.method == 'POST':
         # Retrieve data from the POST request
         event_data = json.loads(request.body)
         
+        # Check if an event with the same name already exists
+        if Event.objects.filter(name=event_data['name']).exists():
+            # Show a SweetAlert informing the user about the existing event
+            return JsonResponse({'message': 'An event with this name already exists'}, status=400)
+
         # Create a new Event object
         new_event = Event(
             name=event_data['name'],
@@ -195,8 +225,6 @@ def create_event(request):
             start_time=event_data['start_time'],  
             end_time=event_data['end_time'],
             location=event_data['location'],
-            # latitude = event_data['latitude'],
-            # longitude = event_data['longitude'],
             category=event_data['category'],
             description=event_data['description']
         )
@@ -263,18 +291,31 @@ def submit_registration(request):
         address = request.POST.get('address')
         additional_info = request.POST.get('additionalInfo')
 
-        # Save the registration data to the database (assuming you have a Registration model)
-        Registration.objects.create(
-            event_name=event_name,
-            full_name=full_name,
-            email=email,
-            phone=phone,
-            address=address,
-            additional_info=additional_info
-        )
+        if request.method == 'POST':
+            # Get form data
+            event_name = request.POST.get('eventName')
+            full_name = request.POST.get('fullName')
+            email = request.POST.get('email')
 
-        # Return a JSON response indicating success
-        return JsonResponse({'success': True})
+            # Check if a registration already exists for this user and event
+            existing_registration = Registration.objects.filter(event_name=event_name, full_name=full_name, email=email).exists()
+            
+            if existing_registration:
+                # Return error response indicating duplicate registration
+                return JsonResponse({'error': 'You have already registered for this event'}, status=400)
+
+            # Save the registration data to the database (assuming you have a Registration model)
+            Registration.objects.create(
+                event_name=event_name,
+                full_name=full_name,
+                email=email,
+                phone=phone,
+                address=address,
+                additional_info=additional_info
+            )
+
+            # Return a JSON response indicating success
+            return JsonResponse({'success': True})
 
     # Handle cases where the form submission method is not POST
     return redirect('events')
@@ -316,6 +357,16 @@ def accept_registration(request):
 
             # Send acceptance email
             send_acceptance_email(registration)
+
+            # Create a record in the AcceptedRegistration model
+            accepted_registration = AcceptedRegistration.objects.create(
+                event_name=registration.event_name,
+                full_name=registration.full_name,
+                email=registration.email,
+                phone=registration.phone,
+                address=registration.address,
+                additional_info=registration.additional_info
+            )
 
             # Delete the registration from the database
             registration.delete()
@@ -413,6 +464,17 @@ def decline_registration(request):
             # Send decline email
             send_decline_email(registration)
 
+            # Create a record in the DeclinedRegistration model
+            declined_registration = DeclinedRegistration.objects.create(
+                event_name=registration.event_name,
+                full_name=registration.full_name,
+                email=registration.email,
+                phone=registration.phone,
+                address=registration.address,
+                additional_info=registration.additional_info
+                # Add any other fields you need
+            )
+
             # Delete the registration from the database
             registration.delete()
 
@@ -421,7 +483,6 @@ def decline_registration(request):
             return JsonResponse({'error': 'Registration does not exist'}, status=404)
     else:
         return JsonResponse({'error': 'Invalid request method'}, status=400)
-
 
 def send_decline_email(registration):
     # Compose the subject for the email
@@ -503,20 +564,66 @@ def get_event_details(request, event_id):
         # Return a JSON response indicating that the event was not found
         return JsonResponse({'error': 'Event not found'}, status=404)
 
-@csrf_exempt  
+# @csrf_exempt  
+# def edit_event(request):
+#     if request.method == 'POST':
+#         # Retrieve form data from POST request
+#         event_id = request.POST.get('eventId')
+#         event_name = request.POST.get('eventName')
+#         event_organizer = request.POST.get('eventOrganizer')
+#         event_start_date = request.POST.get('eventStartDate')
+#         event_start_time = request.POST.get('eventStartTime')
+#         event_end_date = request.POST.get('eventEndDate')
+#         event_end_time = request.POST.get('eventEndTime')
+#         event_location = request.POST.get('eventLocation')
+#         # event_latitude = request.POST.get('latitude')
+#         # event_longitude = request.POST.get('longitude')
+#         event_category = request.POST.get('eventCategory')
+#         event_description = request.POST.get('eventDescription')
+
+#         # Get the existing event from the database
+#         existing_event = Event.objects.get(id=event_id)
+
+#         # Update the event with the new data
+#         existing_event.name = event_name
+#         existing_event.organizer = event_organizer
+#         existing_event.start_date = event_start_date
+#         existing_event.start_time = event_start_time
+#         existing_event.end_date = event_end_date
+#         existing_event.end_time = event_end_time
+#         existing_event.location = event_location
+#         existing_event.category = event_category
+#         existing_event.description = event_description
+
+#         # Save the updated event
+#         existing_event.save()
+
+#         # Return a JsonResponse indicating success
+#         return JsonResponse({'success': True})
+
+#     # Handle cases where the form is not submitted via POST
+#     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+@csrf_exempt
 def edit_event(request):
     if request.method == 'POST':
         # Retrieve form data from POST request
         event_id = request.POST.get('eventId')
         event_name = request.POST.get('eventName')
+
+        # Check if the event name already exists (excluding the current event being edited)
+        existing_events = Event.objects.exclude(id=event_id).filter(name=event_name)
+
+        if existing_events.exists():
+            # If an event with the same name exists, return an error response
+            return JsonResponse({'success': False, 'error': 'Event name already exists'})
+
+        # Proceed with updating the event
         event_organizer = request.POST.get('eventOrganizer')
         event_start_date = request.POST.get('eventStartDate')
         event_start_time = request.POST.get('eventStartTime')
         event_end_date = request.POST.get('eventEndDate')
         event_end_time = request.POST.get('eventEndTime')
         event_location = request.POST.get('eventLocation')
-        # event_latitude = request.POST.get('latitude')
-        # event_longitude = request.POST.get('longitude')
         event_category = request.POST.get('eventCategory')
         event_description = request.POST.get('eventDescription')
 

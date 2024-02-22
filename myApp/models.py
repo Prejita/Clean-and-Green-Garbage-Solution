@@ -80,6 +80,7 @@ class Registration(models.Model):
     phone = models.CharField(max_length=10)
     address = models.TextField()
     additional_info = models.TextField(blank=True, null=True, default='None')
+    # status = models.CharField(max_length=10, choices=[('accepted', 'Accepted'), ('declined', 'Declined')], default='pending')
 
     def save(self, *args, **kwargs):
         # If additional_info is empty, set it to 'None'
@@ -89,3 +90,26 @@ class Registration(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.event_name}"
+    
+class AcceptedRegistration(models.Model):
+    event_name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    address = models.CharField(max_length=200)
+    additional_info = models.TextField()
+
+    def __str__(self):
+        return self.full_name  
+    
+class DeclinedRegistration(models.Model):
+    event_name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    address = models.CharField(max_length=200)
+    additional_info = models.TextField()
+    # Add any other fields you need
+    
+    def __str__(self):
+        return self.full_name  

@@ -63,29 +63,69 @@
         </form>
 
         <script>
-            // Function to display SweetAlert confirmation and redirect user
-            function showConfirmationAndRedirect() {
+            // // Function to display SweetAlert confirmation and redirect user
+            // function showConfirmationAndRedirect() {
+            //     Swal.fire({
+            //         icon: 'success',
+            //         title: 'Registration Successful!',
+            //         text: 'Your registration request has been submitted. You will be notified once your registration is accepted.',
+            //         confirmButtonText: 'OK',
+            //     }).then((result) => {
+            //         // Check if user clicked "OK"
+            //         if (result.isConfirmed) {
+            //             // Redirect user to the event list page
+            //             window.location.href = "{% url 'events' %}"; 
+            //         }
+            //     });
+            // }
+        
+            // // Get the form element
+            // const form = document.querySelector('form');
+        
+            // // Add event listener for form submission
+            // form.addEventListener('submit', function(event) {
+            //     event.preventDefault(); // Prevent default form submission
+        
+            //     // Perform form submission via AJAX
+            //     fetch("{% url 'submit_registration' %}", {
+            //         method: 'POST',
+            //         body: new FormData(form),
+            //         headers: {
+            //             'X-CSRFToken': '{{ csrf_token }}'
+            //         }
+            //     })
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         if (data.success) {
+            //             // Show SweetAlert confirmation
+            //             showConfirmationAndRedirect();
+            //             form.reset(); // Optional: Reset the form after submission
+            //         } else {
+            //             // Handle error case if needed
+            //             console.error('Error submitting registration');
+            //         }
+            //     })
+            //     .catch(error => {
+            //         console.error('Error:', error);
+            //     });
+            // });
+            // Function to display SweetAlert confirmation
+            function showRegistrationAlert(message) {
                 Swal.fire({
-                    icon: 'success',
-                    title: 'Registration Successful!',
-                    text: 'Your registration request has been submitted. You will be notified once your registration is accepted.',
+                    icon: 'warning',
+                    title: 'Registration Warning!',
+                    text: message,
                     confirmButtonText: 'OK',
-                }).then((result) => {
-                    // Check if user clicked "OK"
-                    if (result.isConfirmed) {
-                        // Redirect user to the event list page
-                        window.location.href = "{% url 'events' %}"; 
-                    }
                 });
             }
-        
+
             // Get the form element
             const form = document.querySelector('form');
-        
+
             // Add event listener for form submission
             form.addEventListener('submit', function(event) {
                 event.preventDefault(); // Prevent default form submission
-        
+
                 // Perform form submission via AJAX
                 fetch("{% url 'submit_registration' %}", {
                     method: 'POST',
@@ -97,12 +137,20 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        // Show SweetAlert confirmation
-                        showConfirmationAndRedirect();
+                        // Show success message using SweetAlert
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Registration Successful!',
+                            text: 'Your registration request has been submitted. You will be notified once your registration is accepted.',
+                            confirmButtonText: 'OK',
+                        }).then((result) => {
+                            // Redirect user to the event list page
+                            window.location.href = "{% url 'events' %}"; 
+                        });
                         form.reset(); // Optional: Reset the form after submission
                     } else {
-                        // Handle error case if needed
-                        console.error('Error submitting registration');
+                        // Show warning message using SweetAlert
+                        showRegistrationAlert(data.error);
                     }
                 })
                 .catch(error => {

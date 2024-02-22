@@ -262,6 +262,15 @@
                                 window.location.href = '{% url "eventlist" %}';
                             });
                         } else {
+                            // Handle errors
+                            if (data.error === 'Event name already exists') {
+                                // Show SweetAlert notification for existing event name
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Event name already exists!',
+                                    text: 'Event name already exists. Please choose a different name.',
+                                });
+                        }else {
                             // Handle errors, e.g., show an error message
                             Swal.fire({
                                 icon: 'error',
@@ -269,6 +278,7 @@
                                 text: data.error || 'An unknown error occurred.',
                             });
                         }
+                    }
                     })
                     .catch(error => {
                         console.error('Error updating event:', error);

@@ -150,109 +150,114 @@
 
     <script>
         document.getElementById('eventForm').addEventListener('submit', function (event) {
-            event.preventDefault(); // Prevent the default form submission
+        event.preventDefault(); // Prevent the default form submission
 
-            // Get form values
-            const eventName = document.getElementById('eventName').value;
-            const eventStartDate = document.getElementById('eventStartDate').value;
-            const eventEndDate = document.getElementById('eventEndDate').value;
-            const start_time = document.getElementById('eventStartTime').value;
-            const end_time = document.getElementById('eventEndTime').value;
-            const eventLocation = document.getElementById('eventLocation').value;
-            const eventOrganizer = document.getElementById('eventOrganizer').value;
-            const eventCategory = document.getElementById('eventCategory').value;
-            const eventDescription = document.getElementById('eventDescription').value;
+        // Get form values
+        const eventName = document.getElementById('eventName').value;
+        const eventStartDate = document.getElementById('eventStartDate').value;
+        const eventEndDate = document.getElementById('eventEndDate').value;
+        const start_time = document.getElementById('eventStartTime').value;
+        const end_time = document.getElementById('eventEndTime').value;
+        const eventLocation = document.getElementById('eventLocation').value;
+        const eventOrganizer = document.getElementById('eventOrganizer').value;
+        const eventCategory = document.getElementById('eventCategory').value;
+        const eventDescription = document.getElementById('eventDescription').value;
 
-            // Get the current date in Kathmandu timezone
-            const kathmanduDate = new Date().toLocaleString('en-US', {
-                timeZone: 'Asia/Kathmandu'
-            });
-
-            // Convert the current date string to a Date object
-            const currentDateInKathmandu = new Date(kathmanduDate);
-
-            // Convert selected dates to Date objects
-            const startDate = new Date(eventStartDate);
-            const endDate = new Date(eventEndDate);
-
-            // Validate start date not in the past
-            if (startDate < currentDateInKathmandu) {
-                // If start date is less than current date, show an error message
-                Swal.fire('Invalid Date', 'Event start date cannot be in the past.', 'error');
-                return; // Stop the form submission
-            }
-
-            // Validate end date not in the past
-            if (endDate < currentDateInKathmandu) {
-                // If end date is less than current date, show an error message
-                Swal.fire('Invalid Date', 'Event end date cannot be in the past.', 'error');
-                return; // Stop the form submission
-            }
-
-            // Validate end date not less than start date
-            if (endDate < startDate) {
-                // If end date is less than start date, show an error message
-                Swal.fire('Invalid Date', 'End date cannot be less than start date.', 'error');
-                return; // Stop the form submission
-            }
-
-            // Validate event title, organizer, and location
-            if (/^\d/.test(eventName) || /^\d/.test(eventOrganizer) || /^\d/.test(eventLocation)) {
-                // If any of them starts with a digit, show an error message
-                Swal.fire('Invalid Input', 'Event title, organizer, and location cannot start with a number.', 'error');
-                return; // Stop the form submission
-            }
-
-            // Create an object with event data
-            const eventData = {
-                name: eventName,
-                organizer: eventOrganizer,
-                start_date: eventStartDate,
-                end_date: eventEndDate,
-                start_time: start_time,
-                end_time: end_time,
-                location: eventLocation,
-                category: eventCategory,
-                description: eventDescription
-            };
-
-            // Send the event data to the server using AJAX (you can use Fetch API or jQuery.ajax)
-            fetch('/create_event/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{ csrf_token }}' // Ensure to include the CSRF token
-                },
-                body: JSON.stringify(eventData)
-            })
-            .then(response => {
-                if (response.ok) {
-                    // Show success notification
-                    Swal.fire('Event Added!', 'The event has been added successfully', 'success').then(() => {
-                        // Reset the form fields
-                        document.getElementById('eventName').value = '';
-                        document.getElementById('eventStartDate').value = '';
-                        document.getElementById('eventEndDate').value = '';
-                        document.getElementById('eventStartTime').value = '';
-                        document.getElementById('eventEndTime').value = '';
-                        document.getElementById('eventLocation').value = '';
-                        document.getElementById('eventOrganizer').value = '';
-                        document.getElementById('eventCategory').value = '';
-                        document.getElementById('eventDescription').value = '';
-                        
-                        // Reload the page to fetch updated data
-                        // window.location.reload();
-                    }) .then(() => {
-                            window.location.href = '{% url "eventlist" %}'; 
-                    });
-                } else {
-                    console.error('Failed to add event');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        // Get the current date in Kathmandu timezone
+        const kathmanduDate = new Date().toLocaleString('en-US', {
+            timeZone: 'Asia/Kathmandu'
         });
+
+        // Convert the current date string to a Date object
+        const currentDateInKathmandu = new Date(kathmanduDate);
+
+        // Convert selected dates to Date objects
+        const startDate = new Date(eventStartDate);
+        const endDate = new Date(eventEndDate);
+
+        // Validate start date not in the past
+        if (startDate < currentDateInKathmandu) {
+            // If start date is less than current date, show an error message
+            Swal.fire('Invalid Date', 'Event start date cannot be in the past.', 'error');
+            return; // Stop the form submission
+        }
+
+        // Validate end date not in the past
+        if (endDate < currentDateInKathmandu) {
+            // If end date is less than current date, show an error message
+            Swal.fire('Invalid Date', 'Event end date cannot be in the past.', 'error');
+            return; // Stop the form submission
+        }
+
+        // Validate end date not less than start date
+        if (endDate < startDate) {
+            // If end date is less than start date, show an error message
+            Swal.fire('Invalid Date', 'End date cannot be less than start date.', 'error');
+            return; // Stop the form submission
+        }
+
+        // Validate event title, organizer, and location
+        if (/^\d/.test(eventName) || /^\d/.test(eventOrganizer) || /^\d/.test(eventLocation)) {
+            // If any of them starts with a digit, show an error message
+            Swal.fire('Invalid Input', 'Event title, organizer, and location cannot start with a number.', 'error');
+            return; // Stop the form submission
+        }
+
+        // Create an object with event data
+        const eventData = {
+            name: eventName,
+            organizer: eventOrganizer,
+            start_date: eventStartDate,
+            end_date: eventEndDate,
+            start_time: start_time,
+            end_time: end_time,
+            location: eventLocation,
+            category: eventCategory,
+            description: eventDescription
+        };
+
+        // Send the event data to the server using AJAX (you can use Fetch API or jQuery.ajax)
+        fetch('/create_event/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}' // Ensure to include the CSRF token
+            },
+            body: JSON.stringify(eventData)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show success notification
+                Swal.fire('Event Added!', 'The event has been added successfully', 'success').then(() => {
+                    // Reset the form fields
+                    document.getElementById('eventName').value = '';
+                    document.getElementById('eventStartDate').value = '';
+                    document.getElementById('eventEndDate').value = '';
+                    document.getElementById('eventStartTime').value = '';
+                    document.getElementById('eventEndTime').value = '';
+                    document.getElementById('eventLocation').value = '';
+                    document.getElementById('eventOrganizer').value = '';
+                    document.getElementById('eventCategory').value = '';
+                    document.getElementById('eventDescription').value = '';
+                    
+                    // Reload the page to fetch updated data
+                    // window.location.reload();
+                }) .then(() => {
+                        window.location.href = '{% url "eventlist" %}'; 
+                });
+            } else if (response.status === 400) {
+                // If the response status is 400 (Bad Request), show a SweetAlert with the error message
+                response.json().then(data => {
+                    Swal.fire('Error', data.message, 'error');
+                });
+            } else {
+                console.error('Failed to add event');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
     </script>   
 
     <script>
