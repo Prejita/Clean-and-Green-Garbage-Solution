@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="/static/css/login.css"> 
     <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
     <title>GreenEase - Login</title>
@@ -52,8 +53,7 @@
         form.addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent the default form submission
 
-            // Here you might perform an AJAX request to your server to check credentials
-            // For this example, let's assume the username is "user" and password is "password"
+            // Perform an AJAX request to your server to check credentials
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
@@ -81,8 +81,6 @@
         });
     });
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

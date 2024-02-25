@@ -4,12 +4,12 @@
 
 const char* ssid = "prejita@ClassicTech";
 const char* password = "Prejita@123";
-const char* serverUrl = "http://192.168.254.4:8000/api/dustbin_data_receiver";
+const char* serverUrl = "http://192.168.254.3:8000/api/dustbin_data_receiver";
 const char* worldTimeApiUrl = "http://worldtimeapi.org/api/timezone/Asia/Kathmandu"; // URL for Kathmandu time
 
 // const char* ssid = "HCK Connect";
 // const char* password = "#erald77";
-// const char* serverUrl = "http://10.22.57.17:8000/api/dustbin_data_receiver";
+// const char* serverUrl = "http://10.22.71.113:8000/api/dustbin_data_receiver";
 // const char* worldTimeApiUrl = "http://worldtimeapi.org/api/timezone/Asia/Kathmandu"; // URL for Kathmandu time
 
 const int triggerPin = 22;
@@ -46,20 +46,13 @@ float getDistance() {
 }
 
 String checkDustbinStatus() {
-  digitalWrite(triggerPin, LOW);
-  delayMicroseconds(2);
-  digitalWrite(triggerPin, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(triggerPin, LOW);
-
-  unsigned long duration = pulseIn(echoPin, HIGH);
-  int distance = duration * 0.034 / 2; // Convert duration to distance in cm
+  float distance = getDistance(); // Measure distance using getDistance() function
 
   String dustbinStatus;
   if (distance < 5) {
-    dustbinStatus = "Full"; // If distance less than 4cm, consider it full
+    dustbinStatus = "Full"; // If distance less than 5cm, consider it full
   } else {
-    dustbinStatus = "Empty"; // If distance greater than or equal to 4cm, consider it empty
+    dustbinStatus = "Empty"; // If distance greater than or equal to 5cm, consider it empty
   }
 
   return dustbinStatus;

@@ -125,6 +125,7 @@
     
                 const filteredEvents = events.filter(event => {
                     const endDate = new Date(event.end_date);
+            
                     const endTime = event.end_time ? new Date(`${event.end_date} ${event.end_time}`) : null;
                     
                     // Compare end date and end time with current date and time
@@ -185,7 +186,7 @@
     </script>    
 
     <script>
-        const csrf_token = "{{ csrf_token }}"; // Include CSRF token here
+        const csrf_token = "{{ csrf_token }}"; 
     
         async function donate(button) {
             console.log("clicked");
@@ -196,7 +197,7 @@
                 publicKey: "test_public_key_cfa6ce2b69d64ef9adf92f07c66b8739",
                 productIdentity: eventName,
                 productName: "GreenEase",
-                productUrl: "http://192.168.254.3:8000/",
+                productUrl: "http://127.0.0.1:8000/",
                 eventHandler: {
                     onSuccess: async (payload) => {
                         await pays(payload.token, payload.amount, eventName);
@@ -211,7 +212,6 @@
                 },
                 paymentPreference: [
                     "KHALTI",
-                    "CONNECT_IPS"
                 ],
             };
             try {

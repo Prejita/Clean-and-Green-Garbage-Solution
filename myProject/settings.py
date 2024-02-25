@@ -129,6 +129,7 @@ STATIC_URL = 'static/'
 import os
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'myApp/static')]
 
+# After login, open Dashboard
 LOGIN_REDIRECT_URL = "/dashboard/"
 
 # Default primary key field type
